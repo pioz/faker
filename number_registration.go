@@ -1,13 +1,21 @@
 package factory
 
+func intInRangeFn(params ...string) (interface{}, error) {
+	min, max, err := paramsToMinMaxInt(params...)
+	if err != nil {
+		return nil, err
+	}
+	return IntInRange(min, max), nil
+}
+
 func init() {
-	RegisterProvider("IntInRange", "int", func(params ...string) (interface{}, error) {
-		min, max, err := paramsToMinMaxInt(params...)
-		if err != nil {
-			return nil, err
-		}
-		return IntInRange(min, max), nil
-	})
+	// RegisterProvider("IntInRange", "int", func(params ...string) (interface{}, error) {
+	// 	min, max, err := paramsToMinMaxInt(params...)
+	// 	if err != nil {
+	// 		return nil, err
+	// 	}
+	// 	return IntInRange(min, max), nil
+	// })
 
 	RegisterProvider("Int", "int", func(params ...string) (interface{}, error) {
 		return Int(), nil

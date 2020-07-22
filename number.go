@@ -118,11 +118,3 @@ func Float32InRange(min, max float32) float32 {
 func Float32() float32 {
 	return Float32InRange(math.SmallestNonzeroFloat32, math.MaxFloat32)
 }
-
-// func RandomIn(pool []interface{}) interface{} {
-// 	if len(pool) == 0 {
-// 		panic("faker.RandomIn has failed to pick a value: pool is empty")
-// 	}
-// 	i := IntInRange(0, len(pool)-1)
-// 	return pool[i]
-// }

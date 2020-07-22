@@ -8,6 +8,13 @@ import (
 	"strings"
 )
 
+// var providers = make(map[string]providerFunc)
+
+var providers = map[string]providerFunc{
+	// number
+	"intinrange-int": intInRangeFn,
+}
+
 const skipTag = "-"
 const uniqueTag = "unique"
 
@@ -55,12 +62,6 @@ func decodeTag(tagString string) *fakerTag {
 }
 
 type providerFunc func(...string) (interface{}, error)
-
-func (f providerFunc) Error() string {
-	return "providerFunc error"
-}
-
-var providers = make(map[string]providerFunc)
 
 func providerKey(providerName, providerType string) string {
 	return strings.ToLower(fmt.Sprintf("%s-%s", providerName, providerType))
