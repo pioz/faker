@@ -90,3 +90,73 @@ func TimeZoneRegion() string {
 	timezone, _ := GetData("timezone", "region")
 	return timezone.(string)
 }
+
+// Provider functions
+
+func durationInRangeFn(params ...string) (interface{}, error) {
+	min, max, err := paramsToMinMaxDuration(params...)
+	if err != nil {
+		return nil, err
+	}
+	return DurationInRange(min, max), nil
+}
+
+func durationFn(params ...string) (interface{}, error) {
+	return Duration(), nil
+}
+
+func timeFn(params ...string) (interface{}, error) {
+	return Time(), nil
+}
+
+func nanoSecondFn(params ...string) (interface{}, error) {
+	return NanoSecond(), nil
+}
+
+func secondFn(params ...string) (interface{}, error) {
+	return Second(), nil
+}
+
+func minuteFn(params ...string) (interface{}, error) {
+	return Minute(), nil
+}
+
+func hourFn(params ...string) (interface{}, error) {
+	return Hour(), nil
+}
+
+func dayFn(params ...string) (interface{}, error) {
+	return Day(), nil
+}
+
+func weekDayFn(params ...string) (interface{}, error) {
+	return WeekDay(), nil
+}
+
+func monthFn(params ...string) (interface{}, error) {
+	return Month(), nil
+}
+
+func yearFn(params ...string) (interface{}, error) {
+	return Year(), nil
+}
+
+func timeZoneFn(params ...string) (interface{}, error) {
+	return TimeZone(), nil
+}
+
+func timeZoneAbbrFn(params ...string) (interface{}, error) {
+	return TimeZoneAbbr(), nil
+}
+
+func timeZoneFullFn(params ...string) (interface{}, error) {
+	return TimeZoneFull(), nil
+}
+
+func timeZoneOffsetFn(params ...string) (interface{}, error) {
+	return TimeZoneOffset(), nil
+}
+
+func timeZoneRegionFn(params ...string) (interface{}, error) {
+	return TimeZoneRegion(), nil
+}
