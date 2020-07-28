@@ -43,22 +43,6 @@ City() StateCode() Zip()
 CountryName()
 ```
 
-
-City() string
-CityPrefix() string
-CitySuffix() string
-Coutry() *Country
-State() string
-StateAbr() string
-Street() string
-StreetName() string
-StreetNumber() string
-StreetPrefix() string
-StreetSuffix() string
-SecondaryAddress() string // "Apt. 672"
-Zip() string
-FullAddress()
-
 Latitude() float64
 LatitudeInRange(min, max float64) (float64, error)
 Longitude() float64

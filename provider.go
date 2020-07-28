@@ -91,6 +91,15 @@ var providers = map[string]providerFunc{
 	providerKey("CurrencyName", "string"):   currencyNameProvider,
 	providerKey("CurrencyCode", "string"):   currencyCodeProvider,
 	providerKey("CurrencySymbol", "string"): currencySymbolProvider,
+	// address
+	providerKey("AddressCity", "string"):             addressCityProvider,
+	providerKey("AddressState", "string"):            addressStateProvider,
+	providerKey("AddressStateCode", "string"):        addressStateCodeProvider,
+	providerKey("AddressStreetName", "string"):       addressStreetNameProvider,
+	providerKey("AddressStreetNumber", "string"):     addressStreetNumberProvider,
+	providerKey("AddressSecondaryAddress", "string"): addressSecondaryAddressProvider,
+	providerKey("AddressZip", "string"):              addressZipProvider,
+	providerKey("AddressFull", "string"):             addressFullProvider,
 }
 
 const skipTag = "-"
