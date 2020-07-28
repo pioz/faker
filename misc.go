@@ -6,6 +6,6 @@ func Bool() bool {
 
 // Provider functions
 
-func boolFn(params ...string) (interface{}, error) {
+func boolProvider(params ...string) (interface{}, error) {
 	return Bool(), nil
 }

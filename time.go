@@ -66,34 +66,52 @@ func Year() int {
 }
 
 func TimeZone() string {
-	timezone, _ := GetData("timezone", "text")
+	timezone, err := GetData("timezone", "text")
+	if err != nil {
+		panic(err)
+	}
 	return timezone.(string)
 }
 
 func TimeZoneAbbr() string {
-	timezone, _ := GetData("timezone", "abbr")
+	timezone, err := GetData("timezone", "abbr")
+	if err != nil {
+		panic(err)
+	}
 	return timezone.(string)
 }
 
 func TimeZoneFull() string {
-	timezone, _ := GetData("timezone", "full")
+	timezone, err := GetData("timezone", "full")
+	if err != nil {
+		panic(err)
+	}
 	return timezone.(string)
 }
 
 func TimeZoneOffset() float32 {
-	offsetString, _ := GetData("timezone", "offset")
-	offset, _ := strconv.ParseFloat(offsetString.(string), 32)
+	offsetString, err := GetData("timezone", "offset")
+	if err != nil {
+		panic(err)
+	}
+	offset, err := strconv.ParseFloat(offsetString.(string), 32)
+	if err != nil {
+		panic(err)
+	}
 	return float32(offset)
 }
 
 func TimeZoneRegion() string {
-	timezone, _ := GetData("timezone", "region")
+	timezone, err := GetData("timezone", "region")
+	if err != nil {
+		panic(err)
+	}
 	return timezone.(string)
 }
 
 // Provider functions
 
-func durationInRangeFn(params ...string) (interface{}, error) {
+func durationInRangeProvider(params ...string) (interface{}, error) {
 	min, max, err := paramsToMinMaxDuration(params...)
 	if err != nil {
 		return nil, err
@@ -101,62 +119,62 @@ func durationInRangeFn(params ...string) (interface{}, error) {
 	return DurationInRange(min, max), nil
 }
 
-func durationFn(params ...string) (interface{}, error) {
+func durationProvider(params ...string) (interface{}, error) {
 	return Duration(), nil
 }
 
-func timeFn(params ...string) (interface{}, error) {
+func timeProvider(params ...string) (interface{}, error) {
 	return Time(), nil
 }
 
-func nanoSecondFn(params ...string) (interface{}, error) {
+func nanoSecondProvider(params ...string) (interface{}, error) {
 	return NanoSecond(), nil
 }
 
-func secondFn(params ...string) (interface{}, error) {
+func secondProvider(params ...string) (interface{}, error) {
 	return Second(), nil
 }
 
-func minuteFn(params ...string) (interface{}, error) {
+func minuteProvider(params ...string) (interface{}, error) {
 	return Minute(), nil
 }
 
-func hourFn(params ...string) (interface{}, error) {
+func hourProvider(params ...string) (interface{}, error) {
 	return Hour(), nil
 }
 
-func dayFn(params ...string) (interface{}, error) {
+func dayProvider(params ...string) (interface{}, error) {
 	return Day(), nil
 }
 
-func weekDayFn(params ...string) (interface{}, error) {
+func weekDayProvider(params ...string) (interface{}, error) {
 	return WeekDay(), nil
 }
 
-func monthFn(params ...string) (interface{}, error) {
+func monthProvider(params ...string) (interface{}, error) {
 	return Month(), nil
 }
 
-func yearFn(params ...string) (interface{}, error) {
+func yearProvider(params ...string) (interface{}, error) {
 	return Year(), nil
 }
 
-func timeZoneFn(params ...string) (interface{}, error) {
+func timeZoneProvider(params ...string) (interface{}, error) {
 	return TimeZone(), nil
 }
 
-func timeZoneAbbrFn(params ...string) (interface{}, error) {
+func timeZoneAbbrProvider(params ...string) (interface{}, error) {
 	return TimeZoneAbbr(), nil
 }
 
-func timeZoneFullFn(params ...string) (interface{}, error) {
+func timeZoneFullProvider(params ...string) (interface{}, error) {
 	return TimeZoneFull(), nil
 }
 
-func timeZoneOffsetFn(params ...string) (interface{}, error) {
+func timeZoneOffsetProvider(params ...string) (interface{}, error) {
 	return TimeZoneOffset(), nil
 }
 
-func timeZoneRegionFn(params ...string) (interface{}, error) {
+func timeZoneRegionProvider(params ...string) (interface{}, error) {
 	return TimeZoneRegion(), nil
 }

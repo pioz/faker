@@ -7,21 +7,17 @@ import (
 	"github.com/pioz/factory/data"
 )
 
-var poolData = data.PoolData{
-	"timezone": data.Timezone,
-}
-
-var dataMutex = &sync.Mutex{}
+var dbMutex = &sync.Mutex{}
 
 func GetData(namespace, group string) (interface{}, error) {
-	dataMutex.Lock()
-	defer dataMutex.Unlock()
+	dbMutex.Lock()
+	defer dbMutex.Unlock()
 	var (
 		poolGroup data.PoolGroup
 		pool      data.Pool
 		found     bool
 	)
-	poolGroup, found = poolData[namespace]
+	poolGroup, found = data.DB[namespace]
 	if !found {
 		return "", fmt.Errorf("The namespace '%s' does not exist", namespace)
 	}
@@ -36,22 +32,22 @@ func GetData(namespace, group string) (interface{}, error) {
 }
 
 func SetPool(namespace, group string, pool data.Pool) {
-	dataMutex.Lock()
-	defer dataMutex.Unlock()
+	dbMutex.Lock()
+	defer dbMutex.Unlock()
 	var (
 		poolGroup data.PoolGroup
 		found     bool
 	)
-	_, found = poolData[namespace]
+	_, found = data.DB[namespace]
 	if !found {
-		poolData[namespace] = make(data.PoolGroup)
+		data.DB[namespace] = make(data.PoolGroup)
 	}
-	poolGroup = poolData[namespace]
+	poolGroup = data.DB[namespace]
 	poolGroup[group] = pool
 }
 
 func SetPoolGroup(namespace string, poolGroup data.PoolGroup) {
-	dataMutex.Lock()
-	defer dataMutex.Unlock()
-	poolData[namespace] = poolGroup
+	dbMutex.Lock()
+	defer dbMutex.Unlock()
+	data.DB[namespace] = poolGroup
 }

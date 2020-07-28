@@ -1,6 +1,5 @@
 package data
 
-// TimeZone is an array of short and long timezones
 var Timezone = PoolGroup{
 	"offset": {"-12", "-11", "-10", "-8", "-7", "-6", "-5", "-4.5", "-4", "-3", "-2.5", "-2", "-1", "0", "-1", "0", "1", "2", "3", "4", "4.5", "5", "5.5", "5.75", "6", "6.5", "7", "8", "9", "9.5", "10", "11", "12", "13"},
 	"abbr":   {"DST", "U", "HST", "AKDT", "PDT", "PDT", "PST", "UMST", "MDT", "MDT", "CAST", "CDT", "CDT", "CCST", "SPST", "EDT", "UEDT", "VST", "PYT", "ADT", "CBST", "SWST", "PSST", "NDT", "ESAST", "AST", "SEST", "GDT", "MST", "BST", "U", "MDT", "ADT", "CVST", "MDT", "UTC", "GMT", "BST", "GDT", "GST", "WEDT", "CEDT", "RDT", "CEDT", "WCAST", "NST", "GDT", "MEDT", "EST", "SDT", "EEDT", "SAST", "FDT", "TDT", "JDT", "LST", "JST", "AST", "KST", "AST", "EAST", "MSK", "SAMT", "IDT", "AST", "ADT", "MST", "GST", "CST", "AST", "WAST", "YEKT", "PKT", "IST", "SLST", "NST", "CAST", "BST", "MST", "SAST", "NCAST", "CST", "NAST", "MPST", "WAST", "TST", "UST", "NAEST", "JST", "KST", "CAST", "ACST", "EAST", "AEST", "WPST", "TST", "YST", "CPST", "VST", "NZST", "U", "FST", "MST", "KDT", "TST", "SST"},

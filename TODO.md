@@ -3,31 +3,47 @@
 - Add data fetcher
 - Add all other providers
 - Rename Factory in Faker? (rename `Build` method also?)
-- Think a better name for `Provider`
+- Think a better name for `Provider` (Producer)
 - GoDoc (comments)
 - Readme
 
 ## Functions
 
-### Country
-Name()
-CodeAlpha2
-CodeAlpha3
-Language() *Language
-Currency() *Currency
-CapitalCity
-Flag
+### Country ✅
+CountryName() string
+CountryAlpha2() string
+CountryAlpha3() string
+CountryNationality() string
+CountryFlag() string
 
-### Languages
-Language() string
-LanguageAbbreviation() string
+### Languages ✅
+LangName() string
+LangCode() string
 
-### Currency
-Faker::Currency.name #=> "Swedish Krona"
-Faker::Currency.code #=> "USD"
-Faker::Currency.symbol #=> "$"
+### Currency ✅
+CurrencyName() string
+CurrencyCode() string
+CurrencySymbol() string
 
 ### Address
+City() string
+State() string
+StreetName() string
+StreetNumber() string
+SecondaryAddress() string // "Apt. 672"
+State() string
+StateCode() string
+Zip() string
+FullAddress()
+```
+FirstName(), LastName()
+SecondaryAddress()
+StreetNumber() StreetName()
+City() StateCode() Zip()
+CountryName()
+```
+
+
 City() string
 CityPrefix() string
 CitySuffix() string
@@ -170,6 +186,9 @@ Map() map[string]interface{}
 
 
 
+STOP HERE FOR FIRST RELEASE
+
+
 ### Colors
 Color() string
 HexColor() string
@@ -280,8 +299,8 @@ Faker::Educator.campus #=> "Vertapple Campus"
 Faker::Device.build_number #=> "5"
 Faker::Device.manufacturer #=> "Apple"
 Faker::Device.model_name #=> "iPhone 4"
-Faker::Device.platform #=> "webOS"    
-Faker::Device.serial #=> "ejfjnRNInxh0363JC2WM"    
+Faker::Device.platform #=> "webOS"
+Faker::Device.serial #=> "ejfjnRNInxh0363JC2WM"
 Faker::Device.version #=> "4"
 
 ### Crypto
