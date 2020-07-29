@@ -9,6 +9,29 @@
 
 ## Functions
 
+PHONE
+phone number
+
+INTERNET
+email
+free_email
+username
+domain_name
+url
+slug
+
+CODE
+uuid
+
+NAME
+names
+
+GENDER
+gender
+
+WORDS
+words
+
 ### Country ✅
 CountryName() string
 CountryAlpha2() string
