@@ -17,9 +17,6 @@ domain_name
 url
 slug
 
-GENDER
-gender
-
 WORDS
 words
 
