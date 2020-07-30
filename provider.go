@@ -112,6 +112,10 @@ var providers = map[string]providerFunc{
 	providerKey("NameSuffix", "string"):       nameSuffixProvider,
 	providerKey("FullName", "string"):         fullNameProvider,
 	providerKey("NameInitials", "string"):     nameInitialsProvider,
+	// gender
+	providerKey("Gender", "string"):            genderProvider,
+	providerKey("BinaryGender", "string"):      binaryGenderProvider,
+	providerKey("ShortBinaryGender", "string"): shortBinaryGenderProvider,
 }
 
 const skipTag = "-"
