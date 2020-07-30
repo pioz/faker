@@ -10,8 +10,10 @@ import (
 
 var providers = map[string]providerFunc{
 	// misc
-	providerKey("Bool", "bool"): boolProvider,
-	providerKey("", "bool"):     boolProvider,
+	providerKey("Bool", "bool"):          boolProvider,
+	providerKey("", "bool"):              boolProvider,
+	providerKey("PhoneNumber", "string"): phoneNumberProvider,
+	providerKey("Uuid", "string"):        uuidProvider,
 	// number
 	providerKey("IntInRange", "int"):         intInRangeProvider,
 	providerKey("Int", "int"):                intProvider,

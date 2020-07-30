@@ -9,9 +9,6 @@
 
 ## Functions
 
-PHONE
-phone number
-
 INTERNET
 email
 free_email
@@ -19,9 +16,6 @@ username
 domain_name
 url
 slug
-
-CODE
-uuid
 
 GENDER
 gender
