@@ -23,9 +23,6 @@ slug
 CODE
 uuid
 
-NAME
-names
-
 GENDER
 gender
 
@@ -159,7 +156,7 @@ Faker::Gender.type #=> "Non-binary"
 Faker::Gender.binary_type #=> "Female"
 Faker::Gender.short_binary_type #=> "f"
 
-### Name
+### Name ✅
 Faker::Name.name             #=> "Tyshawn Johns Sr."
 Faker::Name.name_with_middle #=> "Aditya Elton Douglas"
 Faker::Name.first_name       #=> "Kaci"
