@@ -100,6 +100,16 @@ var providers = map[string]providerFunc{
 	providerKey("AddressSecondaryAddress", "string"): addressSecondaryAddressProvider,
 	providerKey("AddressZip", "string"):              addressZipProvider,
 	providerKey("AddressFull", "string"):             addressFullProvider,
+	// name
+	providerKey("MaleFirstName", "string"):    maleFirstNameProvider,
+	providerKey("FemaleFirstName", "string"):  femaleFirstName,
+	providerKey("NeutralFirstName", "string"): neutralFirstNameProvider,
+	providerKey("FirstName", "string"):        firstNameProvider,
+	providerKey("LastName", "string"):         lastNameProvider,
+	providerKey("NamePrefix", "string"):       namePrefixProvider,
+	providerKey("NameSuffix", "string"):       nameSuffixProvider,
+	providerKey("FullName", "string"):         fullNameProvider,
+	providerKey("NameInitials", "string"):     nameInitialsProvider,
 }
 
 const skipTag = "-"

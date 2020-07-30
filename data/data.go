@@ -9,5 +9,6 @@ var DB = PoolData{
 	"country":  Country,
 	"currency": Currency,
 	"lang":     Lang,
+	"name":     Name,
 	"timezone": Timezone,
 }
