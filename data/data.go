@@ -11,5 +11,6 @@ var DB = PoolData{
 	"gender":   Gender,
 	"lang":     Lang,
 	"name":     Name,
+	"sentence": Sentence,
 	"timezone": Timezone,
 }
