@@ -17,9 +17,6 @@ domain_name
 url
 slug
 
-WORDS
-words
-
 ### Country ✅
 CountryName() string
 CountryAlpha2() string
