@@ -116,6 +116,12 @@ var providers = map[string]providerFunc{
 	providerKey("Gender", "string"):            genderProvider,
 	providerKey("BinaryGender", "string"):      binaryGenderProvider,
 	providerKey("ShortBinaryGender", "string"): shortBinaryGenderProvider,
+	// sentence
+	providerKey("Sentence", "string"):                   sentenceProvider,
+	providerKey("ParagraphWithSentenceCount", "string"): paragraphWithSentenceCountProvider,
+	providerKey("Paragraph", "string"):                  paragraphProvider,
+	providerKey("ArticleWithParagraphCount", "string"):  articleWithParagraphCountProvider,
+	providerKey("Article", "string"):                    articleProvider,
 }
 
 const skipTag = "-"
