@@ -61,6 +61,7 @@ var providers = map[string]providerFunc{
 	providerKey("Letters", "string"):         lettersProvider,
 	providerKey("Lexify", "string"):          lexifyProvider,
 	providerKey("Numerify", "string"):        numerifyProvider,
+	providerKey("Parameterize", "string"):    parameterizeProvider,
 	// time
 	providerKey("DurationInRange", "time.Duration"): durationInRangeProvider,
 	providerKey("Duration", "time.Duration"):        durationProvider,
@@ -122,6 +123,14 @@ var providers = map[string]providerFunc{
 	providerKey("Paragraph", "string"):                  paragraphProvider,
 	providerKey("ArticleWithParagraphCount", "string"):  articleWithParagraphCountProvider,
 	providerKey("Article", "string"):                    articleProvider,
+	// internet
+	providerKey("Username", "string"):  usernameProvider,
+	providerKey("Domain", "string"):    domainProvider,
+	providerKey("Email", "string"):     emailProvider,
+	providerKey("FreeEmail", "string"): freeEmailProvider,
+	providerKey("SafeEmail", "string"): safeEmailProvider,
+	providerKey("Slug", "string"):      slugProvider,
+	providerKey("Url", "string"):       urlProvider,
 }
 
 const skipTag = "-"

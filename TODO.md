@@ -9,14 +9,6 @@
 
 ## Functions
 
-INTERNET
-email
-free_email
-username
-domain_name
-url
-slug
-
 ### Country ✅
 CountryName() string
 CountryAlpha2() string

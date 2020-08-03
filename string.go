@@ -1,6 +1,7 @@
 package factory
 
 import (
+	"regexp"
 	"strings"
 )
 
@@ -39,6 +40,15 @@ func Lexify(str string) string {
 
 func Numerify(str string) string {
 	return replaceChar(str, "?", func() string { return DigitsWithSize(1) })
+}
+
+func Parameterize(str string) string {
+	notAlphaNumRegExp := regexp.MustCompile("[^A-Za-z0-9]+")
+	firstLastDashRegexp := regexp.MustCompile("^-|-$")
+
+	parameterizeString := notAlphaNumRegExp.ReplaceAllString(str, "-")
+	parameterizeString = firstLastDashRegexp.ReplaceAllString(parameterizeString, "")
+	return strings.ToLower(parameterizeString)
 }
 
 func stringWithSize(size int, charset string) string {
@@ -108,4 +118,11 @@ func numerifyProvider(params ...string) (interface{}, error) {
 		return nil, parametersError(nil)
 	}
 	return Numerify(params[0]), nil
+}
+
+func parameterizeProvider(params ...string) (interface{}, error) {
+	if len(params) != 1 {
+		return nil, parametersError(nil)
+	}
+	return Parameterize(params[0]), nil
 }

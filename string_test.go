@@ -47,6 +47,11 @@ func TestNumerify(t *testing.T) {
 	assert.Equal(t, "ab5c30d754", factory.Numerify("ab?c??d???"))
 }
 
+func TestParameterize(t *testing.T) {
+	factory.SetSeed(908)
+	assert.Equal(t, "the-amazing-zanz-153", factory.Parameterize("The Amazing Zanzò 153 "))
+}
+
 func TestStringBuild(t *testing.T) {
 	factory.SetSeed(920)
 	s := &struct {
@@ -58,6 +63,7 @@ func TestStringBuild(t *testing.T) {
 		Field6 string `factory:"Letters"`
 		Field7 string `factory:"Lexify(a?b?c)"`
 		Field8 string `factory:"Numerify(???x)"`
+		Field9 string `factory:"Parameterize(Go is the best programming language!)"`
 	}{}
 	err := factory.Build(&s)
 	assert.Nil(t, err)
@@ -71,4 +77,5 @@ func TestStringBuild(t *testing.T) {
 	assert.Equal(t, "krLqaIpuNJIyqpHnxwwlsVlyYmlIQJKpsekLGbykxAdtZOuUCoJwkQAMKjeEDYGYRgzhGDXhZkYUCasPAALIcPDsbkhMVsxJIYPytgJRFBCMWlEtukCKyKCYokIhiPYYofRkbpCPxtrAorUYCqRGejEFAGTikhUzvAgPuDHNonPnCbUxRJmxrqZoOjNEIQWuMhmgCljwIYQRymoOGiaANnzxPhQNIESQRxWsVtmLxcqIjCTTBbF", s.Field6)
 	assert.Equal(t, "aXbGc", s.Field7)
 	assert.Equal(t, "729x", s.Field8)
+	assert.Equal(t, "go-is-the-best-programming-language", s.Field9)
 }
