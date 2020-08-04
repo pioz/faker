@@ -57,9 +57,9 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 		}
 		return nil
 	}
-	if tag.funcName != "" {
-		return fmt.Errorf("Invalid faker function '%s' for type '%s'", tag.funcName, inputReflectType.String())
-	}
+	// if tag.funcName != "" {
+	// 	return fmt.Errorf("Invalid faker function '%s' for type '%s'", tag.funcName, inputReflectType.String())
+	// }
 
 	switch kind {
 	case reflect.Ptr:
@@ -106,6 +106,9 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 	default:
 		// TODO CAPIRE SE LANCIARE ECCEZZIONE O NO
 		// return errors.New(fmt.Sprintf("Type '%s' is not supported", kind))
+		if tag.funcName != "" {
+			return fmt.Errorf("Invalid faker function '%s' for type '%s'", tag.funcName, inputReflectType.String())
+		}
 		return nil
 	}
 	return nil

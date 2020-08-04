@@ -138,6 +138,16 @@ func TestTagFuncCallNotSupportedTypeBuild(t *testing.T) {
 	assert.Equal(t, "Invalid faker function 'Ping' for type 'int'", err.Error())
 }
 
+func TestNoErrorOnNotSupportedType(t *testing.T) {
+	s := &struct {
+		Channel chan int
+	}{}
+
+	err := factory.Build(&s)
+	assert.Nil(t, err)
+	assert.Equal(t, chan int(nil), s.Channel)
+}
+
 func TestNotEmptyValueBuild(t *testing.T) {
 	factory.SetSeed(603)
 	s := &struct {
@@ -212,6 +222,102 @@ func TestNilNotAllowed(t *testing.T) {
 	assert.Equal(t, "faker.Build input interface{} not allowed", err.Error())
 }
 
+type userTest struct {
+	Username      string         `factory:"username"`
+	Email         string         `factory:"email"`
+	Comments      []string       `factory:"sentence;len=3"`
+	Feedbacks     map[string]int `factory:"feedbacks"`
+	FakeFeedbacks map[string]int
+}
+
 func TestStructBuild(t *testing.T) {
 	// Generic quite complete test on struct
+	factory.SetSeed(620)
+	factory.RegisterProvider("coin", "string", func(...string) (interface{}, error) {
+		if factory.Bool() {
+			return "head", nil
+		} else {
+			return "tail", nil
+		}
+	})
+
+	factory.RegisterProvider("feedbacks", "map[string]int", func(...string) (interface{}, error) {
+		f := make(map[string]int)
+		f["power"] = 2
+		f["speed"] = 3
+		f["intellect"] = 4
+		return f, nil
+	})
+
+	s := &struct {
+		Number1  int `factory:"intinrange(0,5)"`
+		Number2  uint
+		Coin     string `factory:"coin"`
+		List     []int  `factory:"len=4"`
+		NotEmpty string
+		Unknown  chan int
+		User1    userTest
+		User2    *userTest
+	}{NotEmpty: "not changed"}
+
+	err := factory.Build(&s)
+	assert.Nil(t, err)
+	t.Log(s)
+	assert.Equal(t, 3, s.Number1)
+	assert.Equal(t, uint(1593375208), s.Number2)
+	assert.Equal(t, "tail", s.Coin)
+	assert.Equal(t, []int{-1641723469, -1455267700, -2127403521, -434130014}, s.List)
+	assert.Equal(t, "not changed", s.NotEmpty)
+	assert.Equal(t, chan int(nil), s.Unknown)
+
+	assert.Equal(t, "strawboard", s.User1.Username)
+	assert.Equal(t, "palecek@stat.name", s.User1.Email)
+	assert.Equal(t, 3, len(s.User1.Comments))
+	assert.Equal(t, "We can assume that any instance of an owl can be construed as a patient lemon.", s.User1.Comments[0])
+	assert.Equal(t, map[string]int{"power": 2, "speed": 3, "intellect": 4}, s.User1.Feedbacks)
+	assert.Equal(t, map[string]int(nil), s.User1.FakeFeedbacks)
+
+	assert.Equal(t, "messiaen", s.User2.Username)
+	assert.Equal(t, "potter@proletariat.net", s.User2.Email)
+	assert.Equal(t, 3, len(s.User2.Comments))
+	assert.Equal(t, "A bee is the ant of a pineapple;", s.User2.Comments[0])
+	assert.Equal(t, map[string]int{"power": 2, "speed": 3, "intellect": 4}, s.User2.Feedbacks)
+	assert.Equal(t, map[string]int(nil), s.User2.FakeFeedbacks)
 }
+
+type testParent struct {
+	Name   string
+	Parent *testParent
+}
+
+func TestRecursiveStructBuild(t *testing.T) {
+	factory.SetSeed(621)
+	s := testParent{}
+	err := factory.Build(&s)
+	assert.Nil(t, err)
+	t.Log(s)
+
+	assert.Equal(t, "rpCLQtCMxnMcaT6CChHFohkI58zXOnTNQz5c2J25iD7VSU0SrNVxoADmVRx66L1tQx6ljCDaetBPRNqfLC13hczryEpD3YXCV8nGOsHUIpYGdcTjmiH0XTn", s.Name)
+	assert.Equal(t, (*testParent)(nil), s.Parent)
+}
+
+type testNode1 struct {
+	Name string
+	Node *testNode2
+}
+
+type testNode2 struct {
+	Name string
+	Node *testNode1
+}
+
+// func TestMutualRecursiveStructBuild(t *testing.T) {
+// 	factory.SetSeed(622)
+// 	s := testNode1{}
+// 	err := factory.Build(&s)
+// 	assert.Nil(t, err)
+// 	t.Log(s)
+
+// 	assert.Equal(t, "rpCLQtCMxnMcaT6CChHFohkI58zXOnTNQz5c2J25iD7VSU0SrNVxoADmVRx66L1tQx6ljCDaetBPRNqfLC13hczryEpD3YXCV8nGOsHUIpYGdcTjmiH0XTn", s.Name)
+// 	// assert.Equal(t, (*testParent)(nil), s.Parent)
+// }
