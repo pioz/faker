@@ -52,18 +52,24 @@ func TestParameterize(t *testing.T) {
 	assert.Equal(t, "the-amazing-zanz-153", factory.Parameterize("The Amazing Zanzò 153 "))
 }
 
+func TestPick(t *testing.T) {
+	factory.SetSeed(909)
+	assert.Equal(t, "dog", factory.Pick("cat", "dog", "mouse", "lion", "bear"))
+}
+
 func TestStringBuild(t *testing.T) {
 	factory.SetSeed(920)
 	s := &struct {
-		Field1 string `factory:"StringWithSize(4)"`
-		Field2 string `factory:"String"`
-		Field3 string `factory:"DigitsWithSize(5)"`
-		Field4 string `factory:"Digits(4)"`
-		Field5 string `factory:"LettersWithSize(6)"`
-		Field6 string `factory:"Letters"`
-		Field7 string `factory:"Lexify(a?b?c)"`
-		Field8 string `factory:"Numerify(???x)"`
-		Field9 string `factory:"Parameterize(Go is the best programming language!)"`
+		Field1  string `factory:"StringWithSize(4)"`
+		Field2  string `factory:"String"`
+		Field3  string `factory:"DigitsWithSize(5)"`
+		Field4  string `factory:"Digits(4)"`
+		Field5  string `factory:"LettersWithSize(6)"`
+		Field6  string `factory:"Letters"`
+		Field7  string `factory:"Lexify(a?b?c)"`
+		Field8  string `factory:"Numerify(???x)"`
+		Field9  string `factory:"Parameterize(Go is the best programming language!)"`
+		Field10 string `factory:"Pick(cat,dog,mouse,lion,bear)"`
 	}{}
 	err := factory.Build(&s)
 	assert.Nil(t, err)
@@ -78,4 +84,5 @@ func TestStringBuild(t *testing.T) {
 	assert.Equal(t, "aXbGc", s.Field7)
 	assert.Equal(t, "729x", s.Field8)
 	assert.Equal(t, "go-is-the-best-programming-language", s.Field9)
+	assert.Equal(t, "lion", s.Field10)
 }

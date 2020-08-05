@@ -51,6 +51,14 @@ func Parameterize(str string) string {
 	return strings.ToLower(parameterizeString)
 }
 
+func Pick(pool ...string) string {
+	if len(pool) == 0 {
+		return ""
+	}
+	i := IntInRange(0, len(pool)-1)
+	return pool[i]
+}
+
 func stringWithSize(size int, charset string) string {
 	b := make([]byte, size)
 	for i := range b {
@@ -125,4 +133,8 @@ func parameterizeProvider(params ...string) (interface{}, error) {
 		return nil, parametersError(nil)
 	}
 	return Parameterize(params[0]), nil
+}
+
+func pickProvider(params ...string) (interface{}, error) {
+	return Pick(params...), nil
 }
