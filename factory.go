@@ -103,9 +103,38 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 				}
 			}
 		}
+	case reflect.Map:
+		if inputReflectValue.IsNil() {
+			var mapLen int
+			if tag != nil && tag.length != 0 {
+				mapLen = tag.length
+			} else {
+				mapLen = IntInRange(0, 9)
+			}
+			keyReflectType := inputReflectType.Key()
+			elemReflectType := inputReflectType.Elem()
+			newMap := reflect.MakeMap(inputReflectType)
+			var (
+				key  reflect.Value
+				elem reflect.Value
+				err  error
+			)
+			for i := 0; i < mapLen; i++ {
+				key = reflect.New(keyReflectType).Elem()
+				elem = reflect.New(elemReflectType).Elem()
+				err = build(key, tag)
+				if err != nil {
+					return err
+				}
+				err = build(elem, tag)
+				if err != nil {
+					return err
+				}
+				newMap.SetMapIndex(key, elem)
+			}
+			inputReflectValue.Set(newMap)
+		}
 	default:
-		// TODO CAPIRE SE LANCIARE ECCEZZIONE O NO
-		// return errors.New(fmt.Sprintf("Type '%s' is not supported", kind))
 		if tag.funcName != "" {
 			return fmt.Errorf("Invalid faker function '%s' for type '%s'", tag.funcName, inputReflectType.String())
 		}

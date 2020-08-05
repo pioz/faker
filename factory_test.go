@@ -3,6 +3,7 @@ package factory_test
 import (
 	"errors"
 	"testing"
+	"time"
 
 	"github.com/pioz/factory"
 	"github.com/stretchr/testify/assert"
@@ -47,6 +48,39 @@ func TestSliceBuild(t *testing.T) {
 	assert.Equal(t, 546278985, *s.SlicePtrIntField[2])
 
 	assert.Equal(t, 8, len(s.SliceIntField2))
+}
+
+func TestMapBuild(t *testing.T) {
+	factory.SetSeed(604)
+	s := &struct {
+		Field1 map[string]int         `factory:"len=1"`
+		Field2 *map[int]time.Duration `factory:"len=2"`
+		Field3 map[int]*int           `factory:"len=2"`
+		Field4 map[*int]int           `factory:"len=2"`
+		Field5 map[*int]*int          `factory:"len=2"`
+		Field6 map[int]int
+	}{}
+
+	err := factory.Build(&s)
+	assert.Nil(t, err)
+	t.Log(s)
+
+	assert.Equal(t, 1, len(s.Field1))
+	assert.Equal(t, -408064131, s.Field1["pBrjYVHE4Letot5yTTsmIopXpnBff32wlwbLiH0EPQ7KR9upBp6zb2HqCkmQkzR3x71NOyPItdyK9AIqn0F9ROrYnDURrUNLMiDHSgI0ACoyFkguWYZTfOYjb"])
+
+	assert.Equal(t, 2, len(*s.Field2))
+	assert.Equal(t, "-567614h16m7.375390531s", (*s.Field2)[-1984597982].String())
+	assert.Equal(t, "-1393246h51m23.927637982s", (*s.Field2)[-473279944].String())
+
+	assert.Equal(t, 2, len(s.Field3))
+	assert.Equal(t, 140005533, *s.Field3[-664005745])
+	assert.Equal(t, -1314422524, *s.Field3[-107123621])
+
+	assert.Equal(t, 2, len(s.Field4))
+	assert.Equal(t, 2, len(s.Field5))
+
+	assert.Equal(t, 7, len(s.Field6))
+	assert.Equal(t, 1242048708, s.Field6[-503311227])
 }
 
 func TestTagFuncCallBuild(t *testing.T) {
@@ -222,6 +256,44 @@ func TestNilNotAllowed(t *testing.T) {
 	assert.Equal(t, "faker.Build input interface{} not allowed", err.Error())
 }
 
+type testParent struct {
+	Name   string
+	Parent *testParent
+}
+
+func TestRecursiveStructBuild(t *testing.T) {
+	factory.SetSeed(621)
+	s := testParent{}
+	err := factory.Build(&s)
+	assert.Nil(t, err)
+	t.Log(s)
+
+	assert.Equal(t, "rpCLQtCMxnMcaT6CChHFohkI58zXOnTNQz5c2J25iD7VSU0SrNVxoADmVRx66L1tQx6ljCDaetBPRNqfLC13hczryEpD3YXCV8nGOsHUIpYGdcTjmiH0XTn", s.Name)
+	assert.Equal(t, (*testParent)(nil), s.Parent)
+}
+
+type testNode1 struct {
+	Name string
+	Node *testNode2
+}
+
+type testNode2 struct {
+	Name string
+	Node *testNode1 `factory:"-"` // if we remove the ignore tag "-" we will have an infinite loop
+}
+
+func TestMutualRecursiveStructBuild(t *testing.T) {
+	factory.SetSeed(622)
+	s := testNode1{}
+	err := factory.Build(&s)
+	assert.Nil(t, err)
+	t.Log(s)
+
+	assert.Equal(t, "E", s.Name)
+	assert.Equal(t, "0LX6dzNLnPogQSisq70w3F6YmFBQVk1CHiOoV9IUMNE2YfI4AvyupkIwiGVOTwpaHat1LOP3IVbz1X81M3ReM", s.Node.Name)
+	assert.Nil(t, nil, s.Node.Node)
+}
+
 type userTest struct {
 	Username      string         `factory:"username"`
 	Email         string         `factory:"email"`
@@ -230,8 +302,8 @@ type userTest struct {
 	FakeFeedbacks map[string]int
 }
 
+// Generic quite complete test on struct
 func TestStructBuild(t *testing.T) {
-	// Generic quite complete test on struct
 	factory.SetSeed(620)
 	factory.RegisterProvider("coin", "string", func(...string) (interface{}, error) {
 		if factory.Bool() {
@@ -275,49 +347,14 @@ func TestStructBuild(t *testing.T) {
 	assert.Equal(t, 3, len(s.User1.Comments))
 	assert.Equal(t, "We can assume that any instance of an owl can be construed as a patient lemon.", s.User1.Comments[0])
 	assert.Equal(t, map[string]int{"power": 2, "speed": 3, "intellect": 4}, s.User1.Feedbacks)
-	assert.Equal(t, map[string]int(nil), s.User1.FakeFeedbacks)
+	assert.Equal(t, 7, len(s.User1.FakeFeedbacks))
+	assert.Equal(t, -421206271, s.User1.FakeFeedbacks["8YV0qeIEnt3ixbFlO2sSFxDMdogn9GZlBD6mV1kgJtcFAvhx0D7C1Mafs5GJecb4z8G9MVWAX2NOjdxsbU2PYig9yZHR6Jc6jXxJnwc5"])
 
-	assert.Equal(t, "messiaen", s.User2.Username)
-	assert.Equal(t, "potter@proletariat.net", s.User2.Email)
+	assert.Equal(t, "roede", s.User2.Username)
+	assert.Equal(t, "monarski@unceremonious.name", s.User2.Email)
 	assert.Equal(t, 3, len(s.User2.Comments))
-	assert.Equal(t, "A bee is the ant of a pineapple;", s.User2.Comments[0])
+	assert.Equal(t, "The first warmhearted alligator is, in its own way, a tiger.", s.User2.Comments[0])
 	assert.Equal(t, map[string]int{"power": 2, "speed": 3, "intellect": 4}, s.User2.Feedbacks)
-	assert.Equal(t, map[string]int(nil), s.User2.FakeFeedbacks)
+	assert.Equal(t, 6, len(s.User2.FakeFeedbacks))
+	assert.Equal(t, 982485615, s.User2.FakeFeedbacks["D8N3TcJSnbQNXxD4MHI7QQO4VGNj0E3Oat4OvZdRGfrZVrtf55iQ"])
 }
-
-type testParent struct {
-	Name   string
-	Parent *testParent
-}
-
-func TestRecursiveStructBuild(t *testing.T) {
-	factory.SetSeed(621)
-	s := testParent{}
-	err := factory.Build(&s)
-	assert.Nil(t, err)
-	t.Log(s)
-
-	assert.Equal(t, "rpCLQtCMxnMcaT6CChHFohkI58zXOnTNQz5c2J25iD7VSU0SrNVxoADmVRx66L1tQx6ljCDaetBPRNqfLC13hczryEpD3YXCV8nGOsHUIpYGdcTjmiH0XTn", s.Name)
-	assert.Equal(t, (*testParent)(nil), s.Parent)
-}
-
-type testNode1 struct {
-	Name string
-	Node *testNode2
-}
-
-type testNode2 struct {
-	Name string
-	Node *testNode1
-}
-
-// func TestMutualRecursiveStructBuild(t *testing.T) {
-// 	factory.SetSeed(622)
-// 	s := testNode1{}
-// 	err := factory.Build(&s)
-// 	assert.Nil(t, err)
-// 	t.Log(s)
-
-// 	assert.Equal(t, "rpCLQtCMxnMcaT6CChHFohkI58zXOnTNQz5c2J25iD7VSU0SrNVxoADmVRx66L1tQx6ljCDaetBPRNqfLC13hczryEpD3YXCV8nGOsHUIpYGdcTjmiH0XTn", s.Name)
-// 	// assert.Equal(t, (*testParent)(nil), s.Parent)
-// }

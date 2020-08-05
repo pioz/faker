@@ -62,6 +62,7 @@ var providers = map[string]providerFunc{
 	providerKey("Lexify", "string"):          lexifyProvider,
 	providerKey("Numerify", "string"):        numerifyProvider,
 	providerKey("Parameterize", "string"):    parameterizeProvider,
+	providerKey("Pick", "string"):            pickProvider,
 	// time
 	providerKey("DurationInRange", "time.Duration"): durationInRangeProvider,
 	providerKey("Duration", "time.Duration"):        durationProvider,

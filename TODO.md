@@ -1,8 +1,5 @@
 # Factory TODO
 
-- Prevent Mutual recursive infinite loop
-- Add map generation
-- Add function Pick
 - Rename Factory in Faker? (rename `Build` method also?)
 - Think a better name for `Provider` (Producer, Builder)
 - GoDoc (comments)
