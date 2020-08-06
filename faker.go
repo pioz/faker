@@ -4,9 +4,59 @@ import (
 	"errors"
 	"fmt"
 	"reflect"
+	"regexp"
+	"strconv"
+	"strings"
 )
 
-const tagName = "faker"
+const (
+	tagName   = "faker"
+	skipTag   = "-"
+	uniqueTag = "unique"
+)
+
+var (
+	tagFnCallRegexp = regexp.MustCompile(`(.+?)\((.+?)\)`)
+	tagLenRegexp    = regexp.MustCompile(`len=(\d+)`)
+)
+
+type fakerTag struct {
+	funcName string
+	unique   bool
+	length   int
+	params   []string
+}
+
+func (tag *fakerTag) mustSkip() bool {
+	return tag.funcName == skipTag
+}
+
+func decodeTag(tagString string) *fakerTag {
+	tag := &fakerTag{}
+	for _, token := range strings.Split(tagString, ";") {
+		if token == skipTag {
+			tag.funcName = skipTag
+			return tag
+		}
+		if token == uniqueTag {
+			tag.unique = true
+			continue
+		}
+		if m := tagLenRegexp.FindStringSubmatch(token); len(m) == 2 {
+			tag.length, _ = strconv.Atoi(m[1])
+			continue
+		}
+		if tag.funcName == "" {
+			if m := tagFnCallRegexp.FindStringSubmatch(token); len(m) == 3 {
+				tag.funcName = m[1]
+				tag.params = strings.Split(m[2], ",")
+				continue
+			}
+			tag.funcName = token
+		}
+	}
+	return tag
+}
 
 func Build(input interface{}) error {
 	inputReflectType := reflect.TypeOf(input)
@@ -57,9 +107,6 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 		}
 		return nil
 	}
-	// if tag.funcName != "" {
-	// 	return fmt.Errorf("Invalid faker function '%s' for type '%s'", tag.funcName, inputReflectType.String())
-	// }
 
 	switch kind {
 	case reflect.Ptr:
@@ -105,7 +152,12 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 		}
 	case reflect.Map:
 		if inputReflectValue.IsNil() {
-			var mapLen int
+			var (
+				mapLen int
+				key    reflect.Value
+				elem   reflect.Value
+				err    error
+			)
 			if tag != nil && tag.length != 0 {
 				mapLen = tag.length
 			} else {
@@ -114,11 +166,6 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 			keyReflectType := inputReflectType.Key()
 			elemReflectType := inputReflectType.Elem()
 			newMap := reflect.MakeMap(inputReflectType)
-			var (
-				key  reflect.Value
-				elem reflect.Value
-				err  error
-			)
 			for i := 0; i < mapLen; i++ {
 				key = reflect.New(keyReflectType).Elem()
 				elem = reflect.New(elemReflectType).Elem()
