@@ -27,17 +27,17 @@ func TestTimeInRange(t *testing.T) {
 	faker.SetSeed(43)
 	var minTime, maxTime, value time.Time
 
-	minTime, _ = time.Parse(time.RFC3339, "1984-10-21T22:08:41+00:00")
-	maxTime, _ = time.Parse(time.RFC3339, "1980-10-21T22:08:41+00:00")
+	minTime, _ = time.ParseInLocation(time.RFC3339, "1984-10-21T22:08:41+00:00", time.UTC)
+	maxTime, _ = time.ParseInLocation(time.RFC3339, "1980-10-21T22:08:41+00:00", time.UTC)
 	value = faker.TimeInRange(minTime, maxTime)
 	t.Log(value)
-	assert.Equal(t, "1984-10-21 22:08:41 +0000 +0000", value.String())
+	assert.Equal(t, "1984-10-21 22:08:41 +0000 UTC", value.String())
 
-	minTime, _ = time.Parse(time.RFC3339, "1984-10-21T22:08:41+00:00")
-	maxTime, _ = time.Parse(time.RFC3339, "2020-10-21T22:08:41+00:00")
+	minTime, _ = time.ParseInLocation(time.RFC3339, "1984-10-21T22:08:41+00:00", time.UTC)
+	maxTime, _ = time.ParseInLocation(time.RFC3339, "2020-10-21T22:08:41+00:00", time.UTC)
 	value = faker.TimeInRange(minTime, maxTime)
 	t.Log(value)
-	assert.Equal(t, "1992-10-10 23:04:44.977812265 +0000 +0000", value.String())
+	assert.Equal(t, "1992-10-10 23:04:44.977812265 +0000 UTC", value.String())
 }
 
 func TestTime(t *testing.T) {
