@@ -1,41 +1,41 @@
-package factory_test
+package faker_test
 
 import (
 	"testing"
 
-	"github.com/pioz/factory"
+	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestCurrencyName(t *testing.T) {
-	factory.SetSeed(1200)
-	value := factory.CurrencyName()
+	faker.SetSeed(1200)
+	value := faker.CurrencyName()
 	t.Log(value)
 	assert.Equal(t, "Sierra Leonean Leone", value)
 }
 
 func TestCurrencyCode(t *testing.T) {
-	factory.SetSeed(1201)
-	value := factory.CurrencyCode()
+	faker.SetSeed(1201)
+	value := faker.CurrencyCode()
 	t.Log(value)
 	assert.Equal(t, "XOF", value)
 }
 
 func TestCurrencySymbol(t *testing.T) {
-	factory.SetSeed(1201)
-	value := factory.CurrencySymbol()
+	faker.SetSeed(1201)
+	value := faker.CurrencySymbol()
 	t.Log(value)
 	assert.Equal(t, "MK", value)
 }
 
 func TestCurrencyBuild(t *testing.T) {
-	factory.SetSeed(1210)
+	faker.SetSeed(1210)
 	s := &struct {
-		Field1 string `factory:"CurrencyName"`
-		Field2 string `factory:"CurrencyCode"`
-		Field3 string `factory:"CurrencySymbol"`
+		Field1 string `faker:"CurrencyName"`
+		Field2 string `faker:"CurrencyCode"`
+		Field3 string `faker:"CurrencySymbol"`
 	}{}
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 	assert.Equal(t, "Bermudian Dollar", s.Field1)

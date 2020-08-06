@@ -1,4 +1,4 @@
-package factory
+package faker
 
 func Gender() string {
 	value, err := GetData("gender", "types")

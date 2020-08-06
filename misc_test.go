@@ -1,46 +1,46 @@
-package factory_test
+package faker_test
 
 import (
 	"testing"
 
-	"github.com/pioz/factory"
+	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestBool(t *testing.T) {
-	factory.SetSeed(102)
+	faker.SetSeed(102)
 	var value bool
-	value = factory.Bool()
+	value = faker.Bool()
 	t.Log(value)
 	assert.True(t, value)
-	value = factory.Bool()
+	value = faker.Bool()
 	t.Log(value)
 	assert.False(t, value)
 }
 
 func TestPhoneNumber(t *testing.T) {
-	factory.SetSeed(103)
-	value := factory.PhoneNumber()
+	faker.SetSeed(103)
+	value := faker.PhoneNumber()
 	t.Log(value)
 	assert.Equal(t, "152.380.7298", value)
 }
 
 func TestUuid(t *testing.T) {
-	factory.SetSeed(104)
-	value := factory.Uuid()
+	faker.SetSeed(104)
+	value := faker.Uuid()
 	t.Log(value)
 	assert.Equal(t, "40abb44c-895e-45b8-9f67-cc02a811744a", value)
 }
 
 func TestMiscBuild(t *testing.T) {
-	factory.SetSeed(500)
+	faker.SetSeed(500)
 	s := &struct {
-		BoolField        bool `factory:"bool"`
+		BoolField        bool `faker:"bool"`
 		DefaultBoolField bool
-		Field1           string `factory:"PhoneNumber"`
-		Field2           string `factory:"Uuid"`
+		Field1           string `faker:"PhoneNumber"`
+		Field2           string `faker:"Uuid"`
 	}{}
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 	assert.True(t, s.BoolField)

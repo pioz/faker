@@ -1,57 +1,57 @@
-package factory_test
+package faker_test
 
 import (
 	"testing"
 
-	"github.com/pioz/factory"
+	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestSentece(t *testing.T) {
-	factory.SetSeed(1600)
-	value := factory.Sentence()
+	faker.SetSeed(1600)
+	value := faker.Sentence()
 	t.Log(value)
 	assert.Equal(t, "A knowledgeable pomegranate without peaches is truly a panda of compassionate sharks.", value)
 }
 
 func TestParagraphWithSentenceCount(t *testing.T) {
-	factory.SetSeed(1601)
-	value := factory.ParagraphWithSentenceCount(5)
+	faker.SetSeed(1601)
+	value := faker.ParagraphWithSentenceCount(5)
 	t.Log(value)
 	assert.Equal(t, "Their squirrel was, in this moment, an affable goat. A camel is a lion's panda! In modern times dazzling lemons show us how plums can be horses. This is not to discredit the idea that a cat can hardly be considered an amused fish without also being a lobster? An exuberant goldfish is a wolf of the mind.", value)
 }
 
 func TestParagraph(t *testing.T) {
-	factory.SetSeed(1602)
-	value := factory.Paragraph()
+	faker.SetSeed(1602)
+	value := faker.Paragraph()
 	t.Log(value)
 	assert.Equal(t, "A currant is a deer from the right perspective. Having been a gymnast, authors often misinterpret the tangerine as an intelligent camel, when in actuality it feels more like a communicative bear; As far as he is concerned, a shark is the zebra of a dog. Those kumquats are nothing more than elephants. It's an undeniable fact, really; some posit the hilarious prune to be less than intellectual. A communicative zebra's goat comes with it the thought that the honest snake is a cow? Washing and polishing the car,excited cranberries show us how grapefruits can be elephants. One cannot separate bears from dynamic cows! One cannot separate cats from stimulating spiders. Extending this logic, a goldfish can hardly be considered a succinct spider without also being a cheetah.", value)
 }
 
 func TestArticleWithParagraphCount(t *testing.T) {
-	factory.SetSeed(1603)
-	value := factory.ArticleWithParagraphCount(5)
+	faker.SetSeed(1603)
+	value := faker.ArticleWithParagraphCount(5)
 	t.Log(value)
 	assert.Equal(t, "The fly of a pig becomes an alert blueberry. The vivacious apricot reveals itself as a powerful lime to those who look! Few can name a resolute turtle that isn't a happy kiwi; The pandas could be said to resemble fair-minded goats. Few can name a modest wolf that isn't a sensible fly! Some generous alligators are thought of simply as chimpanzees. Few can name a thrifty pineapple that isn't a pleasant apricot.\nBy the waybefore chickens, snakes were only lemons. If this was somewhat unclear, a kitten is a cow from the right perspective? Shouting with happiness, rabbits are romantic fishes. A watermelon is a humorous apricot. The willing deer comes from a diplomatic turtle? We can assume that any instance of a strawberry can be construed as an affable fish. Framed in a different way, the dolphins could be said to resemble receptive cherries. An intuitive fly's seal comes with it the thought that the relieved cranberry is a sheep. A blackberry is a panda's cheetah.\nA turtle sees a panda as an efficient octopus. Seals are compassionate figs; Shouting with happiness, one cannot separate cherries from talented monkeys! Some skillful giraffes are thought of simply as elephants! Few can name an impartial cranberry that isn't a painstaking grapes. A cheetah can hardly be considered a resolute shark without also being a kitten. We know that they were lost without the helpful cherry that composed their giraffe. An energetic goldfish's grapes comes with it the thought that the eminent lemon is a blueberry! As far as he is concerned, their kumquat was, in this moment, a happy eagle. A careful grape's plum comes with it the thought that the industrious turtle is a duck.\nTheir strawberry was, in this moment, a delightful seal. A lively lion is a monkey of the mind. An ant of the plum is assumed to be a kind-hearted frog. It's an undeniable fact, really; they were lost without the brave fish that composed their snail. A mature tiger's zebra comes with it the thought that the resourceful rat is a sheep.\nIn modern times a hamster sees a peach as a helpful fig. In modern times a dog is the fox of a bee. One cannot separate chimpanzees from diplomatic snakes. Some funny seals are thought of simply as grapes; Having been a gymnast, they were lost without the encouraging nectarine that composed their pineapple. This is not to discredit the idea that punctual lions show us how zebras can be pears. Skillful chickens show us how chimpanzees can be lobsters! Few can name an inventive turtle that isn't an adaptable raspberry. Washing and polishing the car,we can assume that any instance of a lime can be construed as an intellectual currant. A cat can hardly be considered a peaceful scorpion without also being a crocodile;", value)
 }
 
 func TestArticle(t *testing.T) {
-	factory.SetSeed(1604)
-	value := factory.Article()
+	faker.SetSeed(1604)
+	value := faker.Article()
 	t.Log(value)
 	assert.Equal(t, "Few can name a sincere chimpanzee that isn't a selective cranberry. They were lost without the straightforward camel that composed their puppy; However, the zebras could be said to resemble tidy bears. Cultured hippopotamus show us how blackberries can be squirrels. In recent years, a cherry sees a nectarine as a resolute bear. This is not to discredit the idea that a crocodile is an emotional prune;\nAn amiable watermelon is a horse of the mind. To be more specific, a panda can hardly be considered an inventive hamster without also being a lime? A camel of the kangaroo is assumed to be a cooperative tiger; Before plums, kangaroos were only melons.\nIn modern times those puppies are nothing more than persimmons. The literature would have us believe that a silly octopus is not but a rabbit. Their blackberry was, in this moment, a protective banana. A puppy is the pear of a grapes. Some posit the amiable pig to be less than helpful.\nFar from the truth, authors often misinterpret the owl as a calm crocodile, when in actuality it feels more like a placid orange. Extending this logic, some honest turtles are thought of simply as horses. The cherry of an apple becomes a brave chimpanzee; Draped neatly on a hanger, authors often misinterpret the octopus as a happy cranberry, when in actuality it feels more like a harmonious kiwi. The oranges could be said to resemble unusual lemons! Their melon was, in this moment, an impartial hippopotamus. Plums are diligent frogs. By the waya zebra is a thrifty fish.\nThe giraffes could be said to resemble broad-minded kangaroos. The first jolly plum is, in its own way, a grape! Extending this logic, the lobster is an orange. Shouting with happiness, the affable grape comes from a thrifty kiwi. However, their panda was, in this moment, an upbeat spider. An inventive deer's kumquat comes with it the thought that the excited cranberry is a spider.\nThose bears are nothing more than goldfishes. Authors often misinterpret the bird as an imaginative persimmon, when in actuality it feels more like an intellectual apricot! An apple is an owl from the right perspective. A camel is the fig of an octopus. What we don't know for sure is whether or not foxes are faithful lions. The literature would have us believe that a pleasant tiger is not but a shark.", value)
 }
 
 func TestSentenceBuild(t *testing.T) {
-	factory.SetSeed(1720)
+	faker.SetSeed(1720)
 	s := &struct {
-		Field1 string `factory:"Sentence"`
-		Field2 string `factory:"ParagraphWithSentenceCount(3)"`
-		Field3 string `factory:"Paragraph"`
-		Field4 string `factory:"ArticleWithParagraphCount(2)"`
-		Field5 string `factory:"Article"`
+		Field1 string `faker:"Sentence"`
+		Field2 string `faker:"ParagraphWithSentenceCount(3)"`
+		Field3 string `faker:"Paragraph"`
+		Field4 string `faker:"ArticleWithParagraphCount(2)"`
+		Field5 string `faker:"Article"`
 	}{}
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 	assert.Equal(t, "As far as he is concerned, the faithful zebra comes from a peaceful raspberry.", s.Field1)

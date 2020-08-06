@@ -1,7 +1,7 @@
-# Factory TODO
+# faker TODO
 
-- Rename Factory in Faker? (rename `Build` method also?)
-- Think a better name for `Provider` (Producer, Builder)
+- Rename faker in Faker
+- Rename `Provider` in `Builder`
 - GoDoc (comments)
 - Readme
 

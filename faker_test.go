@@ -1,21 +1,21 @@
-package factory_test
+package faker_test
 
 import (
 	"errors"
 	"testing"
 	"time"
 
-	"github.com/pioz/factory"
+	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestPtrBuild(t *testing.T) {
-	factory.SetSeed(601)
+	faker.SetSeed(601)
 	s := &struct {
 		IntField    int
 		PtrIntField *int
 	}{}
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 	assert.Equal(t, 1222834422, s.IntField)
@@ -23,15 +23,15 @@ func TestPtrBuild(t *testing.T) {
 }
 
 func TestSliceBuild(t *testing.T) {
-	factory.SetSeed(600)
+	faker.SetSeed(600)
 	s := &struct {
-		SliceIntField    []int  `factory:"len=1"`
-		PtrSliceIntField *[]int `factory:"len=2"`
-		SlicePtrIntField []*int `factory:"len=3"`
+		SliceIntField    []int  `faker:"len=1"`
+		PtrSliceIntField *[]int `faker:"len=2"`
+		SlicePtrIntField []*int `faker:"len=3"`
 		SliceIntField2   []int
 	}{}
 
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 
@@ -51,17 +51,17 @@ func TestSliceBuild(t *testing.T) {
 }
 
 func TestMapBuild(t *testing.T) {
-	factory.SetSeed(604)
+	faker.SetSeed(604)
 	s := &struct {
-		Field1 map[string]int         `factory:"len=1"`
-		Field2 *map[int]time.Duration `factory:"len=2"`
-		Field3 map[int]*int           `factory:"len=2"`
-		Field4 map[*int]int           `factory:"len=2"`
-		Field5 map[*int]*int          `factory:"len=2"`
+		Field1 map[string]int         `faker:"len=1"`
+		Field2 *map[int]time.Duration `faker:"len=2"`
+		Field3 map[int]*int           `faker:"len=2"`
+		Field4 map[*int]int           `faker:"len=2"`
+		Field5 map[*int]*int          `faker:"len=2"`
 		Field6 map[int]int
 	}{}
 
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 
@@ -84,15 +84,15 @@ func TestMapBuild(t *testing.T) {
 }
 
 func TestTagFuncCallBuild(t *testing.T) {
-	factory.RegisterProvider("Ping", "string", func(params ...string) (interface{}, error) {
+	faker.RegisterProvider("Ping", "string", func(params ...string) (interface{}, error) {
 		return "pong", nil
 	})
 
 	s := &struct {
-		Ping string `factory:"Ping"`
+		Ping string `faker:"Ping"`
 	}{}
 
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 
@@ -100,19 +100,19 @@ func TestTagFuncCallBuild(t *testing.T) {
 }
 
 func TestTagFuncCallCaseSensitiveBuild(t *testing.T) {
-	factory.RegisterProvider("Ping", "string", func(params ...string) (interface{}, error) {
+	faker.RegisterProvider("Ping", "string", func(params ...string) (interface{}, error) {
 		return "pong", nil
 	})
 
 	s := &struct {
-		Ping1 string `factory:"Ping"`
-		Ping2 string `factory:"PING"`
-		Ping3 string `factory:"ping"`
-		Ping4 string `factory:"pInG"`
-		Ping5 string `factory:"ping(a,b,c)"`
+		Ping1 string `faker:"Ping"`
+		Ping2 string `faker:"PING"`
+		Ping3 string `faker:"ping"`
+		Ping4 string `faker:"pInG"`
+		Ping5 string `faker:"ping(a,b,c)"`
 	}{}
 
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 
@@ -124,7 +124,7 @@ func TestTagFuncCallCaseSensitiveBuild(t *testing.T) {
 }
 
 func TestTagFuncCallWithParamsBuild(t *testing.T) {
-	factory.RegisterProvider("Temperature", "string", func(params ...string) (interface{}, error) {
+	faker.RegisterProvider("Temperature", "string", func(params ...string) (interface{}, error) {
 		if len(params) == 1 {
 			return params[0], nil
 		}
@@ -132,11 +132,11 @@ func TestTagFuncCallWithParamsBuild(t *testing.T) {
 	})
 
 	s := &struct {
-		Temp1 string `factory:"Temperature"`
-		Temp2 string `factory:"Temperature(hot)"`
+		Temp1 string `faker:"Temperature"`
+		Temp2 string `faker:"Temperature(hot)"`
 	}{}
 
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 
@@ -145,29 +145,29 @@ func TestTagFuncCallWithParamsBuild(t *testing.T) {
 }
 
 func TestTagFuncCallReturnErrorBuild(t *testing.T) {
-	factory.RegisterProvider("Error", "string", func(params ...string) (interface{}, error) {
+	faker.RegisterProvider("Error", "string", func(params ...string) (interface{}, error) {
 		return nil, errors.New("This is an error")
 	})
 
 	s := &struct {
-		Err string `factory:"Error"`
+		Err string `faker:"Error"`
 	}{}
 
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.NotNil(t, err)
 	assert.Equal(t, "This is an error", err.Error())
 }
 
 func TestTagFuncCallNotSupportedTypeBuild(t *testing.T) {
-	factory.RegisterProvider("Ping", "string", func(params ...string) (interface{}, error) {
+	faker.RegisterProvider("Ping", "string", func(params ...string) (interface{}, error) {
 		return "pong", nil
 	})
 
 	s := &struct {
-		Ping int `factory:"Ping"`
+		Ping int `faker:"Ping"`
 	}{}
 
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.NotNil(t, err)
 	assert.Equal(t, "Invalid faker function 'Ping' for type 'int'", err.Error())
 }
@@ -177,19 +177,19 @@ func TestNoErrorOnNotSupportedType(t *testing.T) {
 		Channel chan int
 	}{}
 
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.Nil(t, err)
 	assert.Equal(t, chan int(nil), s.Channel)
 }
 
 func TestNotEmptyValueBuild(t *testing.T) {
-	factory.SetSeed(603)
+	faker.SetSeed(603)
 	s := &struct {
 		Field1 int
 		Field2 int
 	}{Field2: 21}
 
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.Nil(t, err)
 	assert.Equal(t, -236043479, s.Field1)
 	assert.Equal(t, 21, s.Field2)
@@ -197,11 +197,11 @@ func TestNotEmptyValueBuild(t *testing.T) {
 
 func TestSkipTag(t *testing.T) {
 	s := &struct {
-		Field    int  `factory:"-"`
-		PtrField *int `factory:"-"`
+		Field    int  `faker:"-"`
+		PtrField *int `faker:"-"`
 	}{}
 
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 
@@ -210,48 +210,48 @@ func TestSkipTag(t *testing.T) {
 }
 
 func TestUniqueTag(t *testing.T) {
-	factory.SetSeed(602)
+	faker.SetSeed(602)
 	s1 := &struct {
-		Field int `factory:"IntInRange(0,1);unique"`
+		Field int `faker:"IntInRange(0,1);unique"`
 	}{}
 	s2 := &struct {
-		Field int `factory:"IntInRange(0,1);unique"`
+		Field int `faker:"IntInRange(0,1);unique"`
 	}{}
 	s3 := &struct {
-		Field int `factory:"IntInRange(0,1);unique"`
+		Field int `faker:"IntInRange(0,1);unique"`
 	}{}
 
-	err := factory.Build(&s1)
+	err := faker.Build(&s1)
 	assert.Nil(t, err)
 	t.Log(s1)
 	assert.Equal(t, 1, s1.Field)
 
-	err = factory.Build(&s2)
+	err = faker.Build(&s2)
 	assert.Nil(t, err)
 	t.Log(s2)
 	assert.Equal(t, 0, s2.Field)
 
-	err = factory.Build(&s3)
+	err = faker.Build(&s3)
 	assert.NotNil(t, err)
 	assert.Equal(t, "Failed to generate a unique value", err.Error())
 }
 
 func TestInterfaceNotAllowed(t *testing.T) {
 	var i interface{}
-	err := factory.Build(i)
+	err := faker.Build(i)
 	assert.NotNil(t, err)
 	assert.Equal(t, "faker.Build input interface{} not allowed", err.Error())
 }
 
 func TestNoPtrNotAllowed(t *testing.T) {
 	var i int
-	err := factory.Build(i)
+	err := faker.Build(i)
 	assert.NotNil(t, err)
 	assert.Equal(t, "faker.Build input is not a pointer", err.Error())
 }
 
 func TestNilNotAllowed(t *testing.T) {
-	err := factory.Build(nil)
+	err := faker.Build(nil)
 	assert.NotNil(t, err)
 	assert.Equal(t, "faker.Build input interface{} not allowed", err.Error())
 }
@@ -262,9 +262,9 @@ type testParent struct {
 }
 
 func TestRecursiveStructBuild(t *testing.T) {
-	factory.SetSeed(621)
+	faker.SetSeed(621)
 	s := testParent{}
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 
@@ -279,13 +279,13 @@ type testNode1 struct {
 
 type testNode2 struct {
 	Name string
-	Node *testNode1 `factory:"-"` // if we remove the ignore tag "-" we will have an infinite loop
+	Node *testNode1 `faker:"-"` // if we remove the ignore tag "-" we will have an infinite loop
 }
 
 func TestMutualRecursiveStructBuild(t *testing.T) {
-	factory.SetSeed(622)
+	faker.SetSeed(622)
 	s := testNode1{}
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 
@@ -295,25 +295,25 @@ func TestMutualRecursiveStructBuild(t *testing.T) {
 }
 
 type userTest struct {
-	Username      string         `factory:"username"`
-	Email         string         `factory:"email"`
-	Comments      []string       `factory:"sentence;len=3"`
-	Feedbacks     map[string]int `factory:"feedbacks"`
+	Username      string         `faker:"username"`
+	Email         string         `faker:"email"`
+	Comments      []string       `faker:"sentence;len=3"`
+	Feedbacks     map[string]int `faker:"feedbacks"`
 	FakeFeedbacks map[string]int
 }
 
 // Generic quite complete test on struct
 func TestStructBuild(t *testing.T) {
-	factory.SetSeed(620)
-	factory.RegisterProvider("coin", "string", func(...string) (interface{}, error) {
-		if factory.Bool() {
+	faker.SetSeed(620)
+	faker.RegisterProvider("coin", "string", func(...string) (interface{}, error) {
+		if faker.Bool() {
 			return "head", nil
 		} else {
 			return "tail", nil
 		}
 	})
 
-	factory.RegisterProvider("feedbacks", "map[string]int", func(...string) (interface{}, error) {
+	faker.RegisterProvider("feedbacks", "map[string]int", func(...string) (interface{}, error) {
 		f := make(map[string]int)
 		f["power"] = 2
 		f["speed"] = 3
@@ -322,17 +322,17 @@ func TestStructBuild(t *testing.T) {
 	})
 
 	s := &struct {
-		Number1  int `factory:"intinrange(0,5)"`
+		Number1  int `faker:"intinrange(0,5)"`
 		Number2  uint
-		Coin     string `factory:"coin"`
-		List     []int  `factory:"len=4"`
+		Coin     string `faker:"coin"`
+		List     []int  `faker:"len=4"`
 		NotEmpty string
 		Unknown  chan int
 		User1    userTest
 		User2    *userTest
 	}{NotEmpty: "not changed"}
 
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 	assert.Equal(t, 3, s.Number1)

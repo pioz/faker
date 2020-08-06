@@ -1,81 +1,81 @@
-package factory_test
+package faker_test
 
 import (
 	"testing"
 
-	"github.com/pioz/factory"
+	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestAddressCity(t *testing.T) {
-	factory.SetSeed(1300)
-	value := factory.AddressCity()
+	faker.SetSeed(1300)
+	value := faker.AddressCity()
 	t.Log(value)
 	assert.Equal(t, "Ntoroko", value)
 }
 
 func TestAddressState(t *testing.T) {
-	factory.SetSeed(1301)
-	value := factory.AddressState()
+	faker.SetSeed(1301)
+	value := faker.AddressState()
 	t.Log(value)
 	assert.Equal(t, "Indiana", value)
 }
 
 func TestAddressStateCode(t *testing.T) {
-	factory.SetSeed(1302)
-	value := factory.AddressStateCode()
+	faker.SetSeed(1302)
+	value := faker.AddressStateCode()
 	t.Log(value)
 	assert.Equal(t, "DC", value)
 }
 
 func TestAddressStreetName(t *testing.T) {
-	factory.SetSeed(1303)
-	value := factory.AddressStreetName()
+	faker.SetSeed(1303)
+	value := faker.AddressStreetName()
 	t.Log(value)
 	assert.Equal(t, "Hopton Street", value)
 }
 
 func TestAddressStreetNumber(t *testing.T) {
-	factory.SetSeed(1304)
-	value := factory.AddressStreetNumber()
+	faker.SetSeed(1304)
+	value := faker.AddressStreetNumber()
 	t.Log(value)
 	assert.Equal(t, "81-680", value)
 }
 
 func TestAddressSecondaryAddress(t *testing.T) {
-	factory.SetSeed(1305)
-	value := factory.AddressSecondaryAddress()
+	faker.SetSeed(1305)
+	value := faker.AddressSecondaryAddress()
 	t.Log(value)
 	assert.Equal(t, "Suite 208", value)
 }
 
 func TestAddressZip(t *testing.T) {
-	factory.SetSeed(1306)
-	value := factory.AddressZip()
+	faker.SetSeed(1306)
+	value := faker.AddressZip()
 	t.Log(value)
 	assert.Equal(t, "36168", value)
 }
 
 func TestAddressFull(t *testing.T) {
-	factory.SetSeed(1307)
-	value := factory.AddressFull()
+	faker.SetSeed(1307)
+	value := faker.AddressFull()
 	t.Log(value)
 	assert.Equal(t, "John Snow\nApt. 248\n943 Wager Street\nBerezniki PR 52209\nSaudi Arabia", value)
 }
 
 func TestAddressBuild(t *testing.T) {
-	factory.SetSeed(1008)
+	faker.SetSeed(1008)
 	s := &struct {
-		Field1 string `factory:"AddressCity"`
-		Field2 string `factory:"AddressState"`
-		Field3 string `factory:"AddressStateCode"`
-		Field4 string `factory:"AddressStreetName"`
-		Field5 string `factory:"AddressStreetNumber"`
-		Field6 string `factory:"AddressSecondaryAddress"`
-		Field7 string `factory:"AddressZip"`
-		Field8 string `factory:"AddressFull"`
+		Field1 string `faker:"AddressCity"`
+		Field2 string `faker:"AddressState"`
+		Field3 string `faker:"AddressStateCode"`
+		Field4 string `faker:"AddressStreetName"`
+		Field5 string `faker:"AddressStreetNumber"`
+		Field6 string `faker:"AddressSecondaryAddress"`
+		Field7 string `faker:"AddressZip"`
+		Field8 string `faker:"AddressFull"`
 	}{}
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 	assert.Equal(t, "Pryor Creek", s.Field1)

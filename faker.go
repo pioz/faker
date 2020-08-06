@@ -1,4 +1,4 @@
-package factory
+package faker
 
 import (
 	"errors"
@@ -6,7 +6,7 @@ import (
 	"reflect"
 )
 
-const tagName = "factory"
+const tagName = "faker"
 
 func Build(input interface{}) error {
 	inputReflectType := reflect.TypeOf(input)

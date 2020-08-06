@@ -1,48 +1,48 @@
-package factory_test
+package faker_test
 
 import (
 	"testing"
 
-	"github.com/pioz/factory"
+	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestParamsToMinMaxIntInvaliParams1(t *testing.T) {
-	factory.SetSeed(700)
+	faker.SetSeed(700)
 	s := &struct {
-		IntField int `factory:"IntInRange"`
+		IntField int `faker:"IntInRange"`
 	}{}
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.NotNil(t, err)
 	assert.Equal(t, "Invalid parameters", err.Error())
 }
 
 func TestParamsToMinMaxIntInvaliParams2(t *testing.T) {
-	factory.SetSeed(700)
+	faker.SetSeed(700)
 	s := &struct {
-		IntField int `factory:"IntInRange(1)"`
+		IntField int `faker:"IntInRange(1)"`
 	}{}
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.NotNil(t, err)
 	assert.Equal(t, "Invalid parameters", err.Error())
 }
 
 func TestParamsToMinMaxIntInvaliParams3(t *testing.T) {
-	factory.SetSeed(700)
+	faker.SetSeed(700)
 	s := &struct {
-		IntField int `factory:"IntInRange(a,b)"`
+		IntField int `faker:"IntInRange(a,b)"`
 	}{}
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.NotNil(t, err)
 	assert.Equal(t, "Invalid parameters: strconv.Atoi: parsing \"a\": invalid syntax", err.Error())
 }
 
 func TestParamsToMinMaxIntInvaliParams4(t *testing.T) {
-	factory.SetSeed(700)
+	faker.SetSeed(700)
 	s := &struct {
-		IntField int `factory:"IntInRange(1,b)"`
+		IntField int `faker:"IntInRange(1,b)"`
 	}{}
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.NotNil(t, err)
 	assert.Equal(t, "Invalid parameters: strconv.Atoi: parsing \"b\": invalid syntax", err.Error())
 }

@@ -1,73 +1,73 @@
-package factory_test
+package faker_test
 
 import (
 	"testing"
 
-	"github.com/pioz/factory"
+	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestUsername(t *testing.T) {
-	factory.SetSeed(1700)
-	value := factory.Username()
+	faker.SetSeed(1700)
+	value := faker.Username()
 	t.Log(value)
 	assert.Equal(t, "polychasium", value)
 }
 
 func TestDomain(t *testing.T) {
-	factory.SetSeed(1701)
-	value := factory.Domain()
+	faker.SetSeed(1701)
+	value := faker.Domain()
 	t.Log(value)
 	assert.Equal(t, "lorusso.name", value)
 }
 
 func TestEmail(t *testing.T) {
-	factory.SetSeed(1702)
-	value := factory.Email()
+	faker.SetSeed(1702)
+	value := faker.Email()
 	t.Log(value)
 	assert.Equal(t, "homocercal@fulmer.net", value)
 }
 
 func TestFreeEmail(t *testing.T) {
-	factory.SetSeed(1703)
-	value := factory.FreeEmail()
+	faker.SetSeed(1703)
+	value := faker.FreeEmail()
 	t.Log(value)
 	assert.Equal(t, "atlas@gmail.com", value)
 }
 
 func TestSafeEmail(t *testing.T) {
-	factory.SetSeed(1704)
-	value := factory.SafeEmail()
+	faker.SetSeed(1704)
+	value := faker.SafeEmail()
 	t.Log(value)
 	assert.Equal(t, "disbelieve@example.com", value)
 }
 
 func TestSlug(t *testing.T) {
-	factory.SetSeed(1705)
-	value := factory.Slug()
+	faker.SetSeed(1705)
+	value := faker.Slug()
 	t.Log(value)
 	assert.Equal(t, "a-reliable-seal-s-bee-comes-with-it-the-thought-that-the-adventurous-giraffe-is-an-alligator", value)
 }
 
 func TestUrl(t *testing.T) {
-	factory.SetSeed(1706)
-	value := factory.Url()
+	faker.SetSeed(1706)
+	value := faker.Url()
 	t.Log(value)
 	assert.Equal(t, "https://www.mcmillon.info/this-could-be-or-perhaps-their-alligator-was-in-this-moment-an-eager-spider", value)
 }
 
 func TestInternetBuild(t *testing.T) {
-	factory.SetSeed(1720)
+	faker.SetSeed(1720)
 	s := &struct {
-		Field1 string `factory:"Username"`
-		Field2 string `factory:"Domain"`
-		Field3 string `factory:"Email"`
-		Field4 string `factory:"SafeEmail"`
-		Field5 string `factory:"FreeEmail"`
-		Field6 string `factory:"Slug"`
-		Field7 string `factory:"Url"`
+		Field1 string `faker:"Username"`
+		Field2 string `faker:"Domain"`
+		Field3 string `faker:"Email"`
+		Field4 string `faker:"SafeEmail"`
+		Field5 string `faker:"FreeEmail"`
+		Field6 string `faker:"Slug"`
+		Field7 string `faker:"Url"`
 	}{}
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 	assert.Equal(t, "tight", s.Field1)

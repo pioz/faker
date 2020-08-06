@@ -1,10 +1,10 @@
-package factory
+package faker
 
 import (
 	"fmt"
 	"sync"
 
-	"github.com/pioz/factory/data"
+	"github.com/pioz/faker/data"
 )
 
 var dbMutex = &sync.Mutex{}

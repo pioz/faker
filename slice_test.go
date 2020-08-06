@@ -1,15 +1,15 @@
-package factory_test
+package faker_test
 
 import (
 	"testing"
 
-	"github.com/pioz/factory"
+	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestSlice(t *testing.T) {
-	factory.SetSeed(200)
-	slice := factory.Slice(3, func() interface{} { return factory.IntInRange(0, 10) })
+	faker.SetSeed(200)
+	slice := faker.Slice(3, func() interface{} { return faker.IntInRange(0, 10) })
 	assert.Equal(t, 3, len(slice))
 	assert.Equal(t, 6, slice[0])
 	assert.Equal(t, 9, slice[1])

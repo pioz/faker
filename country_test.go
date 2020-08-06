@@ -1,57 +1,57 @@
-package factory_test
+package faker_test
 
 import (
 	"testing"
 
-	"github.com/pioz/factory"
+	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestCountryName(t *testing.T) {
-	factory.SetSeed(1000)
-	value := factory.CountryName()
+	faker.SetSeed(1000)
+	value := faker.CountryName()
 	t.Log(value)
 	assert.Equal(t, "Rwanda", value)
 }
 
 func TestCountryAlpha2(t *testing.T) {
-	factory.SetSeed(1001)
-	value := factory.CountryAlpha2()
+	faker.SetSeed(1001)
+	value := faker.CountryAlpha2()
 	t.Log(value)
 	assert.Equal(t, "ML", value)
 }
 
 func TestCountryAlpha3(t *testing.T) {
-	factory.SetSeed(1002)
-	value := factory.CountryAlpha3()
+	faker.SetSeed(1002)
+	value := faker.CountryAlpha3()
 	t.Log(value)
 	assert.Equal(t, "TKM", value)
 }
 
 func TestCountryNationality(t *testing.T) {
-	factory.SetSeed(1002)
-	value := factory.CountryNationality()
+	faker.SetSeed(1002)
+	value := faker.CountryNationality()
 	t.Log(value)
 	assert.Equal(t, "Venezuelan", value)
 }
 
 func TestCountryFlag(t *testing.T) {
-	factory.SetSeed(1003)
-	value := factory.CountryFlag()
+	faker.SetSeed(1003)
+	value := faker.CountryFlag()
 	t.Log(value)
 	assert.Equal(t, "🇳🇷", value)
 }
 
 func TestCountryBuild(t *testing.T) {
-	factory.SetSeed(1010)
+	faker.SetSeed(1010)
 	s := &struct {
-		Field1 string `factory:"CountryName"`
-		Field2 string `factory:"CountryAlpha2"`
-		Field3 string `factory:"CountryAlpha3"`
-		Field4 string `factory:"CountryNationality"`
-		Field5 string `factory:"CountryFlag"`
+		Field1 string `faker:"CountryName"`
+		Field2 string `faker:"CountryAlpha2"`
+		Field3 string `faker:"CountryAlpha3"`
+		Field4 string `faker:"CountryNationality"`
+		Field5 string `faker:"CountryFlag"`
 	}{}
-	err := factory.Build(&s)
+	err := faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 	assert.Equal(t, "Iceland", s.Field1)

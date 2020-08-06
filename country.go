@@ -1,4 +1,4 @@
-package factory
+package faker
 
 func CountryName() string {
 	value, err := GetData("country", "name")

@@ -1,4 +1,4 @@
-package factory
+package faker
 
 func Slice(size int, fn func() interface{}) []interface{} {
 	slice := make([]interface{}, 0, size)

@@ -1,4 +1,4 @@
-package factory
+package faker
 
 func CurrencyName() string {
 	value, err := GetData("currency", "name")
