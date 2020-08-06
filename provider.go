@@ -8,130 +8,130 @@ import (
 	"strings"
 )
 
-var providers = map[string]providerFunc{
+var builders = map[string]builderFunc{
 	// misc
-	providerKey("Bool", "bool"):          boolProvider,
-	providerKey("", "bool"):              boolProvider,
-	providerKey("PhoneNumber", "string"): phoneNumberProvider,
-	providerKey("Uuid", "string"):        uuidProvider,
+	builderKey("Bool", "bool"):          boolBuilder,
+	builderKey("", "bool"):              boolBuilder,
+	builderKey("PhoneNumber", "string"): phoneNumberBuilder,
+	builderKey("Uuid", "string"):        uuidBuilder,
 	// number
-	providerKey("IntInRange", "int"):         intInRangeProvider,
-	providerKey("Int", "int"):                intProvider,
-	providerKey("", "int"):                   intProvider,
-	providerKey("Int64InRange", "int64"):     int64InRangeProvider,
-	providerKey("Int64", "int64"):            int64Provider,
-	providerKey("", "int64"):                 int64Provider,
-	providerKey("Int32InRange", "int32"):     int32InRangeProvider,
-	providerKey("Int32", "int32"):            int32Provider,
-	providerKey("", "int32"):                 int32Provider,
-	providerKey("Int16InRange", "int16"):     int16InRangeProvider,
-	providerKey("Int16", "int16"):            int16Provider,
-	providerKey("", "int16"):                 int16Provider,
-	providerKey("Int8InRange", "int8"):       int8InRangeProvider,
-	providerKey("Int8", "int8"):              int8Provider,
-	providerKey("", "int8"):                  int8Provider,
-	providerKey("UintInRange", "uint"):       uintInRangeProvider,
-	providerKey("Uint", "uint"):              uintProvider,
-	providerKey("", "uint"):                  uintProvider,
-	providerKey("Uint64InRange", "uint64"):   uint64InRangeProvider,
-	providerKey("Uint64", "uint64"):          uint64Provider,
-	providerKey("", "uint64"):                uint64Provider,
-	providerKey("Uint32InRange", "uint32"):   uint32InRangeProvider,
-	providerKey("Uint32", "uint32"):          uint32Provider,
-	providerKey("", "uint32"):                uint32Provider,
-	providerKey("Uint16InRange", "uint16"):   uint16InRangeProvider,
-	providerKey("Uint16", "uint16"):          uint16Provider,
-	providerKey("", "uint16"):                uint16Provider,
-	providerKey("Uint8InRange", "uint8"):     uint8InRangeProvider,
-	providerKey("Uint8", "uint8"):            uint8Provider,
-	providerKey("", "uint8"):                 uint8Provider,
-	providerKey("Float64InRange", "float64"): float64InRangeProvider,
-	providerKey("Float64", "float64"):        float64Provider,
-	providerKey("", "float64"):               float64Provider,
-	providerKey("Float32InRange", "float32"): float32InRangeProvider,
-	providerKey("Float32", "float32"):        float32Provider,
-	providerKey("", "float32"):               float32Provider,
+	builderKey("IntInRange", "int"):         intInRangeBuilder,
+	builderKey("Int", "int"):                intBuilder,
+	builderKey("", "int"):                   intBuilder,
+	builderKey("Int64InRange", "int64"):     int64InRangeBuilder,
+	builderKey("Int64", "int64"):            int64Builder,
+	builderKey("", "int64"):                 int64Builder,
+	builderKey("Int32InRange", "int32"):     int32InRangeBuilder,
+	builderKey("Int32", "int32"):            int32Builder,
+	builderKey("", "int32"):                 int32Builder,
+	builderKey("Int16InRange", "int16"):     int16InRangeBuilder,
+	builderKey("Int16", "int16"):            int16Builder,
+	builderKey("", "int16"):                 int16Builder,
+	builderKey("Int8InRange", "int8"):       int8InRangeBuilder,
+	builderKey("Int8", "int8"):              int8Builder,
+	builderKey("", "int8"):                  int8Builder,
+	builderKey("UintInRange", "uint"):       uintInRangeBuilder,
+	builderKey("Uint", "uint"):              uintBuilder,
+	builderKey("", "uint"):                  uintBuilder,
+	builderKey("Uint64InRange", "uint64"):   uint64InRangeBuilder,
+	builderKey("Uint64", "uint64"):          uint64Builder,
+	builderKey("", "uint64"):                uint64Builder,
+	builderKey("Uint32InRange", "uint32"):   uint32InRangeBuilder,
+	builderKey("Uint32", "uint32"):          uint32Builder,
+	builderKey("", "uint32"):                uint32Builder,
+	builderKey("Uint16InRange", "uint16"):   uint16InRangeBuilder,
+	builderKey("Uint16", "uint16"):          uint16Builder,
+	builderKey("", "uint16"):                uint16Builder,
+	builderKey("Uint8InRange", "uint8"):     uint8InRangeBuilder,
+	builderKey("Uint8", "uint8"):            uint8Builder,
+	builderKey("", "uint8"):                 uint8Builder,
+	builderKey("Float64InRange", "float64"): float64InRangeBuilder,
+	builderKey("Float64", "float64"):        float64Builder,
+	builderKey("", "float64"):               float64Builder,
+	builderKey("Float32InRange", "float32"): float32InRangeBuilder,
+	builderKey("Float32", "float32"):        float32Builder,
+	builderKey("", "float32"):               float32Builder,
 	// string
-	providerKey("StringWithSize", "string"):  stringWithSizeProvider,
-	providerKey("String", "string"):          stringProvider,
-	providerKey("", "string"):                stringProvider,
-	providerKey("DigitsWithSize", "string"):  digitsWithSizeProvider,
-	providerKey("Digits", "string"):          digitsProvider,
-	providerKey("LettersWithSize", "string"): lettersWithSizeProvider,
-	providerKey("Letters", "string"):         lettersProvider,
-	providerKey("Lexify", "string"):          lexifyProvider,
-	providerKey("Numerify", "string"):        numerifyProvider,
-	providerKey("Parameterize", "string"):    parameterizeProvider,
-	providerKey("Pick", "string"):            pickProvider,
+	builderKey("StringWithSize", "string"):  stringWithSizeBuilder,
+	builderKey("String", "string"):          stringBuilder,
+	builderKey("", "string"):                stringBuilder,
+	builderKey("DigitsWithSize", "string"):  digitsWithSizeBuilder,
+	builderKey("Digits", "string"):          digitsBuilder,
+	builderKey("LettersWithSize", "string"): lettersWithSizeBuilder,
+	builderKey("Letters", "string"):         lettersBuilder,
+	builderKey("Lexify", "string"):          lexifyBuilder,
+	builderKey("Numerify", "string"):        numerifyBuilder,
+	builderKey("Parameterize", "string"):    parameterizeBuilder,
+	builderKey("Pick", "string"):            pickBuilder,
 	// time
-	providerKey("DurationInRange", "time.Duration"): durationInRangeProvider,
-	providerKey("Duration", "time.Duration"):        durationProvider,
-	providerKey("", "time.Duration"):                durationProvider,
-	providerKey("Time", "time.Time"):                timeProvider,
-	providerKey("", "time.Time"):                    timeProvider,
-	providerKey("NanoSecond", "int"):                nanoSecondProvider,
-	providerKey("Second", "int"):                    secondProvider,
-	providerKey("Minute", "int"):                    minuteProvider,
-	providerKey("Hour", "int"):                      hourProvider,
-	providerKey("Day", "int"):                       dayProvider,
-	providerKey("WeekDay", "string"):                weekDayProvider,
-	providerKey("Month", "string"):                  monthProvider,
-	providerKey("Year", "int"):                      yearProvider,
-	providerKey("TimeZone", "string"):               timeZoneProvider,
-	providerKey("TimeZoneAbbr", "string"):           timeZoneAbbrProvider,
-	providerKey("TimeZoneFull", "string"):           timeZoneFullProvider,
-	providerKey("TimeZoneOffset", "float32"):        timeZoneOffsetProvider,
-	providerKey("TimeZoneRegion", "string"):         timeZoneRegionProvider,
+	builderKey("DurationInRange", "time.Duration"): durationInRangeBuilder,
+	builderKey("Duration", "time.Duration"):        durationBuilder,
+	builderKey("", "time.Duration"):                durationBuilder,
+	builderKey("Time", "time.Time"):                timeBuilder,
+	builderKey("", "time.Time"):                    timeBuilder,
+	builderKey("NanoSecond", "int"):                nanoSecondBuilder,
+	builderKey("Second", "int"):                    secondBuilder,
+	builderKey("Minute", "int"):                    minuteBuilder,
+	builderKey("Hour", "int"):                      hourBuilder,
+	builderKey("Day", "int"):                       dayBuilder,
+	builderKey("WeekDay", "string"):                weekDayBuilder,
+	builderKey("Month", "string"):                  monthBuilder,
+	builderKey("Year", "int"):                      yearBuilder,
+	builderKey("TimeZone", "string"):               timeZoneBuilder,
+	builderKey("TimeZoneAbbr", "string"):           timeZoneAbbrBuilder,
+	builderKey("TimeZoneFull", "string"):           timeZoneFullBuilder,
+	builderKey("TimeZoneOffset", "float32"):        timeZoneOffsetBuilder,
+	builderKey("TimeZoneRegion", "string"):         timeZoneRegionBuilder,
 	// country
-	providerKey("CountryName", "string"):        countryNameProvider,
-	providerKey("CountryAlpha2", "string"):      countryAlpha2Provider,
-	providerKey("CountryAlpha3", "string"):      countryAlpha3Provider,
-	providerKey("CountryNationality", "string"): countryNationalityProvider,
-	providerKey("CountryFlag", "string"):        countryFlagProvider,
+	builderKey("CountryName", "string"):        countryNameBuilder,
+	builderKey("CountryAlpha2", "string"):      countryAlpha2Builder,
+	builderKey("CountryAlpha3", "string"):      countryAlpha3Builder,
+	builderKey("CountryNationality", "string"): countryNationalityBuilder,
+	builderKey("CountryFlag", "string"):        countryFlagBuilder,
 	// lang
-	providerKey("LangName", "string"): langNameProvider,
-	providerKey("LangCode", "string"): langCodeProvider,
+	builderKey("LangName", "string"): langNameBuilder,
+	builderKey("LangCode", "string"): langCodeBuilder,
 	// currency
-	providerKey("CurrencyName", "string"):   currencyNameProvider,
-	providerKey("CurrencyCode", "string"):   currencyCodeProvider,
-	providerKey("CurrencySymbol", "string"): currencySymbolProvider,
+	builderKey("CurrencyName", "string"):   currencyNameBuilder,
+	builderKey("CurrencyCode", "string"):   currencyCodeBuilder,
+	builderKey("CurrencySymbol", "string"): currencySymbolBuilder,
 	// address
-	providerKey("AddressCity", "string"):             addressCityProvider,
-	providerKey("AddressState", "string"):            addressStateProvider,
-	providerKey("AddressStateCode", "string"):        addressStateCodeProvider,
-	providerKey("AddressStreetName", "string"):       addressStreetNameProvider,
-	providerKey("AddressStreetNumber", "string"):     addressStreetNumberProvider,
-	providerKey("AddressSecondaryAddress", "string"): addressSecondaryAddressProvider,
-	providerKey("AddressZip", "string"):              addressZipProvider,
-	providerKey("AddressFull", "string"):             addressFullProvider,
+	builderKey("AddressCity", "string"):             addressCityBuilder,
+	builderKey("AddressState", "string"):            addressStateBuilder,
+	builderKey("AddressStateCode", "string"):        addressStateCodeBuilder,
+	builderKey("AddressStreetName", "string"):       addressStreetNameBuilder,
+	builderKey("AddressStreetNumber", "string"):     addressStreetNumberBuilder,
+	builderKey("AddressSecondaryAddress", "string"): addressSecondaryAddressBuilder,
+	builderKey("AddressZip", "string"):              addressZipBuilder,
+	builderKey("AddressFull", "string"):             addressFullBuilder,
 	// name
-	providerKey("MaleFirstName", "string"):    maleFirstNameProvider,
-	providerKey("FemaleFirstName", "string"):  femaleFirstName,
-	providerKey("NeutralFirstName", "string"): neutralFirstNameProvider,
-	providerKey("FirstName", "string"):        firstNameProvider,
-	providerKey("LastName", "string"):         lastNameProvider,
-	providerKey("NamePrefix", "string"):       namePrefixProvider,
-	providerKey("NameSuffix", "string"):       nameSuffixProvider,
-	providerKey("FullName", "string"):         fullNameProvider,
-	providerKey("NameInitials", "string"):     nameInitialsProvider,
+	builderKey("MaleFirstName", "string"):    maleFirstNameBuilder,
+	builderKey("FemaleFirstName", "string"):  femaleFirstName,
+	builderKey("NeutralFirstName", "string"): neutralFirstNameBuilder,
+	builderKey("FirstName", "string"):        firstNameBuilder,
+	builderKey("LastName", "string"):         lastNameBuilder,
+	builderKey("NamePrefix", "string"):       namePrefixBuilder,
+	builderKey("NameSuffix", "string"):       nameSuffixBuilder,
+	builderKey("FullName", "string"):         fullNameBuilder,
+	builderKey("NameInitials", "string"):     nameInitialsBuilder,
 	// gender
-	providerKey("Gender", "string"):            genderProvider,
-	providerKey("BinaryGender", "string"):      binaryGenderProvider,
-	providerKey("ShortBinaryGender", "string"): shortBinaryGenderProvider,
+	builderKey("Gender", "string"):            genderBuilder,
+	builderKey("BinaryGender", "string"):      binaryGenderBuilder,
+	builderKey("ShortBinaryGender", "string"): shortBinaryGenderBuilder,
 	// sentence
-	providerKey("Sentence", "string"):                   sentenceProvider,
-	providerKey("ParagraphWithSentenceCount", "string"): paragraphWithSentenceCountProvider,
-	providerKey("Paragraph", "string"):                  paragraphProvider,
-	providerKey("ArticleWithParagraphCount", "string"):  articleWithParagraphCountProvider,
-	providerKey("Article", "string"):                    articleProvider,
+	builderKey("Sentence", "string"):                   sentenceBuilder,
+	builderKey("ParagraphWithSentenceCount", "string"): paragraphWithSentenceCountBuilder,
+	builderKey("Paragraph", "string"):                  paragraphBuilder,
+	builderKey("ArticleWithParagraphCount", "string"):  articleWithParagraphCountBuilder,
+	builderKey("Article", "string"):                    articleBuilder,
 	// internet
-	providerKey("Username", "string"):  usernameProvider,
-	providerKey("Domain", "string"):    domainProvider,
-	providerKey("Email", "string"):     emailProvider,
-	providerKey("FreeEmail", "string"): freeEmailProvider,
-	providerKey("SafeEmail", "string"): safeEmailProvider,
-	providerKey("Slug", "string"):      slugProvider,
-	providerKey("Url", "string"):       urlProvider,
+	builderKey("Username", "string"):  usernameBuilder,
+	builderKey("Domain", "string"):    domainBuilder,
+	builderKey("Email", "string"):     emailBuilder,
+	builderKey("FreeEmail", "string"): freeEmailBuilder,
+	builderKey("SafeEmail", "string"): safeEmailBuilder,
+	builderKey("Slug", "string"):      slugBuilder,
+	builderKey("Url", "string"):       urlBuilder,
 }
 
 const skipTag = "-"
@@ -180,26 +180,26 @@ func decodeTag(tagString string) *fakerTag {
 	return tag
 }
 
-type providerFunc func(...string) (interface{}, error)
+type builderFunc func(...string) (interface{}, error)
 
-func providerKey(providerName, providerType string) string {
-	return strings.ToLower(fmt.Sprintf("%s-%s", providerName, providerType))
+func builderKey(builderName, builderType string) string {
+	return strings.ToLower(fmt.Sprintf("%s-%s", builderName, builderType))
 }
 
-func RegisterProvider(providerName, providerType string, fn providerFunc) error {
-	key := providerKey(providerName, providerType)
-	if _, ok := providers[key]; ok {
-		return errors.New("Provider already registered")
+func RegisterBuilder(builderName, builderType string, fn builderFunc) error {
+	key := builderKey(builderName, builderType)
+	if _, ok := builders[key]; ok {
+		return errors.New("Builder already registered")
 	}
-	providers[key] = fn
+	builders[key] = fn
 	return nil
 }
 
-func UnregisterProvider(providerName, providerType string) error {
-	key := providerKey(providerName, providerType)
-	if _, ok := providers[key]; !ok {
-		return errors.New("Provider not registered")
+func UnregisterBuilder(builderName, builderType string) error {
+	key := builderKey(builderName, builderType)
+	if _, ok := builders[key]; !ok {
+		return errors.New("Builder not registered")
 	}
-	delete(providers, key)
+	delete(builders, key)
 	return nil
 }

@@ -76,9 +76,9 @@ func replaceChar(str, chr string, fn func() string) string {
 	return r
 }
 
-// Provider functions
+// Builder functions
 
-func stringWithSizeProvider(params ...string) (interface{}, error) {
+func stringWithSizeBuilder(params ...string) (interface{}, error) {
 	size, err := paramsToInt(params...)
 	if err != nil {
 		return nil, err
@@ -86,11 +86,11 @@ func stringWithSizeProvider(params ...string) (interface{}, error) {
 	return StringWithSize(size), nil
 }
 
-func stringProvider(params ...string) (interface{}, error) {
+func stringBuilder(params ...string) (interface{}, error) {
 	return String(), nil
 }
 
-func digitsWithSizeProvider(params ...string) (interface{}, error) {
+func digitsWithSizeBuilder(params ...string) (interface{}, error) {
 	size, err := paramsToInt(params...)
 	if err != nil {
 		return nil, err
@@ -98,11 +98,11 @@ func digitsWithSizeProvider(params ...string) (interface{}, error) {
 	return DigitsWithSize(size), nil
 }
 
-func digitsProvider(params ...string) (interface{}, error) {
+func digitsBuilder(params ...string) (interface{}, error) {
 	return Digits(), nil
 }
 
-func lettersWithSizeProvider(params ...string) (interface{}, error) {
+func lettersWithSizeBuilder(params ...string) (interface{}, error) {
 	size, err := paramsToInt(params...)
 	if err != nil {
 		return nil, err
@@ -110,31 +110,31 @@ func lettersWithSizeProvider(params ...string) (interface{}, error) {
 	return LettersWithSize(size), nil
 }
 
-func lettersProvider(params ...string) (interface{}, error) {
+func lettersBuilder(params ...string) (interface{}, error) {
 	return Letters(), nil
 }
 
-func lexifyProvider(params ...string) (interface{}, error) {
+func lexifyBuilder(params ...string) (interface{}, error) {
 	if len(params) != 1 {
 		return nil, parametersError(nil)
 	}
 	return Lexify(params[0]), nil
 }
 
-func numerifyProvider(params ...string) (interface{}, error) {
+func numerifyBuilder(params ...string) (interface{}, error) {
 	if len(params) != 1 {
 		return nil, parametersError(nil)
 	}
 	return Numerify(params[0]), nil
 }
 
-func parameterizeProvider(params ...string) (interface{}, error) {
+func parameterizeBuilder(params ...string) (interface{}, error) {
 	if len(params) != 1 {
 		return nil, parametersError(nil)
 	}
 	return Parameterize(params[0]), nil
 }
 
-func pickProvider(params ...string) (interface{}, error) {
+func pickBuilder(params ...string) (interface{}, error) {
 	return Pick(params...), nil
 }

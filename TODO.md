@@ -1,6 +1,5 @@
 # faker TODO
 
-- Rename `Provider` in `Builder`
 - GoDoc (comments)
 - Readme
 

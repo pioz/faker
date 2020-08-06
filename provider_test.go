@@ -7,22 +7,22 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestRegisterProvider(t *testing.T) {
-	err := faker.UnregisterProvider("foo", "string")
+func TestRegisterBuilder(t *testing.T) {
+	err := faker.UnregisterBuilder("foo", "string")
 	assert.NotNil(t, err)
-	assert.Equal(t, "Provider not registered", err.Error())
+	assert.Equal(t, "Builder not registered", err.Error())
 
-	err = faker.RegisterProvider("foo", "string", func(...string) (interface{}, error) {
+	err = faker.RegisterBuilder("foo", "string", func(...string) (interface{}, error) {
 		return "bar", nil
 	})
 	assert.Nil(t, err)
 
-	err = faker.RegisterProvider("foo", "string", func(...string) (interface{}, error) {
+	err = faker.RegisterBuilder("foo", "string", func(...string) (interface{}, error) {
 		return "bar", nil
 	})
 	assert.NotNil(t, err)
-	assert.Equal(t, "Provider already registered", err.Error())
+	assert.Equal(t, "Builder already registered", err.Error())
 
-	err = faker.UnregisterProvider("foo", "string")
+	err = faker.UnregisterBuilder("foo", "string")
 	assert.Nil(t, err)
 }

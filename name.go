@@ -82,9 +82,9 @@ func NameInitials() string {
 	return strings.ToUpper(Lexify("??"))
 }
 
-// Provider functions
+// Builder functions
 
-func maleFirstNameProvider(params ...string) (interface{}, error) {
+func maleFirstNameBuilder(params ...string) (interface{}, error) {
 	return MaleFirstName(), nil
 }
 
@@ -92,30 +92,30 @@ func femaleFirstName(params ...string) (interface{}, error) {
 	return FemaleFirstName(), nil
 }
 
-func neutralFirstNameProvider(params ...string) (interface{}, error) {
+func neutralFirstNameBuilder(params ...string) (interface{}, error) {
 	return NeutralFirstName(), nil
 }
 
-func firstNameProvider(params ...string) (interface{}, error) {
+func firstNameBuilder(params ...string) (interface{}, error) {
 	return FirstName(), nil
 }
 
-func lastNameProvider(params ...string) (interface{}, error) {
+func lastNameBuilder(params ...string) (interface{}, error) {
 	return LastName(), nil
 }
 
-func namePrefixProvider(params ...string) (interface{}, error) {
+func namePrefixBuilder(params ...string) (interface{}, error) {
 	return NamePrefix(), nil
 }
 
-func nameSuffixProvider(params ...string) (interface{}, error) {
+func nameSuffixBuilder(params ...string) (interface{}, error) {
 	return NameSuffix(), nil
 }
 
-func fullNameProvider(params ...string) (interface{}, error) {
+func fullNameBuilder(params ...string) (interface{}, error) {
 	return FullName(), nil
 }
 
-func nameInitialsProvider(params ...string) (interface{}, error) {
+func nameInitialsBuilder(params ...string) (interface{}, error) {
 	return NameInitials(), nil
 }

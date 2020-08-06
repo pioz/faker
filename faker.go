@@ -30,13 +30,13 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 	// fmt.Println(">", kind.String(), inputReflectType.String(), tag)
 
 	var (
-		fn    providerFunc
+		fn    builderFunc
 		found bool
 		key   string
 	)
 
-	key = providerKey(tag.funcName, inputReflectType.String())
-	fn, found = providers[key]
+	key = builderKey(tag.funcName, inputReflectType.String())
+	fn, found = builders[key]
 
 	if found {
 		var value interface{}

@@ -119,9 +119,9 @@ func Float32() float32 {
 	return Float32InRange(math.SmallestNonzeroFloat32, math.MaxFloat32)
 }
 
-// Provider functions
+// Builder functions
 
-func intInRangeProvider(params ...string) (interface{}, error) {
+func intInRangeBuilder(params ...string) (interface{}, error) {
 	min, max, err := paramsToMinMaxInt(params...)
 	if err != nil {
 		return nil, err
@@ -129,11 +129,11 @@ func intInRangeProvider(params ...string) (interface{}, error) {
 	return IntInRange(min, max), nil
 }
 
-func intProvider(params ...string) (interface{}, error) {
+func intBuilder(params ...string) (interface{}, error) {
 	return Int(), nil
 }
 
-func int64InRangeProvider(params ...string) (interface{}, error) {
+func int64InRangeBuilder(params ...string) (interface{}, error) {
 	min, max, err := paramsToMinMaxInt(params...)
 	if err != nil {
 		return nil, err
@@ -141,11 +141,11 @@ func int64InRangeProvider(params ...string) (interface{}, error) {
 	return Int64InRange(int64(min), int64(max)), nil
 }
 
-func int64Provider(params ...string) (interface{}, error) {
+func int64Builder(params ...string) (interface{}, error) {
 	return Int64(), nil
 }
 
-func int32InRangeProvider(params ...string) (interface{}, error) {
+func int32InRangeBuilder(params ...string) (interface{}, error) {
 	min, max, err := paramsToMinMaxInt(params...)
 	if err != nil {
 		return nil, err
@@ -153,11 +153,11 @@ func int32InRangeProvider(params ...string) (interface{}, error) {
 	return Int32InRange(int32(min), int32(max)), nil
 }
 
-func int32Provider(params ...string) (interface{}, error) {
+func int32Builder(params ...string) (interface{}, error) {
 	return Int32(), nil
 }
 
-func int16InRangeProvider(params ...string) (interface{}, error) {
+func int16InRangeBuilder(params ...string) (interface{}, error) {
 	min, max, err := paramsToMinMaxInt(params...)
 	if err != nil {
 		return nil, err
@@ -165,11 +165,11 @@ func int16InRangeProvider(params ...string) (interface{}, error) {
 	return Int16InRange(int16(min), int16(max)), nil
 }
 
-func int16Provider(params ...string) (interface{}, error) {
+func int16Builder(params ...string) (interface{}, error) {
 	return Int16(), nil
 }
 
-func int8InRangeProvider(params ...string) (interface{}, error) {
+func int8InRangeBuilder(params ...string) (interface{}, error) {
 	min, max, err := paramsToMinMaxInt(params...)
 	if err != nil {
 		return nil, err
@@ -177,11 +177,11 @@ func int8InRangeProvider(params ...string) (interface{}, error) {
 	return Int8InRange(int8(min), int8(max)), nil
 }
 
-func int8Provider(params ...string) (interface{}, error) {
+func int8Builder(params ...string) (interface{}, error) {
 	return Int8(), nil
 }
 
-func uintInRangeProvider(params ...string) (interface{}, error) {
+func uintInRangeBuilder(params ...string) (interface{}, error) {
 	min, max, err := paramsToMinMaxInt(params...)
 	if err != nil {
 		return nil, err
@@ -189,11 +189,11 @@ func uintInRangeProvider(params ...string) (interface{}, error) {
 	return UintInRange(uint(min), uint(max)), nil
 }
 
-func uintProvider(params ...string) (interface{}, error) {
+func uintBuilder(params ...string) (interface{}, error) {
 	return Uint(), nil
 }
 
-func uint64InRangeProvider(params ...string) (interface{}, error) {
+func uint64InRangeBuilder(params ...string) (interface{}, error) {
 	min, max, err := paramsToMinMaxInt(params...)
 	if err != nil {
 		return nil, err
@@ -201,11 +201,11 @@ func uint64InRangeProvider(params ...string) (interface{}, error) {
 	return Uint64InRange(uint64(min), uint64(max)), nil
 }
 
-func uint64Provider(params ...string) (interface{}, error) {
+func uint64Builder(params ...string) (interface{}, error) {
 	return Uint64(), nil
 }
 
-func uint32InRangeProvider(params ...string) (interface{}, error) {
+func uint32InRangeBuilder(params ...string) (interface{}, error) {
 	min, max, err := paramsToMinMaxInt(params...)
 	if err != nil {
 		return nil, err
@@ -213,11 +213,11 @@ func uint32InRangeProvider(params ...string) (interface{}, error) {
 	return Uint32InRange(uint32(min), uint32(max)), nil
 }
 
-func uint32Provider(params ...string) (interface{}, error) {
+func uint32Builder(params ...string) (interface{}, error) {
 	return Uint32(), nil
 }
 
-func uint16InRangeProvider(params ...string) (interface{}, error) {
+func uint16InRangeBuilder(params ...string) (interface{}, error) {
 	min, max, err := paramsToMinMaxInt(params...)
 	if err != nil {
 		return nil, err
@@ -225,11 +225,11 @@ func uint16InRangeProvider(params ...string) (interface{}, error) {
 	return Uint16InRange(uint16(min), uint16(max)), nil
 }
 
-func uint16Provider(params ...string) (interface{}, error) {
+func uint16Builder(params ...string) (interface{}, error) {
 	return Uint16(), nil
 }
 
-func uint8InRangeProvider(params ...string) (interface{}, error) {
+func uint8InRangeBuilder(params ...string) (interface{}, error) {
 	min, max, err := paramsToMinMaxInt(params...)
 	if err != nil {
 		return nil, err
@@ -237,11 +237,11 @@ func uint8InRangeProvider(params ...string) (interface{}, error) {
 	return Uint8InRange(uint8(min), uint8(max)), nil
 }
 
-func uint8Provider(params ...string) (interface{}, error) {
+func uint8Builder(params ...string) (interface{}, error) {
 	return Uint8(), nil
 }
 
-func float64InRangeProvider(params ...string) (interface{}, error) {
+func float64InRangeBuilder(params ...string) (interface{}, error) {
 	min, max, err := paramsToMinMaxFloat64(params...)
 	if err != nil {
 		return nil, err
@@ -249,11 +249,11 @@ func float64InRangeProvider(params ...string) (interface{}, error) {
 	return Float64InRange(min, max), nil
 }
 
-func float64Provider(params ...string) (interface{}, error) {
+func float64Builder(params ...string) (interface{}, error) {
 	return Float64(), nil
 }
 
-func float32InRangeProvider(params ...string) (interface{}, error) {
+func float32InRangeBuilder(params ...string) (interface{}, error) {
 	min, max, err := paramsToMinMaxFloat64(params...)
 	if err != nil {
 		return nil, err
@@ -261,6 +261,6 @@ func float32InRangeProvider(params ...string) (interface{}, error) {
 	return Float32InRange(float32(min), float32(max)), nil
 }
 
-func float32Provider(params ...string) (interface{}, error) {
+func float32Builder(params ...string) (interface{}, error) {
 	return Float32(), nil
 }

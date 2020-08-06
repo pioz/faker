@@ -109,9 +109,9 @@ func TimeZoneRegion() string {
 	return timezone.(string)
 }
 
-// Provider functions
+// Builder functions
 
-func durationInRangeProvider(params ...string) (interface{}, error) {
+func durationInRangeBuilder(params ...string) (interface{}, error) {
 	min, max, err := paramsToMinMaxDuration(params...)
 	if err != nil {
 		return nil, err
@@ -119,62 +119,62 @@ func durationInRangeProvider(params ...string) (interface{}, error) {
 	return DurationInRange(min, max), nil
 }
 
-func durationProvider(params ...string) (interface{}, error) {
+func durationBuilder(params ...string) (interface{}, error) {
 	return Duration(), nil
 }
 
-func timeProvider(params ...string) (interface{}, error) {
+func timeBuilder(params ...string) (interface{}, error) {
 	return Time(), nil
 }
 
-func nanoSecondProvider(params ...string) (interface{}, error) {
+func nanoSecondBuilder(params ...string) (interface{}, error) {
 	return NanoSecond(), nil
 }
 
-func secondProvider(params ...string) (interface{}, error) {
+func secondBuilder(params ...string) (interface{}, error) {
 	return Second(), nil
 }
 
-func minuteProvider(params ...string) (interface{}, error) {
+func minuteBuilder(params ...string) (interface{}, error) {
 	return Minute(), nil
 }
 
-func hourProvider(params ...string) (interface{}, error) {
+func hourBuilder(params ...string) (interface{}, error) {
 	return Hour(), nil
 }
 
-func dayProvider(params ...string) (interface{}, error) {
+func dayBuilder(params ...string) (interface{}, error) {
 	return Day(), nil
 }
 
-func weekDayProvider(params ...string) (interface{}, error) {
+func weekDayBuilder(params ...string) (interface{}, error) {
 	return WeekDay(), nil
 }
 
-func monthProvider(params ...string) (interface{}, error) {
+func monthBuilder(params ...string) (interface{}, error) {
 	return Month(), nil
 }
 
-func yearProvider(params ...string) (interface{}, error) {
+func yearBuilder(params ...string) (interface{}, error) {
 	return Year(), nil
 }
 
-func timeZoneProvider(params ...string) (interface{}, error) {
+func timeZoneBuilder(params ...string) (interface{}, error) {
 	return TimeZone(), nil
 }
 
-func timeZoneAbbrProvider(params ...string) (interface{}, error) {
+func timeZoneAbbrBuilder(params ...string) (interface{}, error) {
 	return TimeZoneAbbr(), nil
 }
 
-func timeZoneFullProvider(params ...string) (interface{}, error) {
+func timeZoneFullBuilder(params ...string) (interface{}, error) {
 	return TimeZoneFull(), nil
 }
 
-func timeZoneOffsetProvider(params ...string) (interface{}, error) {
+func timeZoneOffsetBuilder(params ...string) (interface{}, error) {
 	return TimeZoneOffset(), nil
 }
 
-func timeZoneRegionProvider(params ...string) (interface{}, error) {
+func timeZoneRegionBuilder(params ...string) (interface{}, error) {
 	return TimeZoneRegion(), nil
 }

@@ -84,7 +84,7 @@ func TestMapBuild(t *testing.T) {
 }
 
 func TestTagFuncCallBuild(t *testing.T) {
-	faker.RegisterProvider("Ping", "string", func(params ...string) (interface{}, error) {
+	faker.RegisterBuilder("Ping", "string", func(params ...string) (interface{}, error) {
 		return "pong", nil
 	})
 
@@ -100,7 +100,7 @@ func TestTagFuncCallBuild(t *testing.T) {
 }
 
 func TestTagFuncCallCaseSensitiveBuild(t *testing.T) {
-	faker.RegisterProvider("Ping", "string", func(params ...string) (interface{}, error) {
+	faker.RegisterBuilder("Ping", "string", func(params ...string) (interface{}, error) {
 		return "pong", nil
 	})
 
@@ -124,7 +124,7 @@ func TestTagFuncCallCaseSensitiveBuild(t *testing.T) {
 }
 
 func TestTagFuncCallWithParamsBuild(t *testing.T) {
-	faker.RegisterProvider("Temperature", "string", func(params ...string) (interface{}, error) {
+	faker.RegisterBuilder("Temperature", "string", func(params ...string) (interface{}, error) {
 		if len(params) == 1 {
 			return params[0], nil
 		}
@@ -145,7 +145,7 @@ func TestTagFuncCallWithParamsBuild(t *testing.T) {
 }
 
 func TestTagFuncCallReturnErrorBuild(t *testing.T) {
-	faker.RegisterProvider("Error", "string", func(params ...string) (interface{}, error) {
+	faker.RegisterBuilder("Error", "string", func(params ...string) (interface{}, error) {
 		return nil, errors.New("This is an error")
 	})
 
@@ -159,7 +159,7 @@ func TestTagFuncCallReturnErrorBuild(t *testing.T) {
 }
 
 func TestTagFuncCallNotSupportedTypeBuild(t *testing.T) {
-	faker.RegisterProvider("Ping", "string", func(params ...string) (interface{}, error) {
+	faker.RegisterBuilder("Ping", "string", func(params ...string) (interface{}, error) {
 		return "pong", nil
 	})
 
@@ -305,7 +305,7 @@ type userTest struct {
 // Generic quite complete test on struct
 func TestStructBuild(t *testing.T) {
 	faker.SetSeed(620)
-	faker.RegisterProvider("coin", "string", func(...string) (interface{}, error) {
+	faker.RegisterBuilder("coin", "string", func(...string) (interface{}, error) {
 		if faker.Bool() {
 			return "head", nil
 		} else {
@@ -313,7 +313,7 @@ func TestStructBuild(t *testing.T) {
 		}
 	})
 
-	faker.RegisterProvider("feedbacks", "map[string]int", func(...string) (interface{}, error) {
+	faker.RegisterBuilder("feedbacks", "map[string]int", func(...string) (interface{}, error) {
 		f := make(map[string]int)
 		f["power"] = 2
 		f["speed"] = 3

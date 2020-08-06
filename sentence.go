@@ -43,13 +43,13 @@ func Article() string {
 	return ArticleWithParagraphCount(n)
 }
 
-// Provider functions
+// Builder functions
 
-func sentenceProvider(params ...string) (interface{}, error) {
+func sentenceBuilder(params ...string) (interface{}, error) {
 	return Sentence(), nil
 }
 
-func paragraphWithSentenceCountProvider(params ...string) (interface{}, error) {
+func paragraphWithSentenceCountBuilder(params ...string) (interface{}, error) {
 	size, err := paramsToInt(params...)
 	if err != nil {
 		return nil, err
@@ -57,11 +57,11 @@ func paragraphWithSentenceCountProvider(params ...string) (interface{}, error) {
 	return ParagraphWithSentenceCount(size), nil
 }
 
-func paragraphProvider(params ...string) (interface{}, error) {
+func paragraphBuilder(params ...string) (interface{}, error) {
 	return Paragraph(), nil
 }
 
-func articleWithParagraphCountProvider(params ...string) (interface{}, error) {
+func articleWithParagraphCountBuilder(params ...string) (interface{}, error) {
 	size, err := paramsToInt(params...)
 	if err != nil {
 		return nil, err
@@ -69,7 +69,7 @@ func articleWithParagraphCountProvider(params ...string) (interface{}, error) {
 	return ArticleWithParagraphCount(size), nil
 }
 
-func articleProvider(params ...string) (interface{}, error) {
+func articleBuilder(params ...string) (interface{}, error) {
 	return Article(), nil
 }
 

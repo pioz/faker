@@ -24,16 +24,16 @@ func ShortBinaryGender() string {
 	return value.(string)
 }
 
-// Provider functions
+// Builder functions
 
-func genderProvider(params ...string) (interface{}, error) {
+func genderBuilder(params ...string) (interface{}, error) {
 	return Gender(), nil
 }
 
-func binaryGenderProvider(params ...string) (interface{}, error) {
+func binaryGenderBuilder(params ...string) (interface{}, error) {
 	return BinaryGender(), nil
 }
 
-func shortBinaryGenderProvider(params ...string) (interface{}, error) {
+func shortBinaryGenderBuilder(params ...string) (interface{}, error) {
 	return ShortBinaryGender(), nil
 }

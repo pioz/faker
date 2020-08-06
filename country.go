@@ -40,24 +40,24 @@ func CountryFlag() string {
 	return value.(string)
 }
 
-// Provider functions
+// Builder functions
 
-func countryNameProvider(params ...string) (interface{}, error) {
+func countryNameBuilder(params ...string) (interface{}, error) {
 	return CountryName(), nil
 }
 
-func countryAlpha2Provider(params ...string) (interface{}, error) {
+func countryAlpha2Builder(params ...string) (interface{}, error) {
 	return CountryAlpha2(), nil
 }
 
-func countryAlpha3Provider(params ...string) (interface{}, error) {
+func countryAlpha3Builder(params ...string) (interface{}, error) {
 	return CountryAlpha3(), nil
 }
 
-func countryNationalityProvider(params ...string) (interface{}, error) {
+func countryNationalityBuilder(params ...string) (interface{}, error) {
 	return CountryNationality(), nil
 }
 
-func countryFlagProvider(params ...string) (interface{}, error) {
+func countryFlagBuilder(params ...string) (interface{}, error) {
 	return CountryFlag(), nil
 }

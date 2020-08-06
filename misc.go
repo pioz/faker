@@ -40,16 +40,16 @@ func Uuid() string {
 	return string(buf)
 }
 
-// Provider functions
+// Builder functions
 
-func boolProvider(params ...string) (interface{}, error) {
+func boolBuilder(params ...string) (interface{}, error) {
 	return Bool(), nil
 }
 
-func phoneNumberProvider(params ...string) (interface{}, error) {
+func phoneNumberBuilder(params ...string) (interface{}, error) {
 	return PhoneNumber(), nil
 }
 
-func uuidProvider(params ...string) (interface{}, error) {
+func uuidBuilder(params ...string) (interface{}, error) {
 	return Uuid(), nil
 }

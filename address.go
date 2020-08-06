@@ -64,36 +64,36 @@ func AddressFull() string {
 	return fmt.Sprintf("%s\n%s\n%s %s\n%s %s %s\n%s", "John Snow", AddressSecondaryAddress(), AddressStreetNumber(), AddressStreetName(), AddressCity(), AddressStateCode(), AddressZip(), CountryName())
 }
 
-// Provider functions
+// Builder functions
 
-func addressCityProvider(params ...string) (interface{}, error) {
+func addressCityBuilder(params ...string) (interface{}, error) {
 	return AddressCity(), nil
 }
 
-func addressStateProvider(params ...string) (interface{}, error) {
+func addressStateBuilder(params ...string) (interface{}, error) {
 	return AddressState(), nil
 }
 
-func addressStateCodeProvider(params ...string) (interface{}, error) {
+func addressStateCodeBuilder(params ...string) (interface{}, error) {
 	return AddressStateCode(), nil
 }
 
-func addressStreetNameProvider(params ...string) (interface{}, error) {
+func addressStreetNameBuilder(params ...string) (interface{}, error) {
 	return AddressStreetName(), nil
 }
 
-func addressStreetNumberProvider(params ...string) (interface{}, error) {
+func addressStreetNumberBuilder(params ...string) (interface{}, error) {
 	return AddressStreetNumber(), nil
 }
 
-func addressSecondaryAddressProvider(params ...string) (interface{}, error) {
+func addressSecondaryAddressBuilder(params ...string) (interface{}, error) {
 	return AddressSecondaryAddress(), nil
 }
 
-func addressZipProvider(params ...string) (interface{}, error) {
+func addressZipBuilder(params ...string) (interface{}, error) {
 	return AddressZip(), nil
 }
 
-func addressFullProvider(params ...string) (interface{}, error) {
+func addressFullBuilder(params ...string) (interface{}, error) {
 	return AddressFull(), nil
 }

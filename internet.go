@@ -56,32 +56,32 @@ func Url() string {
 	return fmt.Sprintf("%s://%s%s/%s", protocol, www, Domain(), Slug())
 }
 
-// Provider functions
+// Builder functions
 
-func usernameProvider(params ...string) (interface{}, error) {
+func usernameBuilder(params ...string) (interface{}, error) {
 	return Username(), nil
 }
 
-func domainProvider(params ...string) (interface{}, error) {
+func domainBuilder(params ...string) (interface{}, error) {
 	return Domain(), nil
 }
 
-func emailProvider(params ...string) (interface{}, error) {
+func emailBuilder(params ...string) (interface{}, error) {
 	return Email(), nil
 }
 
-func freeEmailProvider(params ...string) (interface{}, error) {
+func freeEmailBuilder(params ...string) (interface{}, error) {
 	return FreeEmail(), nil
 }
 
-func safeEmailProvider(params ...string) (interface{}, error) {
+func safeEmailBuilder(params ...string) (interface{}, error) {
 	return SafeEmail(), nil
 }
 
-func slugProvider(params ...string) (interface{}, error) {
+func slugBuilder(params ...string) (interface{}, error) {
 	return Slug(), nil
 }
 
-func urlProvider(params ...string) (interface{}, error) {
+func urlBuilder(params ...string) (interface{}, error) {
 	return Url(), nil
 }

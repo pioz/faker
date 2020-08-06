@@ -16,12 +16,12 @@ func LangCode() string {
 	return value.(string)
 }
 
-// Provider functions
+// Builder functions
 
-func langNameProvider(params ...string) (interface{}, error) {
+func langNameBuilder(params ...string) (interface{}, error) {
 	return LangName(), nil
 }
 
-func langCodeProvider(params ...string) (interface{}, error) {
+func langCodeBuilder(params ...string) (interface{}, error) {
 	return LangCode(), nil
 }

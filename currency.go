@@ -24,16 +24,16 @@ func CurrencySymbol() string {
 	return value.(string)
 }
 
-// Provider functions
+// Builder functions
 
-func currencyNameProvider(params ...string) (interface{}, error) {
+func currencyNameBuilder(params ...string) (interface{}, error) {
 	return CurrencyName(), nil
 }
 
-func currencyCodeProvider(params ...string) (interface{}, error) {
+func currencyCodeBuilder(params ...string) (interface{}, error) {
 	return CurrencyCode(), nil
 }
 
-func currencySymbolProvider(params ...string) (interface{}, error) {
+func currencySymbolBuilder(params ...string) (interface{}, error) {
 	return CurrencySymbol(), nil
 }
