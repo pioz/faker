@@ -7,11 +7,55 @@ import (
 )
 
 var builders = map[string]builderFunc{
+	// address
+	builderKey("AddressCity", "string"):             addressCityBuilder,
+	builderKey("AddressState", "string"):            addressStateBuilder,
+	builderKey("AddressStateCode", "string"):        addressStateCodeBuilder,
+	builderKey("AddressStreetName", "string"):       addressStreetNameBuilder,
+	builderKey("AddressStreetNumber", "string"):     addressStreetNumberBuilder,
+	builderKey("AddressSecondaryAddress", "string"): addressSecondaryAddressBuilder,
+	builderKey("AddressZip", "string"):              addressZipBuilder,
+	builderKey("AddressFull", "string"):             addressFullBuilder,
+	// country
+	builderKey("CountryName", "string"):        countryNameBuilder,
+	builderKey("CountryAlpha2", "string"):      countryAlpha2Builder,
+	builderKey("CountryAlpha3", "string"):      countryAlpha3Builder,
+	builderKey("CountryNationality", "string"): countryNationalityBuilder,
+	builderKey("CountryFlag", "string"):        countryFlagBuilder,
+	// currency
+	builderKey("CurrencyName", "string"):   currencyNameBuilder,
+	builderKey("CurrencyCode", "string"):   currencyCodeBuilder,
+	builderKey("CurrencySymbol", "string"): currencySymbolBuilder,
+	// gender
+	builderKey("Gender", "string"):            genderBuilder,
+	builderKey("BinaryGender", "string"):      binaryGenderBuilder,
+	builderKey("ShortBinaryGender", "string"): shortBinaryGenderBuilder,
+	// internet
+	builderKey("Username", "string"):  usernameBuilder,
+	builderKey("Domain", "string"):    domainBuilder,
+	builderKey("Email", "string"):     emailBuilder,
+	builderKey("FreeEmail", "string"): freeEmailBuilder,
+	builderKey("SafeEmail", "string"): safeEmailBuilder,
+	builderKey("Slug", "string"):      slugBuilder,
+	builderKey("Url", "string"):       urlBuilder,
+	// lang
+	builderKey("LangName", "string"): langNameBuilder,
+	builderKey("LangCode", "string"): langCodeBuilder,
 	// misc
 	builderKey("Bool", "bool"):          boolBuilder,
 	builderKey("", "bool"):              boolBuilder,
 	builderKey("PhoneNumber", "string"): phoneNumberBuilder,
 	builderKey("Uuid", "string"):        uuidBuilder,
+	// name
+	builderKey("MaleFirstName", "string"):    maleFirstNameBuilder,
+	builderKey("FemaleFirstName", "string"):  femaleFirstName,
+	builderKey("NeutralFirstName", "string"): neutralFirstNameBuilder,
+	builderKey("FirstName", "string"):        firstNameBuilder,
+	builderKey("LastName", "string"):         lastNameBuilder,
+	builderKey("NamePrefix", "string"):       namePrefixBuilder,
+	builderKey("NameSuffix", "string"):       nameSuffixBuilder,
+	builderKey("FullName", "string"):         fullNameBuilder,
+	builderKey("NameInitials", "string"):     nameInitialsBuilder,
 	// number
 	builderKey("IntInRange", "int"):         intInRangeBuilder,
 	builderKey("Int", "int"):                intBuilder,
@@ -49,6 +93,12 @@ var builders = map[string]builderFunc{
 	builderKey("Float32InRange", "float32"): float32InRangeBuilder,
 	builderKey("Float32", "float32"):        float32Builder,
 	builderKey("", "float32"):               float32Builder,
+	// sentence
+	builderKey("Sentence", "string"):                   sentenceBuilder,
+	builderKey("ParagraphWithSentenceCount", "string"): paragraphWithSentenceCountBuilder,
+	builderKey("Paragraph", "string"):                  paragraphBuilder,
+	builderKey("ArticleWithParagraphCount", "string"):  articleWithParagraphCountBuilder,
+	builderKey("Article", "string"):                    articleBuilder,
 	// string
 	builderKey("StringWithSize", "string"):  stringWithSizeBuilder,
 	builderKey("String", "string"):          stringBuilder,
@@ -80,56 +130,6 @@ var builders = map[string]builderFunc{
 	builderKey("TimeZoneFull", "string"):           timeZoneFullBuilder,
 	builderKey("TimeZoneOffset", "float32"):        timeZoneOffsetBuilder,
 	builderKey("TimeZoneRegion", "string"):         timeZoneRegionBuilder,
-	// country
-	builderKey("CountryName", "string"):        countryNameBuilder,
-	builderKey("CountryAlpha2", "string"):      countryAlpha2Builder,
-	builderKey("CountryAlpha3", "string"):      countryAlpha3Builder,
-	builderKey("CountryNationality", "string"): countryNationalityBuilder,
-	builderKey("CountryFlag", "string"):        countryFlagBuilder,
-	// lang
-	builderKey("LangName", "string"): langNameBuilder,
-	builderKey("LangCode", "string"): langCodeBuilder,
-	// currency
-	builderKey("CurrencyName", "string"):   currencyNameBuilder,
-	builderKey("CurrencyCode", "string"):   currencyCodeBuilder,
-	builderKey("CurrencySymbol", "string"): currencySymbolBuilder,
-	// address
-	builderKey("AddressCity", "string"):             addressCityBuilder,
-	builderKey("AddressState", "string"):            addressStateBuilder,
-	builderKey("AddressStateCode", "string"):        addressStateCodeBuilder,
-	builderKey("AddressStreetName", "string"):       addressStreetNameBuilder,
-	builderKey("AddressStreetNumber", "string"):     addressStreetNumberBuilder,
-	builderKey("AddressSecondaryAddress", "string"): addressSecondaryAddressBuilder,
-	builderKey("AddressZip", "string"):              addressZipBuilder,
-	builderKey("AddressFull", "string"):             addressFullBuilder,
-	// name
-	builderKey("MaleFirstName", "string"):    maleFirstNameBuilder,
-	builderKey("FemaleFirstName", "string"):  femaleFirstName,
-	builderKey("NeutralFirstName", "string"): neutralFirstNameBuilder,
-	builderKey("FirstName", "string"):        firstNameBuilder,
-	builderKey("LastName", "string"):         lastNameBuilder,
-	builderKey("NamePrefix", "string"):       namePrefixBuilder,
-	builderKey("NameSuffix", "string"):       nameSuffixBuilder,
-	builderKey("FullName", "string"):         fullNameBuilder,
-	builderKey("NameInitials", "string"):     nameInitialsBuilder,
-	// gender
-	builderKey("Gender", "string"):            genderBuilder,
-	builderKey("BinaryGender", "string"):      binaryGenderBuilder,
-	builderKey("ShortBinaryGender", "string"): shortBinaryGenderBuilder,
-	// sentence
-	builderKey("Sentence", "string"):                   sentenceBuilder,
-	builderKey("ParagraphWithSentenceCount", "string"): paragraphWithSentenceCountBuilder,
-	builderKey("Paragraph", "string"):                  paragraphBuilder,
-	builderKey("ArticleWithParagraphCount", "string"):  articleWithParagraphCountBuilder,
-	builderKey("Article", "string"):                    articleBuilder,
-	// internet
-	builderKey("Username", "string"):  usernameBuilder,
-	builderKey("Domain", "string"):    domainBuilder,
-	builderKey("Email", "string"):     emailBuilder,
-	builderKey("FreeEmail", "string"): freeEmailBuilder,
-	builderKey("SafeEmail", "string"): safeEmailBuilder,
-	builderKey("Slug", "string"):      slugBuilder,
-	builderKey("Url", "string"):       urlBuilder,
 }
 
 type builderFunc func(...string) (interface{}, error)
