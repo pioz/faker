@@ -1,24 +1,23 @@
 package faker_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestLangName(t *testing.T) {
+func ExampleLangName() {
 	faker.SetSeed(1100)
-	value := faker.LangName()
-	t.Log(value)
-	assert.Equal(t, "Kirghiz", value)
+	fmt.Println(faker.LangName())
+	// Output: Kirghiz
 }
 
-func TestLangCode(t *testing.T) {
+func ExampleLangCode() {
 	faker.SetSeed(1101)
-	value := faker.LangCode()
-	t.Log(value)
-	assert.Equal(t, "sk", value)
+	fmt.Println(faker.LangCode())
+	// Output: sk
 }
 
 func TestLangBuild(t *testing.T) {

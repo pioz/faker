@@ -1,35 +1,31 @@
 package faker_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestBool(t *testing.T) {
+func ExampleBool() {
 	faker.SetSeed(102)
-	var value bool
-	value = faker.Bool()
-	t.Log(value)
-	assert.True(t, value)
-	value = faker.Bool()
-	t.Log(value)
-	assert.False(t, value)
+	fmt.Println(faker.Bool())
+	fmt.Println(faker.Bool())
+	// Output: true
+	// false
 }
 
-func TestPhoneNumber(t *testing.T) {
+func ExamplePhoneNumber() {
 	faker.SetSeed(103)
-	value := faker.PhoneNumber()
-	t.Log(value)
-	assert.Equal(t, "152.380.7298", value)
+	fmt.Println(faker.PhoneNumber())
+	// Output: 152.380.7298
 }
 
-func TestUuid(t *testing.T) {
+func ExampleUUID() {
 	faker.SetSeed(104)
-	value := faker.Uuid()
-	t.Log(value)
-	assert.Equal(t, "40abb44c-895e-45b8-9f67-cc02a811744a", value)
+	fmt.Println(faker.UUID())
+	// Output: 40abb44c-895e-45b8-9f67-cc02a811744a
 }
 
 func TestMiscBuild(t *testing.T) {

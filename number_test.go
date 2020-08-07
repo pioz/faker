@@ -1,256 +1,193 @@
 package faker_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestIntInRange(t *testing.T) {
+func ExampleIntInRange() {
 	faker.SetSeed(3)
-
-	value := faker.IntInRange(10, 20)
-	t.Log(value)
-	assert.Equal(t, 16, value)
-
-	value = faker.IntInRange(-20, -10)
-	t.Log(value)
-	assert.Equal(t, -14, value)
-
-	value = faker.IntInRange(-20, -30)
-	assert.Equal(t, -20, value)
+	fmt.Println(faker.IntInRange(10, 20))
+	fmt.Println(faker.IntInRange(-20, -10))
+	fmt.Println(faker.IntInRange(-20, -30))
+	// Output: 16
+	// -14
+	// -20
 }
 
-func TestInt(t *testing.T) {
+func ExampleInt() {
 	faker.SetSeed(4)
-	value := faker.Int()
-	t.Log(value)
-	assert.Equal(t, 477987042, value)
+	fmt.Println(faker.Int())
+	// Output: 477987042
 }
 
-func TestInt64InRange(t *testing.T) {
+func ExampleInt64InRange() {
 	faker.SetSeed(5)
-
-	value := faker.Int64InRange(10, 20)
-	t.Log(value)
-	assert.Equal(t, int64(10), value)
-
-	value = faker.Int64InRange(-20, -10)
-	t.Log(value)
-	assert.Equal(t, int64(-19), value)
-
-	value = faker.Int64InRange(-20, -30)
-	assert.Equal(t, int64(-20), value)
+	fmt.Println(faker.Int64InRange(10, 20))
+	fmt.Println(faker.Int64InRange(-20, -10))
+	fmt.Println(faker.Int64InRange(-20, -30))
+	// Output: 10
+	// -19
+	// -20
 }
 
-func TestInt64(t *testing.T) {
+func ExampleInt64() {
 	faker.SetSeed(6)
-	value := faker.Int64()
-	t.Log(value)
-	assert.Equal(t, int64(-5917743806733054187), value)
+	fmt.Println(faker.Int64())
+	// Output: -5917743806733054187
 }
 
-func TestInt32InRange(t *testing.T) {
+func ExampleInt32InRange() {
 	faker.SetSeed(7)
-
-	value := faker.Int32InRange(10, 20)
-	t.Log(value)
-	assert.Equal(t, int32(15), value)
-
-	value = faker.Int32InRange(-20, -10)
-	t.Log(value)
-	assert.Equal(t, int32(-16), value)
-
-	value = faker.Int32InRange(-20, -30)
-	assert.Equal(t, int32(-20), value)
+	fmt.Println(faker.Int32InRange(10, 20))
+	fmt.Println(faker.Int32InRange(-20, -10))
+	fmt.Println(faker.Int32InRange(-20, -30))
+	// Output: 15
+	// -16
+	// -20
 }
 
-func TestInt32(t *testing.T) {
+func ExampleInt32() {
 	faker.SetSeed(8)
-	value := faker.Int32()
-	t.Log(value)
-	assert.Equal(t, int32(-417194768), value)
+	fmt.Println(faker.Int32())
+	// Output: -417194768
 }
 
-func TestInt16InRange(t *testing.T) {
+func ExampleInt16InRange() {
 	faker.SetSeed(9)
-
-	value := faker.Int16InRange(10, 20)
-	t.Log(value)
-	assert.Equal(t, int16(14), value)
-
-	value = faker.Int16InRange(-20, -10)
-	t.Log(value)
-	assert.Equal(t, int16(-16), value)
-
-	value = faker.Int16InRange(-20, -30)
-	assert.Equal(t, int16(-20), value)
+	fmt.Println(faker.Int16InRange(10, 20))
+	fmt.Println(faker.Int16InRange(-20, -10))
+	fmt.Println(faker.Int16InRange(-20, -30))
+	// Output: 14
+	// -16
+	// -20
 }
 
-func TestInt16(t *testing.T) {
+func ExampleInt16() {
 	faker.SetSeed(10)
-	value := faker.Int16()
-	t.Log(value)
-	assert.Equal(t, int16(-24938), value)
+	fmt.Println(faker.Int16())
+	// Output: -24938
 }
 
-func TestInt8InRange(t *testing.T) {
+func ExampleInt8InRange() {
 	faker.SetSeed(11)
-
-	value := faker.Int8InRange(10, 20)
-	t.Log(value)
-	assert.Equal(t, int8(15), value)
-
-	value = faker.Int8InRange(-20, -10)
-	t.Log(value)
-	assert.Equal(t, int8(-14), value)
-
-	value = faker.Int8InRange(-20, -30)
-	assert.Equal(t, int8(-20), value)
+	fmt.Println(faker.Int8InRange(10, 20))
+	fmt.Println(faker.Int8InRange(-20, -10))
+	fmt.Println(faker.Int8InRange(-20, -30))
+	// Output: 15
+	// -14
+	// -20
 }
 
-func TestInt8(t *testing.T) {
+func ExampleInt8() {
 	faker.SetSeed(12)
-	value := faker.Int8()
-	t.Log(value)
-	assert.Equal(t, int8(-101), value)
+	fmt.Println(faker.Int8())
+	// Output: -101
 }
 
-func TestUintInRange(t *testing.T) {
+func ExampleUintInRange() {
 	faker.SetSeed(13)
-
-	value := faker.UintInRange(10, 20)
-	t.Log(value)
-	assert.Equal(t, uint(15), value)
-
-	value = faker.UintInRange(20, 10)
-	assert.Equal(t, uint(20), value)
+	fmt.Println(faker.UintInRange(10, 20))
+	fmt.Println(faker.UintInRange(20, 10))
+	// Output: 15
+	// 20
 }
 
-func TestUint(t *testing.T) {
+func ExampleUint() {
 	faker.SetSeed(14)
-	value := faker.Uint()
-	t.Log(value)
-	assert.Equal(t, uint(2486533097), value)
+	fmt.Println(faker.Uint())
+	// Output: 2486533097
 }
 
-func TestUint64InRange(t *testing.T) {
+func ExampleUint64InRange() {
 	faker.SetSeed(15)
-
-	value := faker.Uint64InRange(10, 20)
-	t.Log(value)
-	assert.Equal(t, uint64(13), value)
-
-	value = faker.Uint64InRange(20, 10)
-	assert.Equal(t, uint64(20), value)
+	fmt.Println(faker.Uint64InRange(10, 20))
+	fmt.Println(faker.Uint64InRange(20, 10))
+	// Output: 13
+	// 20
 }
 
-func TestUint64(t *testing.T) {
+func ExampleUint64() {
 	faker.SetSeed(16)
-	value := faker.Uint64()
-	t.Log(value)
-	assert.Equal(t, uint64(16676020418646319060), value)
+	fmt.Println(faker.Uint64())
+	// Output: 16676020418646319060
 }
 
-func TestUint32InRange(t *testing.T) {
+func ExampleUint32InRange() {
 	faker.SetSeed(17)
-
-	value := faker.Uint32InRange(10, 20)
-	t.Log(value)
-	assert.Equal(t, uint32(16), value)
-
-	value = faker.Uint32InRange(20, 10)
-	assert.Equal(t, uint32(20), value)
+	fmt.Println(faker.Uint32InRange(10, 20))
+	fmt.Println(faker.Uint32InRange(20, 10))
+	// Output: 16
+	// 20
 }
 
-func TestUint32(t *testing.T) {
+func ExampleUint32() {
 	faker.SetSeed(18)
-	value := faker.Uint32()
-	t.Log(value)
-	assert.Equal(t, uint32(1185777406), value)
+	fmt.Println(faker.Uint32())
+	// Output: 1185777406
 }
 
-func TestUint16InRange(t *testing.T) {
+func ExampleUint16InRange() {
 	faker.SetSeed(19)
-
-	value := faker.Uint16InRange(10, 20)
-	t.Log(value)
-	assert.Equal(t, uint16(13), value)
-
-	value = faker.Uint16InRange(20, 10)
-	assert.Equal(t, uint16(20), value)
+	fmt.Println(faker.Uint16InRange(10, 20))
+	fmt.Println(faker.Uint16InRange(20, 10))
+	// Output: 13
+	// 20
 }
 
-func TestUint16(t *testing.T) {
+func ExampleUint16() {
 	faker.SetSeed(20)
-	value := faker.Uint16()
-	t.Log(value)
-	assert.Equal(t, uint16(29810), value)
+	fmt.Println(faker.Uint16())
+	// Output: 29810
 }
 
-func TestUint8InRange(t *testing.T) {
+func ExampleUint8InRange() {
 	faker.SetSeed(21)
-
-	value := faker.Uint8InRange(10, 20)
-	t.Log(value)
-	assert.Equal(t, uint8(18), value)
-
-	value = faker.Uint8InRange(20, 10)
-	assert.Equal(t, uint8(20), value)
+	fmt.Println(faker.Uint8InRange(10, 20))
+	fmt.Println(faker.Uint8InRange(20, 10))
+	// Output: 18
+	// 20
 }
 
-func TestUint8(t *testing.T) {
+func ExampleUint8() {
 	faker.SetSeed(22)
-
-	value := faker.Uint8()
-	t.Log(value)
-	assert.Equal(t, uint8(231), value)
+	fmt.Println(faker.Uint8())
+	// Output: 231
 }
 
-func TestFloat64InRange(t *testing.T) {
+func ExampleFloat64InRange() {
 	faker.SetSeed(23)
-
-	value := faker.Float64InRange(10, 20)
-	t.Log(value)
-	assert.Equal(t, float64(18.120965248489753), value)
-
-	value = faker.Float64InRange(-20, -10)
-	t.Log(value)
-	assert.Equal(t, float64(-14.513652135502497), value)
-
-	value = faker.Float64InRange(-20, -30)
-	assert.Equal(t, float64(-20), value)
+	fmt.Println(faker.Float64InRange(10, 20))
+	fmt.Println(faker.Float64InRange(-20, -10))
+	fmt.Println(faker.Float64InRange(-20, -30))
+	// Output: 18.120965248489753
+	// -14.513652135502497
+	// -20
 }
 
-func TestFloat64(t *testing.T) {
+func ExampleFloat64() {
 	faker.SetSeed(24)
-
-	value := faker.Float64()
-	t.Log(value)
-	assert.Equal(t, float64(6.696671980874496e+307), value)
+	fmt.Println(faker.Float64())
+	// Output: 6.696671980874496e+307
 }
 
-func TestFloat32InRange(t *testing.T) {
+func ExampleFloat32InRange() {
 	faker.SetSeed(25)
-
-	value := faker.Float32InRange(10, 20)
-	t.Log(value)
-	assert.Equal(t, float32(18.961363), value)
-
-	value = faker.Float32InRange(-20, -10)
-	t.Log(value)
-	assert.Equal(t, float32(-15.832848), value)
-
-	value = faker.Float32InRange(-20, -30)
-	assert.Equal(t, float32(-20), value)
+	fmt.Println(faker.Float32InRange(10, 20))
+	fmt.Println(faker.Float32InRange(-20, -10))
+	fmt.Println(faker.Float32InRange(-20, -30))
+	// Output: 18.961363
+	// -15.832848
+	// -20
 }
 
-func TestFloat32(t *testing.T) {
+func ExampleFloat32() {
 	faker.SetSeed(26)
-	value := faker.Float32()
-	t.Log(value)
-	assert.Equal(t, float32(1.5426473e+38), value)
+	fmt.Println(faker.Float32())
+	// Output: 1.5426473e+38
 }
 
 func TestNumberBuild(t *testing.T) {

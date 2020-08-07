@@ -4,17 +4,20 @@ import (
 	"encoding/hex"
 )
 
+// Bool will build a random boolean value (true or false).
 func Bool() bool {
 	return IntInRange(0, 1) == 0
 }
 
+// PhoneNumber will build a random phone number string.
 func PhoneNumber() string {
 	formats := []string{"???-???-????", "(???) ???-????", "1-???-???-????", "???.???.????"}
 	i := IntInRange(0, len(formats)-1)
 	return Numerify(formats[i])
 }
 
-func Uuid() string {
+// UUID will build a random UUID string.
+func UUID() string {
 	version := byte(4)
 	uuid := make([]byte, 16)
 	random.Read(uuid)
@@ -51,5 +54,5 @@ func phoneNumberBuilder(params ...string) (interface{}, error) {
 }
 
 func uuidBuilder(params ...string) (interface{}, error) {
-	return Uuid(), nil
+	return UUID(), nil
 }

@@ -1,5 +1,6 @@
 package faker
 
+// LangName will build a random language name string.
 func LangName() string {
 	value, err := GetData("lang", "name")
 	if err != nil {
@@ -8,6 +9,7 @@ func LangName() string {
 	return value.(string)
 }
 
+// LangCode will build a random language code string.
 func LangCode() string {
 	value, err := GetData("lang", "code")
 	if err != nil {

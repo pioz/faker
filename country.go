@@ -1,5 +1,6 @@
 package faker
 
+// CountryName will build a random country name string.
 func CountryName() string {
 	value, err := GetData("country", "name")
 	if err != nil {
@@ -8,6 +9,7 @@ func CountryName() string {
 	return value.(string)
 }
 
+// CountryAlpha2 will build a random 2 characters country code string.
 func CountryAlpha2() string {
 	value, err := GetData("country", "alpha2")
 	if err != nil {
@@ -16,6 +18,7 @@ func CountryAlpha2() string {
 	return value.(string)
 }
 
+// CountryAlpha3 will build a random 3 characters country code string.
 func CountryAlpha3() string {
 	value, err := GetData("country", "alpha3")
 	if err != nil {
@@ -24,6 +27,7 @@ func CountryAlpha3() string {
 	return value.(string)
 }
 
+// CountryNationality will build a random nationality string.
 func CountryNationality() string {
 	value, err := GetData("country", "nationality")
 	if err != nil {
@@ -32,6 +36,7 @@ func CountryNationality() string {
 	return value.(string)
 }
 
+// CountryFlag will build a random emoji flag string.
 func CountryFlag() string {
 	value, err := GetData("country", "flag")
 	if err != nil {

@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// Username will build a random username string.
 func Username() string {
 	value, err := GetData("internet", "username")
 	if err != nil {
@@ -12,6 +13,7 @@ func Username() string {
 	return value.(string)
 }
 
+// Domain will build a random domain string.
 func Domain() string {
 	domainSuffix, err := GetData("internet", "domain_suffix")
 	if err != nil {
@@ -20,10 +22,12 @@ func Domain() string {
 	return fmt.Sprintf("%s.%s", Username(), domainSuffix)
 }
 
+// Email will build a random email address string.
 func Email() string {
 	return fmt.Sprintf("%s@%s", Username(), Domain())
 }
 
+// FreeEmail will build a random free email address string (gmail, hotmail, yahoo...).
 func FreeEmail() string {
 	domain, err := GetData("internet", "free_email")
 	if err != nil {
@@ -32,6 +36,7 @@ func FreeEmail() string {
 	return fmt.Sprintf("%s@%s", Username(), domain)
 }
 
+// SafeEmail will build a random email address string whose domain is always example.com.
 func SafeEmail() string {
 	domain, err := GetData("internet", "safe_email")
 	if err != nil {
@@ -40,11 +45,13 @@ func SafeEmail() string {
 	return fmt.Sprintf("%s@%s", Username(), domain)
 }
 
+// Slug will build a random slug string.
 func Slug() string {
 	return Parameterize(Sentence())
 }
 
-func Url() string {
+// URL will build a random URL string.
+func URL() string {
 	protocol, err := GetData("internet", "protocol")
 	if err != nil {
 		panic(err)
@@ -83,5 +90,5 @@ func slugBuilder(params ...string) (interface{}, error) {
 }
 
 func urlBuilder(params ...string) (interface{}, error) {
-	return Url(), nil
+	return URL(), nil
 }

@@ -4,6 +4,7 @@ import (
 	"strings"
 )
 
+// MaleFirstName will build a random male first name string.
 func MaleFirstName() string {
 	value, err := GetData("name", "male_first_name")
 	if err != nil {
@@ -12,6 +13,7 @@ func MaleFirstName() string {
 	return value.(string)
 }
 
+// FemaleFirstName will build a random female first name string.
 func FemaleFirstName() string {
 	value, err := GetData("name", "female_first_name")
 	if err != nil {
@@ -20,6 +22,7 @@ func FemaleFirstName() string {
 	return value.(string)
 }
 
+// NeutralFirstName will build a random neutral first name string.
 func NeutralFirstName() string {
 	value, err := GetData("name", "neutral_first_name")
 	if err != nil {
@@ -28,6 +31,7 @@ func NeutralFirstName() string {
 	return value.(string)
 }
 
+// FirstName will build a random first name string.
 func FirstName() string {
 	kind := IntInRange(0, 2)
 	switch kind {
@@ -40,6 +44,7 @@ func FirstName() string {
 	}
 }
 
+// LastName will build a random last name string.
 func LastName() string {
 	value, err := GetData("name", "last_name")
 	if err != nil {
@@ -48,6 +53,7 @@ func LastName() string {
 	return value.(string)
 }
 
+// NamePrefix will build a random name prefix string.
 func NamePrefix() string {
 	value, err := GetData("name", "prefix")
 	if err != nil {
@@ -56,6 +62,7 @@ func NamePrefix() string {
 	return value.(string)
 }
 
+// NameSuffix will build a random name suffix string.
 func NameSuffix() string {
 	value, err := GetData("name", "suffix")
 	if err != nil {
@@ -64,6 +71,7 @@ func NameSuffix() string {
 	return value.(string)
 }
 
+// FullName will build a random full name string.
 func FullName() string {
 	templates := []string{"{first_name} {last_name}", "{prefix} {first_name} {last_name}", "{first_name} {suffix} {last_name}", "{prefix} {first_name} {suffix} {last_name}"}
 	i := IntInRange(0, len(templates)*2)
@@ -78,6 +86,7 @@ func FullName() string {
 	return name
 }
 
+// NameInitials will build a random name initials of 2 characters string.
 func NameInitials() string {
 	return strings.ToUpper(Lexify("??"))
 }

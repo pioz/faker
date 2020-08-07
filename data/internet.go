@@ -1,5 +1,6 @@
 package data
 
+// Internet map contains fake data to build Internet stuffs.
 var Internet = PoolGroup{
 	"domain_suffix": {"com", "biz", "info", "name", "net", "org", "io"},
 	"free_email":    {"gmail.com", "yahoo.com", "gmx.com", "hotmail.com"},

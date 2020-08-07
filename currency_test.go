@@ -1,31 +1,29 @@
 package faker_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCurrencyName(t *testing.T) {
+func ExampleCurrencyName() {
 	faker.SetSeed(1200)
-	value := faker.CurrencyName()
-	t.Log(value)
-	assert.Equal(t, "Sierra Leonean Leone", value)
+	fmt.Println(faker.CurrencyName())
+	// Output: Sierra Leonean Leone
 }
 
-func TestCurrencyCode(t *testing.T) {
+func ExampleCurrencyCode() {
 	faker.SetSeed(1201)
-	value := faker.CurrencyCode()
-	t.Log(value)
-	assert.Equal(t, "XOF", value)
+	fmt.Println(faker.CurrencyCode())
+	// Output: XOF
 }
 
-func TestCurrencySymbol(t *testing.T) {
-	faker.SetSeed(1201)
-	value := faker.CurrencySymbol()
-	t.Log(value)
-	assert.Equal(t, "MK", value)
+func ExampleCurrencySymbol() {
+	faker.SetSeed(1202)
+	fmt.Println(faker.CurrencySymbol())
+	// Output: ₮
 }
 
 func TestCurrencyBuild(t *testing.T) {

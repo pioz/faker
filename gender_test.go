@@ -1,31 +1,29 @@
 package faker_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGender(t *testing.T) {
+func ExampleGender() {
 	faker.SetSeed(1500)
-	value := faker.Gender()
-	t.Log(value)
-	assert.Equal(t, "Cisgender Male", value)
+	fmt.Println(faker.Gender())
+	// Output: Cisgender Male
 }
 
-func TestBinaryGender(t *testing.T) {
+func ExampleBinaryGender() {
 	faker.SetSeed(1501)
-	value := faker.BinaryGender()
-	t.Log(value)
-	assert.Equal(t, "Male", value)
+	fmt.Println(faker.BinaryGender())
+	// Output: Male
 }
 
-func TestShortBinaryGender(t *testing.T) {
+func ExampleShortBinaryGender() {
 	faker.SetSeed(1502)
-	value := faker.ShortBinaryGender()
-	t.Log(value)
-	assert.Equal(t, "m", value)
+	fmt.Println(faker.ShortBinaryGender())
+	// Output: m
 }
 
 func TestGenderBuild(t *testing.T) {

@@ -1,73 +1,65 @@
 package faker_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestMaleFirstName(t *testing.T) {
+func ExampleMaleFirstName() {
 	faker.SetSeed(1400)
-	value := faker.MaleFirstName()
-	t.Log(value)
-	assert.Equal(t, "Lucien", value)
+	fmt.Println(faker.MaleFirstName())
+	// Output: Lucien
 }
 
-func TestFemaleFirstName(t *testing.T) {
+func ExampleFemaleFirstName() {
 	faker.SetSeed(1401)
-	value := faker.FemaleFirstName()
-	t.Log(value)
-	assert.Equal(t, "Sharell", value)
+	fmt.Println(faker.FemaleFirstName())
+	// Output: Sharell
 }
 
-func TestNeutralFirstName(t *testing.T) {
+func ExampleNeutralFirstName() {
 	faker.SetSeed(1402)
-	value := faker.NeutralFirstName()
-	t.Log(value)
-	assert.Equal(t, "Hayden", value)
+	fmt.Println(faker.NeutralFirstName())
+	// Output: Hayden
 }
 
-func TestFirstName(t *testing.T) {
+func ExampleFirstName() {
 	faker.SetSeed(1403)
-	value := faker.FirstName()
-	t.Log(value)
-	assert.Equal(t, "Barney", value)
+	fmt.Println(faker.FirstName())
+	// Output: Barney
 }
 
-func TestLastName(t *testing.T) {
+func ExampleLastName() {
 	faker.SetSeed(1404)
-	value := faker.LastName()
-	t.Log(value)
-	assert.Equal(t, "Ankunding", value)
+	fmt.Println(faker.LastName())
+	// Output: Ankunding
 }
 
-func TestNamePrefix(t *testing.T) {
+func ExampleNamePrefix() {
 	faker.SetSeed(1405)
-	value := faker.NamePrefix()
-	t.Log(value)
-	assert.Equal(t, "Msgr.", value)
+	fmt.Println(faker.NamePrefix())
+	// Output: Msgr.
 }
 
-func TestNameSuffix(t *testing.T) {
+func ExampleNameSuffix() {
 	faker.SetSeed(1406)
-	value := faker.NameSuffix()
-	t.Log(value)
-	assert.Equal(t, "PhD", value)
+	fmt.Println(faker.NameSuffix())
+	// Output: PhD
 }
 
-func TestFullName(t *testing.T) {
+func ExampleFullName() {
 	faker.SetSeed(1407)
-	value := faker.FullName()
-	t.Log(value)
-	assert.Equal(t, "Sawyer Littel", value)
+	fmt.Println(faker.FullName())
+	// Output: Sawyer Littel
 }
 
-func TestNameInitials(t *testing.T) {
+func ExampleNameInitials() {
 	faker.SetSeed(1408)
-	value := faker.NameInitials()
-	t.Log(value)
-	assert.Equal(t, "NP", value)
+	fmt.Println(faker.NameInitials())
+	// Output: NP
 }
 
 func TestNameBuild(t *testing.T) {

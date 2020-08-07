@@ -1,59 +1,53 @@
 package faker_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestUsername(t *testing.T) {
+func ExampleUsername() {
 	faker.SetSeed(1700)
-	value := faker.Username()
-	t.Log(value)
-	assert.Equal(t, "polychasium", value)
+	fmt.Println(faker.Username())
+	// Output: polychasium
 }
 
-func TestDomain(t *testing.T) {
+func ExampleDomain() {
 	faker.SetSeed(1701)
-	value := faker.Domain()
-	t.Log(value)
-	assert.Equal(t, "lorusso.name", value)
+	fmt.Println(faker.Domain())
+	// Output: lorusso.name
 }
 
-func TestEmail(t *testing.T) {
+func ExampleEmail() {
 	faker.SetSeed(1702)
-	value := faker.Email()
-	t.Log(value)
-	assert.Equal(t, "homocercal@fulmer.net", value)
+	fmt.Println(faker.Email())
+	// Output: homocercal@fulmer.net
 }
 
-func TestFreeEmail(t *testing.T) {
+func ExampleFreeEmail() {
 	faker.SetSeed(1703)
-	value := faker.FreeEmail()
-	t.Log(value)
-	assert.Equal(t, "atlas@gmail.com", value)
+	fmt.Println(faker.FreeEmail())
+	// Output: atlas@gmail.com
 }
 
-func TestSafeEmail(t *testing.T) {
+func ExampleSafeEmail() {
 	faker.SetSeed(1704)
-	value := faker.SafeEmail()
-	t.Log(value)
-	assert.Equal(t, "disbelieve@example.com", value)
+	fmt.Println(faker.SafeEmail())
+	// Output: disbelieve@example.com
 }
 
-func TestSlug(t *testing.T) {
+func ExampleSlug() {
 	faker.SetSeed(1705)
-	value := faker.Slug()
-	t.Log(value)
-	assert.Equal(t, "a-reliable-seal-s-bee-comes-with-it-the-thought-that-the-adventurous-giraffe-is-an-alligator", value)
+	fmt.Println(faker.Slug())
+	// Output: a-reliable-seal-s-bee-comes-with-it-the-thought-that-the-adventurous-giraffe-is-an-alligator
 }
 
-func TestUrl(t *testing.T) {
+func ExampleURL() {
 	faker.SetSeed(1706)
-	value := faker.Url()
-	t.Log(value)
-	assert.Equal(t, "https://www.mcmillon.info/this-could-be-or-perhaps-their-alligator-was-in-this-moment-an-eager-spider", value)
+	fmt.Println(faker.URL())
+	// Output: https://www.mcmillon.info/this-could-be-or-perhaps-their-alligator-was-in-this-moment-an-eager-spider
 }
 
 func TestInternetBuild(t *testing.T) {

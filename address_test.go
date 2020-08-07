@@ -1,66 +1,63 @@
 package faker_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestAddressCity(t *testing.T) {
+func ExampleAddressCity() {
 	faker.SetSeed(1300)
-	value := faker.AddressCity()
-	t.Log(value)
-	assert.Equal(t, "Ntoroko", value)
+	fmt.Println(faker.AddressCity())
+	// Output: Ntoroko
 }
 
-func TestAddressState(t *testing.T) {
+func ExampleAddressState() {
 	faker.SetSeed(1301)
-	value := faker.AddressState()
-	t.Log(value)
-	assert.Equal(t, "Indiana", value)
+	fmt.Println(faker.AddressState())
+	// Output: Indiana
 }
 
-func TestAddressStateCode(t *testing.T) {
+func ExampleAddressStateCode() {
 	faker.SetSeed(1302)
-	value := faker.AddressStateCode()
-	t.Log(value)
-	assert.Equal(t, "DC", value)
+	fmt.Println(faker.AddressStateCode())
+	// Output: DC
 }
 
-func TestAddressStreetName(t *testing.T) {
+func ExampleAddressStreetName() {
 	faker.SetSeed(1303)
-	value := faker.AddressStreetName()
-	t.Log(value)
-	assert.Equal(t, "Hopton Street", value)
+	fmt.Println(faker.AddressStreetName())
+	// Output: Hopton Street
 }
 
-func TestAddressStreetNumber(t *testing.T) {
+func ExampleAddressStreetNumber() {
 	faker.SetSeed(1304)
-	value := faker.AddressStreetNumber()
-	t.Log(value)
-	assert.Equal(t, "81-680", value)
+	fmt.Println(faker.AddressStreetNumber())
+	// Output: 81-680
 }
 
-func TestAddressSecondaryAddress(t *testing.T) {
+func ExampleAddressSecondaryAddress() {
 	faker.SetSeed(1305)
-	value := faker.AddressSecondaryAddress()
-	t.Log(value)
-	assert.Equal(t, "Suite 208", value)
+	fmt.Println(faker.AddressSecondaryAddress())
+	// Output: Suite 208
 }
 
-func TestAddressZip(t *testing.T) {
+func ExampleAddressZip() {
 	faker.SetSeed(1306)
-	value := faker.AddressZip()
-	t.Log(value)
-	assert.Equal(t, "36168", value)
+	fmt.Println(faker.AddressZip())
+	// Output: 36168
 }
 
-func TestAddressFull(t *testing.T) {
+func ExampleAddressFull() {
 	faker.SetSeed(1307)
-	value := faker.AddressFull()
-	t.Log(value)
-	assert.Equal(t, "John Snow\nApt. 248\n943 Wager Street\nBerezniki PR 52209\nSaudi Arabia", value)
+	fmt.Println(faker.AddressFull())
+	// Output: John Snow
+	// Apt. 248
+	// 943 Wager Street
+	// Berezniki PR 52209
+	// Saudi Arabia
 }
 
 func TestAddressBuild(t *testing.T) {

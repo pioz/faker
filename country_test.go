@@ -1,45 +1,41 @@
 package faker_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCountryName(t *testing.T) {
+func ExampleCountryName() {
 	faker.SetSeed(1000)
-	value := faker.CountryName()
-	t.Log(value)
-	assert.Equal(t, "Rwanda", value)
+	fmt.Println(faker.CountryName())
+	// Output: Rwanda
 }
 
-func TestCountryAlpha2(t *testing.T) {
+func ExampleCountryAlpha2() {
 	faker.SetSeed(1001)
-	value := faker.CountryAlpha2()
-	t.Log(value)
-	assert.Equal(t, "ML", value)
+	fmt.Println(faker.CountryAlpha2())
+	// Output: ML
 }
 
-func TestCountryAlpha3(t *testing.T) {
+func ExampleCountryAlpha3() {
 	faker.SetSeed(1002)
-	value := faker.CountryAlpha3()
-	t.Log(value)
-	assert.Equal(t, "TKM", value)
+	fmt.Println(faker.CountryAlpha3())
+	// Output: TKM
 }
 
-func TestCountryNationality(t *testing.T) {
+func ExampleCountryNationality() {
 	faker.SetSeed(1002)
-	value := faker.CountryNationality()
-	t.Log(value)
-	assert.Equal(t, "Venezuelan", value)
+	fmt.Println(faker.CountryNationality())
+	// Output: Venezuelan
 }
 
-func TestCountryFlag(t *testing.T) {
+func ExampleCountryFlag() {
 	faker.SetSeed(1003)
-	value := faker.CountryFlag()
-	t.Log(value)
-	assert.Equal(t, "🇳🇷", value)
+	fmt.Println(faker.CountryFlag())
+	// Output: 🇳🇷
 }
 
 func TestCountryBuild(t *testing.T) {

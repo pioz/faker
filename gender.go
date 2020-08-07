@@ -1,5 +1,6 @@
 package faker
 
+// Gender will build a random gender string.
 func Gender() string {
 	value, err := GetData("gender", "types")
 	if err != nil {
@@ -8,6 +9,7 @@ func Gender() string {
 	return value.(string)
 }
 
+// BinaryGender will build a random binary gender string (Male or Female).
 func BinaryGender() string {
 	value, err := GetData("gender", "binary_types")
 	if err != nil {
@@ -16,6 +18,7 @@ func BinaryGender() string {
 	return value.(string)
 }
 
+// ShortBinaryGender will build a random short binary gender string (m or f).
 func ShortBinaryGender() string {
 	value, err := GetData("gender", "short_binary_types")
 	if err != nil {
