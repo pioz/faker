@@ -10,38 +10,47 @@ const lowerLetters = "abcdefghijklmnopqrstuvwxyz"
 const upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 const charset = digits + lowerLetters + upperLetters
 
+// StringWithSize will build a random string of length size.
 func StringWithSize(size int) string {
 	return stringWithSize(size, charset)
 }
 
+// String will build a random string of length between 1 and 255.
 func String() string {
 	return StringWithSize(IntInRange(1, 255))
 }
 
+// DigitsWithSize will build a random string of only digits of length size.
 func DigitsWithSize(size int) string {
 	return stringWithSize(size, digits)
 }
 
+// Digits will build a random string of only digits of length between 1 and 255.
 func Digits() string {
 	return DigitsWithSize(IntInRange(1, 255))
 }
 
+// LettersWithSize will build a random string of only letters of length size.
 func LettersWithSize(size int) string {
 	return stringWithSize(size, lowerLetters+upperLetters)
 }
 
+// Letters will build a random string of only letters of length between 1 and 255.
 func Letters() string {
 	return LettersWithSize(IntInRange(1, 255))
 }
 
+// Lexify will replace all occurences of "?" in str with a random letter.
 func Lexify(str string) string {
 	return replaceChar(str, "?", func() string { return LettersWithSize(1) })
 }
 
+// Numerify will replace all occurences of "?" in str with a random digit.
 func Numerify(str string) string {
 	return replaceChar(str, "?", func() string { return DigitsWithSize(1) })
 }
 
+// Parameterize replaces special characters in str so that it may be used as part of a 'pretty' URL.
 func Parameterize(str string) string {
 	notAlphaNumRegExp := regexp.MustCompile("[^A-Za-z0-9]+")
 	firstLastDashRegexp := regexp.MustCompile("^-|-$")
@@ -51,6 +60,7 @@ func Parameterize(str string) string {
 	return strings.ToLower(parameterizeString)
 }
 
+// Pick returns a random string among those passed as parameters.
 func Pick(pool ...string) string {
 	if len(pool) == 0 {
 		return ""
@@ -58,6 +68,8 @@ func Pick(pool ...string) string {
 	i := IntInRange(0, len(pool)-1)
 	return pool[i]
 }
+
+// Private functions
 
 func stringWithSize(size int, charset string) string {
 	b := make([]byte, size)

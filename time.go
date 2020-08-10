@@ -5,14 +5,18 @@ import (
 	"time"
 )
 
+// DurationInRange will build a random time.Duration between min and max
+// included.
 func DurationInRange(min, max time.Duration) time.Duration {
 	return time.Duration(Int64InRange(int64(min), int64(max)))
 }
 
+// Duration will build a random time.Duration.
 func Duration() time.Duration {
 	return time.Duration(Int64())
 }
 
+// TimeInRange will build a random time.Time between min and max included.
 func TimeInRange(min, max time.Time) time.Time {
 	if min.After(max) {
 		return min
@@ -21,50 +25,52 @@ func TimeInRange(min, max time.Time) time.Time {
 	return min.Add(d)
 }
 
+// Time will build a random time.Time.
 func Time() time.Time {
 	return time.Now().Add(Duration())
 }
 
-// NanoSecond will generate a random nano second
+// NanoSecond will build a random nano second.
 func NanoSecond() int {
 	return IntInRange(0, 999999999)
 }
 
-// Second will generate a random second
+// Second will build a random second.
 func Second() int {
 	return IntInRange(0, 59)
 }
 
-// Minute will generate a random minute
+// Minute will build a random minute.
 func Minute() int {
 	return IntInRange(0, 59)
 }
 
-// Hour will generate a random hour - in military time
+// Hour will build a random hour in military time.
 func Hour() int {
 	return IntInRange(0, 23)
 }
 
-// Day will generate a random day between 1 - 31
+// Day will build a random day between 1 - 31.
 func Day() int {
 	return IntInRange(1, 31)
 }
 
-// WeekDay will generate a random weekday string (Monday-Sunday)
+// WeekDay will build a random weekday string (Monday-Sunday).
 func WeekDay() string {
 	return time.Weekday(IntInRange(0, 6)).String()
 }
 
-// Month will generate a random month string
+// Month will build a random month string.
 func Month() string {
 	return time.Month(IntInRange(1, 12)).String()
 }
 
-// Year will generate a random year between 1900 - 2100
+// Year will build a random year between 1900 - 2100.
 func Year() int {
 	return IntInRange(1900, 2100)
 }
 
+// TimeZone will build a random timezone string.
 func TimeZone() string {
 	timezone, err := GetData("timezone", "text")
 	if err != nil {
@@ -73,6 +79,7 @@ func TimeZone() string {
 	return timezone.(string)
 }
 
+// TimeZoneAbbr will build a random abbreviated timezone string.
 func TimeZoneAbbr() string {
 	timezone, err := GetData("timezone", "abbr")
 	if err != nil {
@@ -81,6 +88,7 @@ func TimeZoneAbbr() string {
 	return timezone.(string)
 }
 
+// TimeZoneFull will build a random full timezone string.
 func TimeZoneFull() string {
 	timezone, err := GetData("timezone", "full")
 	if err != nil {
@@ -89,6 +97,7 @@ func TimeZoneFull() string {
 	return timezone.(string)
 }
 
+// TimeZoneOffset will build a random timezone offset.
 func TimeZoneOffset() float32 {
 	offsetString, err := GetData("timezone", "offset")
 	if err != nil {
@@ -101,6 +110,7 @@ func TimeZoneOffset() float32 {
 	return float32(offset)
 }
 
+// TimeZoneRegion will build a random timezone region string.
 func TimeZoneRegion() string {
 	timezone, err := GetData("timezone", "region")
 	if err != nil {

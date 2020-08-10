@@ -1,6 +1,7 @@
 package faker_test
 
 import (
+	"fmt"
 	"testing"
 	"time"
 
@@ -8,19 +9,16 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestDurationInRange(t *testing.T) {
+func ExampleDurationInRange() {
 	faker.SetSeed(41)
-	value := faker.DurationInRange(100, 200)
-	t.Log(value)
-	assert.Equal(t, time.Duration(158), value)
+	fmt.Println(faker.DurationInRange(100, 200))
+	// Output: 158ns
 }
 
-func TestDuration(t *testing.T) {
+func ExampleDuration() {
 	faker.SetSeed(42)
-	value := faker.Duration()
-	t.Log(value)
-	expectedDuration, _ := time.ParseDuration("-1606331h18m2.623497133s")
-	assert.Equal(t, expectedDuration, value)
+	fmt.Println(faker.Duration())
+	// Output: -1606331h18m2.623497133s
 }
 
 func TestTimeInRange(t *testing.T) {
@@ -47,95 +45,82 @@ func TestTime(t *testing.T) {
 	assert.NotEmpty(t, value)
 }
 
-func TestNanoSecond(t *testing.T) {
+func ExampleNanoSecond() {
 	faker.SetSeed(45)
-	value := faker.NanoSecond()
-	t.Log(value)
-	assert.Equal(t, 299642157, value)
+	fmt.Println(faker.NanoSecond())
+	// Output: 299642157
 }
 
-func TestSecond(t *testing.T) {
+func ExampleSecond() {
 	faker.SetSeed(46)
-	value := faker.Second()
-	t.Log(value)
-	assert.Equal(t, 51, value)
+	fmt.Println(faker.Second())
+	// Output: 51
 }
 
-func TestMinute(t *testing.T) {
+func ExampleMinute() {
 	faker.SetSeed(47)
-	value := faker.Minute()
-	t.Log(value)
-	assert.Equal(t, 40, value)
+	fmt.Println(faker.Minute())
+	// Output: 40
 }
 
-func TestHour(t *testing.T) {
+func ExampleHour() {
 	faker.SetSeed(48)
-	value := faker.Hour()
-	t.Log(value)
-	assert.Equal(t, 9, value)
+	fmt.Println(faker.Hour())
+	// Output: 9
 }
 
-func TestDay(t *testing.T) {
+func ExampleDay() {
 	faker.SetSeed(49)
-	value := faker.Day()
-	t.Log(value)
-	assert.Equal(t, 5, value)
+	fmt.Println(faker.Day())
+	// Output: 5
 }
 
-func TestWeekDay(t *testing.T) {
+func ExampleWeekDay() {
 	faker.SetSeed(50)
-	value := faker.WeekDay()
-	t.Log(value)
-	assert.Equal(t, "Saturday", value)
+	fmt.Println(faker.WeekDay())
+	// Output: Saturday
 }
 
-func TestMonth(t *testing.T) {
+func ExampleMonth() {
 	faker.SetSeed(51)
-	value := faker.Month()
-	t.Log(value)
-	assert.Equal(t, "July", value)
+	fmt.Println(faker.Month())
+	// Output: July
 }
 
-func TestYear(t *testing.T) {
+func ExampleYear() {
 	faker.SetSeed(52)
-	value := faker.Year()
-	t.Log(value)
-	assert.Equal(t, 2032, value)
+	fmt.Println(faker.Year())
+	// Output: 2032
 }
 
-func TestTimeZone(t *testing.T) {
+func ExampleTimeZone() {
 	faker.SetSeed(53)
-	value := faker.TimeZone()
-	t.Log(value)
-	assert.Equal(t, "Venezuela Standard Time", value)
+	fmt.Println(faker.TimeZone())
+	// Output: Venezuela Standard Time
 }
 
-func TestTimeZoneAbbr(t *testing.T) {
+func ExampleTimeZoneAbbr() {
 	faker.SetSeed(54)
-	value := faker.TimeZoneAbbr()
-	t.Log(value)
-	assert.Equal(t, "MEDT", value)
+	fmt.Println(faker.TimeZoneAbbr())
+	// Output: MEDT
 }
 
-func TestTimeZoneFull(t *testing.T) {
+func ExampleTimeZoneFull() {
 	faker.SetSeed(55)
-	value := faker.TimeZoneFull()
-	t.Log(value)
-	assert.Equal(t, "(UTC-03:00) Cayenne, Fortaleza", value)
+	fmt.Println(faker.TimeZoneFull())
+	// Output: (UTC-03:00) Cayenne, Fortaleza
 }
 
-func TestTimeZoneOffset(t *testing.T) {
+func ExampleTimeZoneOffset() {
 	faker.SetSeed(56)
-	value := faker.TimeZoneOffset()
-	t.Log(value)
-	assert.Equal(t, float32(-1), value)
+	fmt.Println(faker.TimeZoneOffset())
+	// Output: -1
 }
 
-func TestTimeZoneRegion(t *testing.T) {
+func ExampleTimeZoneRegion() {
 	faker.SetSeed(57)
-	value := faker.TimeZoneRegion()
-	t.Log(value)
-	assert.Equal(t, "Africa/Accra", value)
+	fmt.Println(faker.TimeZoneRegion())
+	// Output: Africa/Accra
 }
 
 func TestTimeBuild(t *testing.T) {

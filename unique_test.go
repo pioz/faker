@@ -2,11 +2,27 @@ package faker_test
 
 import (
 	"errors"
+	"fmt"
 	"testing"
 
 	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
+
+func ExampleUniq() {
+	faker.SetSeed(403)
+	generator := func() (interface{}, error) { return faker.IntInRange(0, 1), nil }
+	value1, _ := faker.Uniq("test", 0, generator)
+	fmt.Println(value1)
+	value2, _ := faker.Uniq("test", 0, generator)
+	fmt.Println(value2)
+	faker.ClearUniqCache("test")
+	value3, _ := faker.Uniq("test", 0, generator)
+	fmt.Println(value3)
+	// Output: 1
+	// 0
+	// 0
+}
 
 func TestUniq(t *testing.T) {
 	faker.SetSeed(400)

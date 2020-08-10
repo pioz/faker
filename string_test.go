@@ -1,60 +1,71 @@
 package faker_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/pioz/faker"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestStringWithSize(t *testing.T) {
+func ExampleStringWithSize() {
 	faker.SetSeed(900)
-	assert.Equal(t, "zVCVi", faker.StringWithSize(5))
+	fmt.Println(faker.StringWithSize(5))
+	// Output: zVCVi
 }
 
-func TestString(t *testing.T) {
+func ExampleString() {
 	faker.SetSeed(901)
-	assert.Equal(t, "PMIWvi6i", faker.String())
+	fmt.Println(faker.String())
+	// Output: PMIWvi6i
 }
 
-func TestDigitsWithSize(t *testing.T) {
+func ExampleDigitsWithSize() {
 	faker.SetSeed(902)
-	assert.Equal(t, "083232", faker.DigitsWithSize(6))
+	fmt.Println(faker.DigitsWithSize(6))
+	// Output: 083232
 }
 
-func TestDigits(t *testing.T) {
+func ExampleDigits() {
 	faker.SetSeed(903)
-	assert.Equal(t, "615512400386075514115741266153386748264703852380812377508844034317824285597708278706114561792707006830894923584342024491056728416855686581847469966327751223766784279332851122716701382579799798697760692758485844", faker.Digits())
+	fmt.Println(faker.Digits())
+	// Output: 615512400386075514115741266153386748264703852380812377508844034317824285597708278706114561792707006830894923584342024491056728416855686581847469966327751223766784279332851122716701382579799798697760692758485844
 }
 
-func TestLettersWithSize(t *testing.T) {
+func ExampleLettersWithSize() {
 	faker.SetSeed(904)
-	assert.Equal(t, "ZHCbqwV", faker.LettersWithSize(7))
+	fmt.Println(faker.LettersWithSize(7))
+	// Output: ZHCbqwV
 }
 
-func TestLetters(t *testing.T) {
+func ExampleLetters() {
 	faker.SetSeed(905)
-	assert.Equal(t, "HZEoOvFsmElJQnsbdXbkRhVXJupACokXppdhpWO", faker.Letters())
+	fmt.Println(faker.Letters())
+	// Output: HZEoOvFsmElJQnsbdXbkRhVXJupACokXppdhpWO
 }
 
-func TestLexify(t *testing.T) {
+func ExampleLexify() {
 	faker.SetSeed(906)
-	assert.Equal(t, "abxcZhdZ", faker.Lexify("ab?c??d?"))
+	fmt.Println(faker.Lexify("ab?c??d?"))
+	// Output: abxcZhdZ
 }
 
-func TestNumerify(t *testing.T) {
+func ExampleNumerify() {
 	faker.SetSeed(907)
-	assert.Equal(t, "ab5c30d754", faker.Numerify("ab?c??d???"))
+	fmt.Println(faker.Numerify("ab?c??d???"))
+	// Output: ab5c30d754
 }
 
-func TestParameterize(t *testing.T) {
+func ExampleParameterize() {
 	faker.SetSeed(908)
-	assert.Equal(t, "the-amazing-zanz-153", faker.Parameterize("The Amazing Zanzò 153 "))
+	fmt.Println(faker.Parameterize("The Amazing Zanzò 153 "))
+	// Output: the-amazing-zanz-153
 }
 
-func TestPick(t *testing.T) {
+func ExamplePick() {
 	faker.SetSeed(909)
-	assert.Equal(t, "dog", faker.Pick("cat", "dog", "mouse", "lion", "bear"))
+	fmt.Println(faker.Pick("cat", "dog", "mouse", "lion", "bear"))
+	// Output: dog
 }
 
 func TestStringBuild(t *testing.T) {

@@ -1,3 +1,4 @@
+// Faker TODO
 package faker
 
 import (
@@ -58,6 +59,15 @@ func decodeTag(tagString string) *fakerTag {
 	return tag
 }
 
+// Build fills in exported elements of a struct with random data based on the
+// value of `faker` tag of exported elements. The faker tag value can be any
+// available function (case insensitive). Use `faker:"-"` to explicitly skip
+// an element. Use `faker:"unique"` to guarantee a unique value. Built-in
+// types supported are: bool, int, int8, int16, int32, int64, uint, uint8,
+// uint16, uint32, uint64, float32, float64, string. Other standard library
+// supported types are time.Time and time.Duration. But is really easy to
+// extend faker to add other builders to support other types and or customize
+// faker's behavior (see RegisterBuilder function).
 func Build(input interface{}) error {
 	inputReflectType := reflect.TypeOf(input)
 	if inputReflectType == nil {

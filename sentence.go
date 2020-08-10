@@ -9,6 +9,7 @@ import (
 	"unicode"
 )
 
+// Sentence will build a random sentence string.
 func Sentence() string {
 	phrase := randomStartingPhrase()
 	phrase += makeSentence()
@@ -17,6 +18,8 @@ func Sentence() string {
 	return phrase
 }
 
+// ParagraphWithSentenceCount will build a random paragraph string consisting
+// of n sentences.
 func ParagraphWithSentenceCount(n int) string {
 	p := make([]string, 0, n)
 	for i := 0; i < n; i++ {
@@ -25,11 +28,14 @@ func ParagraphWithSentenceCount(n int) string {
 	return strings.Join(p, " ")
 }
 
+// Paragraph will build a random paragraph.
 func Paragraph() string {
 	n := IntInRange(4, 11)
 	return ParagraphWithSentenceCount(n)
 }
 
+// ArticleWithParagraphCount will build a random article string consisting
+// of n paragraphs.
 func ArticleWithParagraphCount(n int) string {
 	p := make([]string, 0, n)
 	for i := 0; i < n; i++ {
@@ -38,6 +44,7 @@ func ArticleWithParagraphCount(n int) string {
 	return strings.Join(p, "\n")
 }
 
+// Article will build a random article.
 func Article() string {
 	n := IntInRange(4, 11)
 	return ArticleWithParagraphCount(n)

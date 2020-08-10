@@ -2,6 +2,7 @@ package faker_test
 
 import (
 	"errors"
+	"fmt"
 	"testing"
 	"time"
 
@@ -357,4 +358,34 @@ func TestStructBuild(t *testing.T) {
 	assert.Equal(t, map[string]int{"power": 2, "speed": 3, "intellect": 4}, s.User2.Feedbacks)
 	assert.Equal(t, 6, len(s.User2.FakeFeedbacks))
 	assert.Equal(t, 982485615, s.User2.FakeFeedbacks["D8N3TcJSnbQNXxD4MHI7QQO4VGNj0E3Oat4OvZdRGfrZVrtf55iQ"])
+}
+
+func ExampleBuild() {
+	faker.SetSeed(621)
+	type Person struct {
+		Name   string `faker:"firstName"`
+		City   string `faker:"addressCity"`
+		Age    int    `faker:"intinrange(0,120)"`
+		Code   string
+		UUID   string `faker:"uuid;unique"`
+		Number int
+	}
+
+	p := Person{}
+	err := faker.Build(&p)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(p.Name)
+	fmt.Println(p.City)
+	fmt.Println(p.Age)
+	fmt.Println(p.Code)
+	fmt.Println(p.UUID)
+	fmt.Println(p.Number)
+	// Output: Elizabeth
+	// Thai Nguyen
+	// 7
+	// QtCMxn
+	// 85fc6010-c82e-4770-b522-6a726c575662
+	// 2053519858
 }

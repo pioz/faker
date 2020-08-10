@@ -9,6 +9,11 @@ import (
 
 var dbMutex = &sync.Mutex{}
 
+// GetData return a random value of the Pool present in the group group with
+// namespace namespace or error if the pool does not exist. Faker organize
+// fake data in a map of string and map of string and array of interface. The
+// keys of the first level map are called namespaces, the keys of the second
+// level map are called groups.
 func GetData(namespace, group string) (interface{}, error) {
 	dbMutex.Lock()
 	defer dbMutex.Unlock()
@@ -31,6 +36,8 @@ func GetData(namespace, group string) (interface{}, error) {
 	return pool[i], nil
 }
 
+// SetPool add a new Pool under the group group with namespace namespace (see
+// GetData).
 func SetPool(namespace, group string, pool data.Pool) {
 	dbMutex.Lock()
 	defer dbMutex.Unlock()
@@ -46,6 +53,8 @@ func SetPool(namespace, group string, pool data.Pool) {
 	poolGroup[group] = pool
 }
 
+// SetPoolGroup add a new PoolGroup under the namespace namespace (see
+// GetData).
 func SetPoolGroup(namespace string, poolGroup data.PoolGroup) {
 	dbMutex.Lock()
 	defer dbMutex.Unlock()

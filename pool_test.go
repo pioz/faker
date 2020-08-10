@@ -1,12 +1,24 @@
 package faker_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/pioz/faker"
 	"github.com/pioz/faker/data"
 	"github.com/stretchr/testify/assert"
 )
+
+func ExampleGetData() {
+	faker.SetSeed(801)
+	faker.SetPool("address", "city", data.Pool{"New York", "Rome"})
+	value, err := faker.GetData("address", "city")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(value)
+	// Output: New York
+}
 
 func TestGetAndSetPool(t *testing.T) {
 	faker.SetSeed(802)
