@@ -59,6 +59,8 @@ jobs:
       uses: grandcolline/golang-github-actions@v1.1.0
       with:
         run: errcheck
+      env:
+        GOROOT: ""
 
     - name: Imports check
       uses: grandcolline/golang-github-actions@v1.1.0
