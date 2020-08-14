@@ -35,3 +35,7 @@ jobs:
 
     - name: Test
       run: go test -v .
+    
+    - name: Run golangci-lint
+      uses: actions-contrib/golangci-lint@v1
+      
