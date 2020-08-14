@@ -71,6 +71,8 @@ jobs:
       uses: grandcolline/golang-github-actions@v1.1.0
       with:
         run: sec
+      env:
+        GOROOT: ""
 
     - name: Run golangci-lint
       uses: actions-contrib/golangci-lint@v1
