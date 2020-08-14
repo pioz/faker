@@ -43,6 +43,8 @@ jobs:
 
     - name: Shadow
       uses: grandcolline/golang-github-actions@v1.1.0
+      env:
+        GOROOT: ""
       with:
         run: shadow
 
