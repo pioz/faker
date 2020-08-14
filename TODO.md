@@ -1,6 +1,7 @@
 # faker TODO
 
 - Wiki add new Builder
+- Split build job in many jobs per check
 
 ## Functions
 
