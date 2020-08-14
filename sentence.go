@@ -97,37 +97,37 @@ func makeSentence() string {
 
 	funcMap := template.FuncMap{
 		"noun": func() string {
-			v, err := GetData("sentence", "noun")
-			if err != nil {
-				panic(err)
+			v, e := GetData("sentence", "noun")
+			if e != nil {
+				panic(e)
 			}
 			return v.(string)
 		},
 		"anoun": func() string {
-			v, err := GetData("sentence", "noun")
-			if err != nil {
-				panic(err)
+			v, e := GetData("sentence", "noun")
+			if e != nil {
+				panic(e)
 			}
 			return articleize(v.(string))
 		},
 		"nouns": func() string {
-			v, err := GetData("sentence", "noun")
-			if err != nil {
-				panic(err)
+			v, e := GetData("sentence", "noun")
+			if e != nil {
+				panic(e)
 			}
 			return pluralize(v.(string))
 		},
 		"adjective": func() string {
-			v, err := GetData("sentence", "adjective")
-			if err != nil {
-				panic(err)
+			v, e := GetData("sentence", "adjective")
+			if e != nil {
+				panic(e)
 			}
 			return v.(string)
 		},
 		"anAdjective": func() string {
-			v, err := GetData("sentence", "adjective")
-			if err != nil {
-				panic(err)
+			v, e := GetData("sentence", "adjective")
+			if e != nil {
+				panic(e)
 			}
 			return articleize(v.(string))
 		},
