@@ -20,7 +20,10 @@ func PhoneNumber() string {
 func UUID() string {
 	version := byte(4)
 	uuid := make([]byte, 16)
-	random.Read(uuid)
+	_, err := random.Read(uuid)
+	if err != nil {
+		panic(err)
+	}
 
 	// Set version
 	uuid[6] = (uuid[6] & 0x0f) | (version << 4)
