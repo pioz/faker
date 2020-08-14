@@ -51,7 +51,10 @@ func ExampleRegisterBuilder() {
 	}{}
 
 	// Build a struct with fake data
-	faker.Build(&player)
+	err = faker.Build(&player)
+	if err != nil {
+		panic(err)
+	}
 
 	fmt.Println(player.Class)
 	// Output: Paladin

@@ -1,7 +1,6 @@
 # faker TODO
 
-- GoDoc (comments)
-- Readme
+- Wiki add new Builder
 
 ## Functions
 

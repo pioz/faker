@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func ExampleSentece() {
+func ExampleSentence() {
 	faker.SetSeed(1600)
 	fmt.Println(faker.Sentence())
 	// Output: A knowledgeable pomegranate without peaches is truly a panda of compassionate sharks.

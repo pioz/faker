@@ -32,6 +32,7 @@ func TestUniq(t *testing.T) {
 		assert.Nil(t, err)
 		values = append(values, value.(int))
 	}
+	assert.Equal(t, 11, len(values))
 
 	faker.ClearUniqCache("notexistingkey")
 	_, err := faker.Uniq("test", 0, func() (interface{}, error) { return faker.IntInRange(0, 10), nil })

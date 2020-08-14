@@ -49,7 +49,7 @@ func AddressStreetNumber() string {
 	return Numerify(value.(string))
 }
 
-// AddressSecondaryAddress will build a random secondary address string.
+// AddressSecondaryAddressz will build a random secondary address string.
 func AddressSecondaryAddress() string {
 	value, err := GetData("address", "secondary_address")
 	if err != nil {

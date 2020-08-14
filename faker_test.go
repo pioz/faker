@@ -85,25 +85,29 @@ func TestMapBuild(t *testing.T) {
 }
 
 func TestTagFuncCallBuild(t *testing.T) {
-	faker.RegisterBuilder("Ping", "string", func(params ...string) (interface{}, error) {
+	err := faker.RegisterBuilder("Ping", "string", func(params ...string) (interface{}, error) {
 		return "pong", nil
 	})
+	assert.Nil(t, err)
 
 	s := &struct {
 		Ping string `faker:"Ping"`
 	}{}
 
-	err := faker.Build(&s)
+	err = faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 
 	assert.Equal(t, "pong", s.Ping)
+	err = faker.UnregisterBuilder("Ping", "string")
+	assert.Nil(t, err)
 }
 
 func TestTagFuncCallCaseSensitiveBuild(t *testing.T) {
-	faker.RegisterBuilder("Ping", "string", func(params ...string) (interface{}, error) {
+	err := faker.RegisterBuilder("Ping", "string", func(params ...string) (interface{}, error) {
 		return "pong", nil
 	})
+	assert.Nil(t, err)
 
 	s := &struct {
 		Ping1 string `faker:"Ping"`
@@ -113,7 +117,7 @@ func TestTagFuncCallCaseSensitiveBuild(t *testing.T) {
 		Ping5 string `faker:"ping(a,b,c)"`
 	}{}
 
-	err := faker.Build(&s)
+	err = faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 
@@ -122,22 +126,25 @@ func TestTagFuncCallCaseSensitiveBuild(t *testing.T) {
 	assert.Equal(t, "pong", s.Ping3)
 	assert.Equal(t, "pong", s.Ping4)
 	assert.Equal(t, "pong", s.Ping5)
+	err = faker.UnregisterBuilder("Ping", "string")
+	assert.Nil(t, err)
 }
 
 func TestTagFuncCallWithParamsBuild(t *testing.T) {
-	faker.RegisterBuilder("Temperature", "string", func(params ...string) (interface{}, error) {
+	err := faker.RegisterBuilder("Temperature", "string", func(params ...string) (interface{}, error) {
 		if len(params) == 1 {
 			return params[0], nil
 		}
 		return "nil", nil
 	})
+	assert.Nil(t, err)
 
 	s := &struct {
 		Temp1 string `faker:"Temperature"`
 		Temp2 string `faker:"Temperature(hot)"`
 	}{}
 
-	err := faker.Build(&s)
+	err = faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 
@@ -146,31 +153,35 @@ func TestTagFuncCallWithParamsBuild(t *testing.T) {
 }
 
 func TestTagFuncCallReturnErrorBuild(t *testing.T) {
-	faker.RegisterBuilder("Error", "string", func(params ...string) (interface{}, error) {
+	err := faker.RegisterBuilder("Error", "string", func(params ...string) (interface{}, error) {
 		return nil, errors.New("This is an error")
 	})
+	assert.Nil(t, err)
 
 	s := &struct {
 		Err string `faker:"Error"`
 	}{}
 
-	err := faker.Build(&s)
+	err = faker.Build(&s)
 	assert.NotNil(t, err)
 	assert.Equal(t, "This is an error", err.Error())
 }
 
 func TestTagFuncCallNotSupportedTypeBuild(t *testing.T) {
-	faker.RegisterBuilder("Ping", "string", func(params ...string) (interface{}, error) {
+	err := faker.RegisterBuilder("Ping", "string", func(params ...string) (interface{}, error) {
 		return "pong", nil
 	})
+	assert.Nil(t, err)
 
 	s := &struct {
 		Ping int `faker:"Ping"`
 	}{}
 
-	err := faker.Build(&s)
+	err = faker.Build(&s)
 	assert.NotNil(t, err)
 	assert.Equal(t, "Invalid faker function 'Ping' for type 'int'", err.Error())
+	err = faker.UnregisterBuilder("Ping", "string")
+	assert.Nil(t, err)
 }
 
 func TestNoErrorOnNotSupportedType(t *testing.T) {
@@ -306,21 +317,23 @@ type userTest struct {
 // Generic quite complete test on struct
 func TestStructBuild(t *testing.T) {
 	faker.SetSeed(620)
-	faker.RegisterBuilder("coin", "string", func(...string) (interface{}, error) {
+	err := faker.RegisterBuilder("coin", "string", func(...string) (interface{}, error) {
 		if faker.Bool() {
 			return "head", nil
 		} else {
 			return "tail", nil
 		}
 	})
+	assert.Nil(t, err)
 
-	faker.RegisterBuilder("feedbacks", "map[string]int", func(...string) (interface{}, error) {
+	err = faker.RegisterBuilder("feedbacks", "map[string]int", func(...string) (interface{}, error) {
 		f := make(map[string]int)
 		f["power"] = 2
 		f["speed"] = 3
 		f["intellect"] = 4
 		return f, nil
 	})
+	assert.Nil(t, err)
 
 	s := &struct {
 		Number1  int `faker:"intinrange(0,5)"`
@@ -333,7 +346,7 @@ func TestStructBuild(t *testing.T) {
 		User2    *userTest
 	}{NotEmpty: "not changed"}
 
-	err := faker.Build(&s)
+	err = faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 	assert.Equal(t, 3, s.Number1)
@@ -465,7 +478,10 @@ func ExampleBuild_third() {
 
 	italianUserFactory := func() *User {
 		u := &User{Country: "IT"}
-		faker.Build(u)
+		err := faker.Build(u)
+		if err != nil {
+			panic(err)
+		}
 		return u
 	}
 
