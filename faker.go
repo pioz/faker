@@ -1,4 +1,4 @@
-// Faker TODO
+// Package faker is a random data generator and struct fake data generator.
 package faker
 
 import (
