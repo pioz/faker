@@ -11,7 +11,7 @@ import (
 func TestRegisterBuilder(t *testing.T) {
 	err := faker.UnregisterBuilder("foo", "string")
 	assert.NotNil(t, err)
-	assert.Equal(t, "Builder not registered", err.Error())
+	assert.Equal(t, "builder not registered", err.Error())
 
 	err = faker.RegisterBuilder("foo", "string", func(...string) (interface{}, error) {
 		return "bar", nil
@@ -22,7 +22,7 @@ func TestRegisterBuilder(t *testing.T) {
 		return "bar", nil
 	})
 	assert.NotNil(t, err)
-	assert.Equal(t, "Builder already registered", err.Error())
+	assert.Equal(t, "builder already registered", err.Error())
 
 	err = faker.UnregisterBuilder("foo", "string")
 	assert.Nil(t, err)

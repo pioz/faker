@@ -146,7 +146,7 @@ func builderKey(builderName, builderType string) string {
 func RegisterBuilder(builderName, builderType string, fn builderFunc) error {
 	key := builderKey(builderName, builderType)
 	if _, ok := builders[key]; ok {
-		return errors.New("Builder already registered")
+		return errors.New("builder already registered")
 	}
 	builders[key] = fn
 	return nil
@@ -156,7 +156,7 @@ func RegisterBuilder(builderName, builderType string, fn builderFunc) error {
 func UnregisterBuilder(builderName, builderType string) error {
 	key := builderKey(builderName, builderType)
 	if _, ok := builders[key]; !ok {
-		return errors.New("Builder not registered")
+		return errors.New("builder not registered")
 	}
 	delete(builders, key)
 	return nil

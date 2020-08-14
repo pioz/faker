@@ -154,7 +154,7 @@ func TestTagFuncCallWithParamsBuild(t *testing.T) {
 
 func TestTagFuncCallReturnErrorBuild(t *testing.T) {
 	err := faker.RegisterBuilder("Error", "string", func(params ...string) (interface{}, error) {
-		return nil, errors.New("This is an error")
+		return nil, errors.New("this is an error")
 	})
 	assert.Nil(t, err)
 
@@ -164,7 +164,7 @@ func TestTagFuncCallReturnErrorBuild(t *testing.T) {
 
 	err = faker.Build(&s)
 	assert.NotNil(t, err)
-	assert.Equal(t, "This is an error", err.Error())
+	assert.Equal(t, "this is an error", err.Error())
 }
 
 func TestTagFuncCallNotSupportedTypeBuild(t *testing.T) {
@@ -245,7 +245,7 @@ func TestUniqueTag(t *testing.T) {
 
 	err = faker.Build(&s3)
 	assert.NotNil(t, err)
-	assert.Equal(t, "Failed to generate a unique value", err.Error())
+	assert.Equal(t, "failed to generate a unique value", err.Error())
 }
 
 func TestInterfaceNotAllowed(t *testing.T) {

@@ -37,7 +37,7 @@ func TestUniq(t *testing.T) {
 	faker.ClearUniqCache("notexistingkey")
 	_, err := faker.Uniq("test", 0, func() (interface{}, error) { return faker.IntInRange(0, 10), nil })
 	assert.NotNil(t, err)
-	assert.Equal(t, "Failed to generate a unique value", err.Error())
+	assert.Equal(t, "failed to generate a unique value", err.Error())
 
 	faker.ClearUniqCache("test")
 	_, err = faker.Uniq("test", 0, func() (interface{}, error) { return faker.IntInRange(0, 0), nil })
@@ -45,7 +45,7 @@ func TestUniq(t *testing.T) {
 
 	_, err = faker.Uniq("test", 0, func() (interface{}, error) { return faker.IntInRange(0, 0), nil })
 	assert.NotNil(t, err)
-	assert.Equal(t, "Failed to generate a unique value", err.Error())
+	assert.Equal(t, "failed to generate a unique value", err.Error())
 
 	faker.ClearAllUniqCache()
 	_, err = faker.Uniq("test", 0, func() (interface{}, error) { return faker.IntInRange(0, 0), nil })
@@ -53,9 +53,9 @@ func TestUniq(t *testing.T) {
 }
 
 func TestUniqError(t *testing.T) {
-	_, err := faker.Uniq("test", 0, func() (interface{}, error) { return nil, errors.New("This is an error") })
+	_, err := faker.Uniq("test", 0, func() (interface{}, error) { return nil, errors.New("this is an error") })
 	assert.NotNil(t, err)
-	assert.Equal(t, "This is an error", err.Error())
+	assert.Equal(t, "this is an error", err.Error())
 }
 
 func TestUniqSlice(t *testing.T) {
@@ -78,5 +78,5 @@ func TestUniqSliceError(t *testing.T) {
 	})
 	t.Log(randIntSlice)
 	assert.NotNil(t, err)
-	assert.Equal(t, "Failed to generate a unique value", err.Error())
+	assert.Equal(t, "failed to generate a unique value", err.Error())
 }

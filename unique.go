@@ -34,7 +34,7 @@ func Uniq(group string, maxRetry int, fn func() (interface{}, error)) (interface
 			return value, nil
 		}
 	}
-	return value, errors.New("Failed to generate a unique value")
+	return value, errors.New("failed to generate a unique value")
 }
 
 // UniqSlice run max maxRetry times fn function until fn returns a unique
