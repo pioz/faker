@@ -35,11 +35,16 @@ jobs:
 
     - name: Test
       run: go test -v .
-    
+
+    - name: Lint
+      uses: grandcolline/golang-github-actions@v1.1.0
+      with:
+        run: lint
+
     - name: Run golangci-lint
       uses: actions-contrib/golangci-lint@v1
       env:
         GOROOT: ""
       with:
         args: "run"
-      
+
