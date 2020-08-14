@@ -52,6 +52,8 @@ jobs:
       uses: grandcolline/golang-github-actions@v1.1.0
       with:
         run: staticcheck
+      env:
+        GOROOT: ""
 
     - name: Err check
       uses: grandcolline/golang-github-actions@v1.1.0
@@ -70,8 +72,7 @@ jobs:
 
     - name: Run golangci-lint
       uses: actions-contrib/golangci-lint@v1
-      env:
-        GOROOT: ""
       with:
         args: "run"
-
+      env:
+        GOROOT: ""
