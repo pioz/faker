@@ -70,7 +70,7 @@ func paramsToInt(params ...string) (int, error) {
 
 func parametersError(err error) error {
 	if err == nil {
-		return fmt.Errorf("Invalid parameters")
+		return fmt.Errorf("invalid parameters")
 	}
-	return fmt.Errorf("Invalid parameters: %s", err.Error())
+	return fmt.Errorf("invalid parameters: %s", err.Error())
 }

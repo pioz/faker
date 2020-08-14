@@ -24,12 +24,12 @@ func GetData(namespace, group string) (interface{}, error) {
 	)
 	poolGroup, found = data.DB[namespace]
 	if !found {
-		return "", fmt.Errorf("The namespace '%s' does not exist", namespace)
+		return "", fmt.Errorf("the namespace '%s' does not exist", namespace)
 	}
 
 	pool, found = poolGroup[group]
 	if !found {
-		return "", fmt.Errorf("The group '%s' in namespace '%s' does not exist", group, namespace)
+		return "", fmt.Errorf("the group '%s' in namespace '%s' does not exist", group, namespace)
 	}
 
 	i := IntInRange(0, len(pool)-1)

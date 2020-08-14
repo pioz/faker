@@ -193,7 +193,7 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 		}
 	default:
 		if tag.funcName != "" {
-			return fmt.Errorf("Invalid faker function '%s' for type '%s'", tag.funcName, inputReflectType.String())
+			return fmt.Errorf("invalid faker function '%s' for type '%s'", tag.funcName, inputReflectType.String())
 		}
 		return nil
 	}

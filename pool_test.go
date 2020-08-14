@@ -51,12 +51,12 @@ func TestGetDataWithNamespaceError(t *testing.T) {
 	faker.SetPool("ns4", "grp1", data.Pool{"foo", "bar"})
 	_, err := faker.GetData("not-exist", "grp1")
 	assert.NotNil(t, err)
-	assert.Equal(t, "The namespace 'not-exist' does not exist", err.Error())
+	assert.Equal(t, "the namespace 'not-exist' does not exist", err.Error())
 }
 
 func TestGetDataWithGroupError(t *testing.T) {
 	faker.SetPool("ns5", "grp1", data.Pool{"foo", "bar"})
 	_, err := faker.GetData("ns5", "not-exist")
 	assert.NotNil(t, err)
-	assert.Equal(t, "The group 'not-exist' in namespace 'ns5' does not exist", err.Error())
+	assert.Equal(t, "the group 'not-exist' in namespace 'ns5' does not exist", err.Error())
 }

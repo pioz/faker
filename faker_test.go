@@ -179,7 +179,7 @@ func TestTagFuncCallNotSupportedTypeBuild(t *testing.T) {
 
 	err = faker.Build(&s)
 	assert.NotNil(t, err)
-	assert.Equal(t, "Invalid faker function 'Ping' for type 'int'", err.Error())
+	assert.Equal(t, "invalid faker function 'Ping' for type 'int'", err.Error())
 	err = faker.UnregisterBuilder("Ping", "string")
 	assert.Nil(t, err)
 }

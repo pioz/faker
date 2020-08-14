@@ -14,7 +14,7 @@ func TestParamsToMinMaxIntInvaliParams1(t *testing.T) {
 	}{}
 	err := faker.Build(&s)
 	assert.NotNil(t, err)
-	assert.Equal(t, "Invalid parameters", err.Error())
+	assert.Equal(t, "invalid parameters", err.Error())
 }
 
 func TestParamsToMinMaxIntInvaliParams2(t *testing.T) {
@@ -24,7 +24,7 @@ func TestParamsToMinMaxIntInvaliParams2(t *testing.T) {
 	}{}
 	err := faker.Build(&s)
 	assert.NotNil(t, err)
-	assert.Equal(t, "Invalid parameters", err.Error())
+	assert.Equal(t, "invalid parameters", err.Error())
 }
 
 func TestParamsToMinMaxIntInvaliParams3(t *testing.T) {
@@ -34,7 +34,7 @@ func TestParamsToMinMaxIntInvaliParams3(t *testing.T) {
 	}{}
 	err := faker.Build(&s)
 	assert.NotNil(t, err)
-	assert.Equal(t, "Invalid parameters: strconv.Atoi: parsing \"a\": invalid syntax", err.Error())
+	assert.Equal(t, "invalid parameters: strconv.Atoi: parsing \"a\": invalid syntax", err.Error())
 }
 
 func TestParamsToMinMaxIntInvaliParams4(t *testing.T) {
@@ -44,5 +44,5 @@ func TestParamsToMinMaxIntInvaliParams4(t *testing.T) {
 	}{}
 	err := faker.Build(&s)
 	assert.NotNil(t, err)
-	assert.Equal(t, "Invalid parameters: strconv.Atoi: parsing \"b\": invalid syntax", err.Error())
+	assert.Equal(t, "invalid parameters: strconv.Atoi: parsing \"b\": invalid syntax", err.Error())
 }
