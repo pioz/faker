@@ -389,3 +389,87 @@ func ExampleBuild() {
 	// 85fc6010-c82e-4770-b522-6a726c575662
 	// 2053519858
 }
+
+func ExampleBuild_second() {
+	faker.SetSeed(622)
+
+	// Define a new builder
+	colorBuilder := func(params ...string) (interface{}, error) {
+		return faker.Pick("Red", "Yellow", "Blue", "Black", "White"), nil
+	}
+
+	// Register a new builder named "color" for string type
+	err := faker.RegisterBuilder("color", "string", colorBuilder)
+	if err != nil {
+		panic(err)
+	}
+
+	type Animal struct {
+		Name  string `faker:"username"`
+		Color string `faker:"color"` // Use custom color builder
+	}
+
+	type Person struct {
+		FirstName string            `faker:"firstName"`         // Any available function case insensitive
+		LastName  *string           `faker:"lastName"`          // Pointer are also supported
+		Age       int               `faker:"intinrange(0,120)"` // Can call with parameters
+		UUID      string            `faker:"uuid;unique"`       // Guarantees a unique value
+		Number    int               `faker:"-"`                 // Skip this field
+		Code      string            // No tag to use default builder for this field type
+		Pet       Animal            // Recursively fill this struct
+		Nicknames []string          `faker:"username;len=3"`          // Build an array of size 3 using faker.Username function
+		Extra     map[string]string `faker:"stringWithSize(3);len=2"` // map are supported
+	}
+
+	p := Person{}
+	err = faker.Build(&p)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(p.FirstName)
+	fmt.Println(*p.LastName)
+	fmt.Println(p.Age)
+	fmt.Println(p.UUID)
+	fmt.Println(p.Number)
+	fmt.Println(p.Code)
+	fmt.Println(p.Pet.Name)
+	fmt.Println(p.Pet.Color)
+	fmt.Println(len(p.Nicknames))
+	fmt.Println(p.Nicknames[0])
+	fmt.Println(p.Nicknames[1])
+	fmt.Println(p.Nicknames[2])
+	fmt.Println(p.Extra)
+	// Output: Wilber
+	// Gutkowski
+	// 25
+	// ff8d6917-b920-46e6-b1be-dc2d48becfcb
+	// 0
+	// z
+	// honegger
+	// Red
+	// 3
+	// teagan
+	// polypeptide
+	// chinfest
+	// map[70w:3F6 gQS:isq]
+}
+
+func ExampleBuild_third() {
+	faker.SetSeed(623)
+
+	type User struct {
+		Username string `faker:"username"`
+		Email    string `faker:"email"`
+		Country  string `faker:"CountryAlpha2"`
+	}
+
+	italianUserFactory := func() *User {
+		u := &User{Country: "IT"}
+		faker.Build(u)
+		return u
+	}
+
+	italianUser := italianUserFactory()
+	fmt.Println(italianUser)
+	// Output: &{spicule hoag@ornamented.biz IT}
+}

@@ -39,7 +39,7 @@ func ExampleRegisterBuilder() {
 		return faker.Pick("Cleric", "Druid", "Ranger", "Sorcerer", "Warlock", "Wizard"), nil
 	}
 
-	// Register a new builder named "dndClass" for string types
+	// Register a new builder named "dndClass" for string type
 	err := faker.RegisterBuilder("dndClass", "string", builder)
 	if err != nil {
 		panic(err)
