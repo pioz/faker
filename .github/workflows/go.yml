@@ -38,4 +38,8 @@ jobs:
     
     - name: Run golangci-lint
       uses: actions-contrib/golangci-lint@v1
+      env:
+        GOROOT: ""
+      with:
+        args: "run"
       
