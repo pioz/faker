@@ -1,42 +1,9 @@
 # faker TODO
 
+- Think to remove data sub package and move `var DB` and `var builders` in the same file (init.go)
 - Wiki add new Builder
 
 ## Functions
-
-### Country ✅
-CountryName() string
-CountryAlpha2() string
-CountryAlpha3() string
-CountryNationality() string
-CountryFlag() string
-
-### Languages ✅
-LangName() string
-LangCode() string
-
-### Currency ✅
-CurrencyName() string
-CurrencyCode() string
-CurrencySymbol() string
-
-### Address
-City() string
-State() string
-StreetName() string
-StreetNumber() string
-SecondaryAddress() string // "Apt. 672"
-State() string
-StateCode() string
-Zip() string
-FullAddress()
-```
-FirstName(), LastName()
-SecondaryAddress()
-StreetNumber() StreetName()
-City() StateCode() Zip()
-CountryName()
-```
 
 Latitude() float64
 LatitudeInRange(min, max float64) (float64, error)

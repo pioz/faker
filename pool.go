@@ -3,9 +3,16 @@ package faker
 import (
 	"fmt"
 	"sync"
-
-	"github.com/pioz/faker/data"
 )
+
+// Pool type is a slice that contains fake data.
+type Pool []interface{}
+
+// PoolGroup type is a map that groups Pool types.
+type PoolGroup map[string]Pool
+
+// PoolData type is a map that groups PoolGroup types.
+type PoolData map[string]PoolGroup
 
 var dbMutex = &sync.Mutex{}
 
@@ -18,11 +25,11 @@ func GetData(namespace, group string) (interface{}, error) {
 	dbMutex.Lock()
 	defer dbMutex.Unlock()
 	var (
-		poolGroup data.PoolGroup
-		pool      data.Pool
+		poolGroup PoolGroup
+		pool      Pool
 		found     bool
 	)
-	poolGroup, found = data.DB[namespace]
+	poolGroup, found = db[namespace]
 	if !found {
 		return "", fmt.Errorf("the namespace '%s' does not exist", namespace)
 	}
@@ -38,25 +45,25 @@ func GetData(namespace, group string) (interface{}, error) {
 
 // SetPool add a new Pool under the group group with namespace namespace (see
 // GetData).
-func SetPool(namespace, group string, pool data.Pool) {
+func SetPool(namespace, group string, pool Pool) {
 	dbMutex.Lock()
 	defer dbMutex.Unlock()
 	var (
-		poolGroup data.PoolGroup
+		poolGroup PoolGroup
 		found     bool
 	)
-	_, found = data.DB[namespace]
+	_, found = db[namespace]
 	if !found {
-		data.DB[namespace] = make(data.PoolGroup)
+		db[namespace] = make(PoolGroup)
 	}
-	poolGroup = data.DB[namespace]
+	poolGroup = db[namespace]
 	poolGroup[group] = pool
 }
 
 // SetPoolGroup add a new PoolGroup under the namespace namespace (see
 // GetData).
-func SetPoolGroup(namespace string, poolGroup data.PoolGroup) {
+func SetPoolGroup(namespace string, poolGroup PoolGroup) {
 	dbMutex.Lock()
 	defer dbMutex.Unlock()
-	data.DB[namespace] = poolGroup
+	db[namespace] = poolGroup
 }

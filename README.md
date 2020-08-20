@@ -5,7 +5,7 @@
 
 Random data generator and struct fake data generator written in go.
 
-* More than 100 functions
+* More than 100 generator functions
 * Struct generator
 * Unique data generator
 * Builtin types support
@@ -153,6 +153,10 @@ be used to generate fake data and customize the behaviour of Faker. Here an exam
 
     fmt.Println(player.Class)
     // Output: Paladin
+
+## Contributing with new generator functions
+
+If you want to contribute to faker with new generator functions please read this [wiki](https://github.com/pioz/faker/wiki/Contributing-with-new-generator-functions)!
 
 ## Contributing
 
