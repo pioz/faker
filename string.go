@@ -40,12 +40,12 @@ func Letters() string {
 	return LettersWithSize(IntInRange(1, 255))
 }
 
-// Lexify will replace all occurences of "?" in str with a random letter.
+// Lexify will replace all occurrences of "?" in str with a random letter.
 func Lexify(str string) string {
 	return replaceChar(str, "?", func() string { return LettersWithSize(1) })
 }
 
-// Numerify will replace all occurences of "?" in str with a random digit.
+// Numerify will replace all occurrences of "?" in str with a random digit.
 func Numerify(str string) string {
 	return replaceChar(str, "?", func() string { return DigitsWithSize(1) })
 }
