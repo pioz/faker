@@ -97,52 +97,34 @@ var (
 const vowels = "aeiouy"
 
 func makeSentence() string {
-	sentenceTemplate, err := GetData("sentence", "sentence_template")
-	if err != nil {
-		panic(err)
-	}
+	sentenceTemplate, _ := GetData("sentence", "sentence_template")
 
 	funcMap := template.FuncMap{
 		"noun": func() string {
-			v, e := GetData("sentence", "noun")
-			if e != nil {
-				panic(e)
-			}
-			return v.(string)
+			value, _ := GetData("sentence", "noun")
+			return value.(string)
 		},
 		"anoun": func() string {
-			v, e := GetData("sentence", "noun")
-			if e != nil {
-				panic(e)
-			}
-			return articleize(v.(string))
+			value, _ := GetData("sentence", "noun")
+			return articleize(value.(string))
 		},
 		"nouns": func() string {
-			v, e := GetData("sentence", "noun")
-			if e != nil {
-				panic(e)
-			}
-			return pluralize(v.(string))
+			value, _ := GetData("sentence", "noun")
+			return pluralize(value.(string))
 		},
 		"adjective": func() string {
-			v, e := GetData("sentence", "adjective")
-			if e != nil {
-				panic(e)
-			}
-			return v.(string)
+			value, _ := GetData("sentence", "adjective")
+			return value.(string)
 		},
 		"anAdjective": func() string {
-			v, e := GetData("sentence", "adjective")
-			if e != nil {
-				panic(e)
-			}
-			return articleize(v.(string))
+			value, _ := GetData("sentence", "adjective")
+			return articleize(value.(string))
 		},
 	}
 
 	buf := bytes.NewBufferString("")
 	tmpl := template.Must(template.New("sentence").Funcs(funcMap).Parse(sentenceTemplate.(string)))
-	err = tmpl.Execute(buf, "")
+	err := tmpl.Execute(buf, "")
 	if err != nil {
 		panic(err)
 	}

@@ -15,28 +15,19 @@ var nameData = PoolGroup{
 
 // MaleFirstName will build a random male first name string.
 func MaleFirstName() string {
-	value, err := GetData("name", "male_first_name")
-	if err != nil {
-		panic(err)
-	}
+	value, _ := GetData("name", "male_first_name")
 	return value.(string)
 }
 
 // FemaleFirstName will build a random female first name string.
 func FemaleFirstName() string {
-	value, err := GetData("name", "female_first_name")
-	if err != nil {
-		panic(err)
-	}
+	value, _ := GetData("name", "female_first_name")
 	return value.(string)
 }
 
 // NeutralFirstName will build a random neutral first name string.
 func NeutralFirstName() string {
-	value, err := GetData("name", "neutral_first_name")
-	if err != nil {
-		panic(err)
-	}
+	value, _ := GetData("name", "neutral_first_name")
 	return value.(string)
 }
 
@@ -55,28 +46,19 @@ func FirstName() string {
 
 // LastName will build a random last name string.
 func LastName() string {
-	value, err := GetData("name", "last_name")
-	if err != nil {
-		panic(err)
-	}
+	value, _ := GetData("name", "last_name")
 	return value.(string)
 }
 
 // NamePrefix will build a random name prefix string.
 func NamePrefix() string {
-	value, err := GetData("name", "prefix")
-	if err != nil {
-		panic(err)
-	}
+	value, _ := GetData("name", "prefix")
 	return value.(string)
 }
 
 // NameSuffix will build a random name suffix string.
 func NameSuffix() string {
-	value, err := GetData("name", "suffix")
-	if err != nil {
-		panic(err)
-	}
+	value, _ := GetData("name", "suffix")
 	return value.(string)
 }
 

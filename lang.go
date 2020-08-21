@@ -7,19 +7,13 @@ var langData = PoolGroup{
 
 // LangName will build a random language name string.
 func LangName() string {
-	value, err := GetData("lang", "name")
-	if err != nil {
-		panic(err)
-	}
+	value, _ := GetData("lang", "name")
 	return value.(string)
 }
 
 // LangCode will build a random language code string.
 func LangCode() string {
-	value, err := GetData("lang", "code")
-	if err != nil {
-		panic(err)
-	}
+	value, _ := GetData("lang", "code")
 	return value.(string)
 }
 

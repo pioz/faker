@@ -8,28 +8,19 @@ var currencyData = PoolGroup{
 
 // CurrencyName will build a random currency name string.
 func CurrencyName() string {
-	value, err := GetData("currency", "name")
-	if err != nil {
-		panic(err)
-	}
+	value, _ := GetData("currency", "name")
 	return value.(string)
 }
 
 // CurrencyCode will build a random currency code string.
 func CurrencyCode() string {
-	value, err := GetData("currency", "code")
-	if err != nil {
-		panic(err)
-	}
+	value, _ := GetData("currency", "code")
 	return value.(string)
 }
 
 // CurrencySymbol will build a random currency symbol string.
 func CurrencySymbol() string {
-	value, err := GetData("currency", "symbol")
-	if err != nil {
-		panic(err)
-	}
+	value, _ := GetData("currency", "symbol")
 	return value.(string)
 }
 

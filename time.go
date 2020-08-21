@@ -80,37 +80,25 @@ func Year() int {
 
 // TimeZone will build a random timezone string.
 func TimeZone() string {
-	timezone, err := GetData("timezone", "text")
-	if err != nil {
-		panic(err)
-	}
+	timezone, _ := GetData("timezone", "text")
 	return timezone.(string)
 }
 
 // TimeZoneAbbr will build a random abbreviated timezone string.
 func TimeZoneAbbr() string {
-	timezone, err := GetData("timezone", "abbr")
-	if err != nil {
-		panic(err)
-	}
+	timezone, _ := GetData("timezone", "abbr")
 	return timezone.(string)
 }
 
 // TimeZoneFull will build a random full timezone string.
 func TimeZoneFull() string {
-	timezone, err := GetData("timezone", "full")
-	if err != nil {
-		panic(err)
-	}
+	timezone, _ := GetData("timezone", "full")
 	return timezone.(string)
 }
 
 // TimeZoneOffset will build a random timezone offset.
 func TimeZoneOffset() float32 {
-	offsetString, err := GetData("timezone", "offset")
-	if err != nil {
-		panic(err)
-	}
+	offsetString, _ := GetData("timezone", "offset")
 	offset, err := strconv.ParseFloat(offsetString.(string), 32)
 	if err != nil {
 		panic(err)
@@ -120,10 +108,7 @@ func TimeZoneOffset() float32 {
 
 // TimeZoneRegion will build a random timezone region string.
 func TimeZoneRegion() string {
-	timezone, err := GetData("timezone", "region")
-	if err != nil {
-		panic(err)
-	}
+	timezone, _ := GetData("timezone", "region")
 	return timezone.(string)
 }
 

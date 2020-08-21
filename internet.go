@@ -14,19 +14,13 @@ var internetData = PoolGroup{
 
 // Username will build a random username string.
 func Username() string {
-	value, err := GetData("internet", "username")
-	if err != nil {
-		panic(err)
-	}
+	value, _ := GetData("internet", "username")
 	return value.(string)
 }
 
 // Domain will build a random domain string.
 func Domain() string {
-	domainSuffix, err := GetData("internet", "domain_suffix")
-	if err != nil {
-		panic(err)
-	}
+	domainSuffix, _ := GetData("internet", "domain_suffix")
 	return fmt.Sprintf("%s.%s", Username(), domainSuffix)
 }
 
@@ -37,19 +31,13 @@ func Email() string {
 
 // FreeEmail will build a random free email address string (gmail, hotmail, yahoo...).
 func FreeEmail() string {
-	domain, err := GetData("internet", "free_email")
-	if err != nil {
-		panic(err)
-	}
+	domain, _ := GetData("internet", "free_email")
 	return fmt.Sprintf("%s@%s", Username(), domain)
 }
 
 // SafeEmail will build a random email address string whose domain is always example.com.
 func SafeEmail() string {
-	domain, err := GetData("internet", "safe_email")
-	if err != nil {
-		panic(err)
-	}
+	domain, _ := GetData("internet", "safe_email")
 	return fmt.Sprintf("%s@%s", Username(), domain)
 }
 
@@ -60,10 +48,7 @@ func Slug() string {
 
 // URL will build a random URL string.
 func URL() string {
-	protocol, err := GetData("internet", "protocol")
-	if err != nil {
-		panic(err)
-	}
+	protocol, _ := GetData("internet", "protocol")
 	www := ""
 	if Bool() {
 		www = "www."
