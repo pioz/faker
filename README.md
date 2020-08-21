@@ -2,6 +2,7 @@
 
 ![Go](https://github.com/pioz/faker/workflows/Go/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/pioz/faker)](https://goreportcard.com/report/github.com/pioz/faker)
+[![codecov](https://codecov.io/gh/pioz/faker/branch/master/graph/badge.svg)](https://codecov.io/gh/pioz/faker)
 [![GoDoc](https://godoc.org/github.com/pioz/faker?status.svg)](https://godoc.org/github.com/pioz/faker)
 
 Random data generator and struct fake data generator written in go.
