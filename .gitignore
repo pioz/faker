@@ -7,3 +7,5 @@
 .project
 .DS_Store
 __*
+
+coverage.txt
