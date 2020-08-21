@@ -14,10 +14,13 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - uses: actions/setup-go@v2
+    - uses: codecov/codecov-action@v1
+      with:
+        file: ./coverage.txt # optional
     - name: Build project
       run: go build -v .
     - name: Run tests
-      run: go test -v .
+      run: go test -race -coverprofile=coverage.txt -covermode=atomic
 
   lint:
     name: Lint
