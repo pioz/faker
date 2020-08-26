@@ -551,3 +551,22 @@ func ExampleBuild_third() {
 	fmt.Println(italianUser)
 	// Output: &{spicule hoag@ornamented.biz IT}
 }
+
+func ExampleBuild_fourth() {
+	faker.SetSeed(623)
+
+	type User struct {
+		Username string `faker:"username"`
+		Email    string `faker:"email"`
+		Country  string `faker:"CountryAlpha2"`
+	}
+
+	// Build 3 users
+	users := make([]User, 3)
+	err := faker.Build(&users)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("%+v", users)
+	// Output: [{Username:spicule Email:hoag@ornamented.biz Country:FI} {Username:twelvetone Email:mechanics@ramiform.name Country:TL} {Username:considerate Email:solnit@canonry.biz Country:TG}]
+}
