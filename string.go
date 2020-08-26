@@ -15,9 +15,9 @@ func StringWithSize(size int) string {
 	return stringWithSize(size, charset)
 }
 
-// String will build a random string of length between 1 and 255.
+// String will build a random string of length between 1 and 8.
 func String() string {
-	return StringWithSize(IntInRange(1, 255))
+	return StringWithSize(IntInRange(1, 8))
 }
 
 // DigitsWithSize will build a random string of only digits of length size.
@@ -25,9 +25,9 @@ func DigitsWithSize(size int) string {
 	return stringWithSize(size, digits)
 }
 
-// Digits will build a random string of only digits of length between 1 and 255.
+// Digits will build a random string of only digits of length between 1 and 8.
 func Digits() string {
-	return DigitsWithSize(IntInRange(1, 255))
+	return DigitsWithSize(IntInRange(1, 8))
 }
 
 // LettersWithSize will build a random string of only letters of length size.
@@ -35,9 +35,9 @@ func LettersWithSize(size int) string {
 	return stringWithSize(size, lowerLetters+upperLetters)
 }
 
-// Letters will build a random string of only letters of length between 1 and 255.
+// Letters will build a random string of only letters of length between 1 and 8.
 func Letters() string {
-	return LettersWithSize(IntInRange(1, 255))
+	return LettersWithSize(IntInRange(1, 8))
 }
 
 // Lexify will replace all occurrences of "?" in str with a random letter.

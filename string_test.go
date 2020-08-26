@@ -29,7 +29,7 @@ func ExampleDigitsWithSize() {
 func ExampleDigits() {
 	faker.SetSeed(903)
 	fmt.Println(faker.Digits())
-	// Output: 615512400386075514115741266153386748264703852380812377508844034317824285597708278706114561792707006830894923584342024491056728416855686581847469966327751223766784279332851122716701382579799798697760692758485844
+	// Output: 615512
 }
 
 func ExampleLettersWithSize() {
@@ -41,7 +41,7 @@ func ExampleLettersWithSize() {
 func ExampleLetters() {
 	faker.SetSeed(905)
 	fmt.Println(faker.Letters())
-	// Output: HZEoOvFsmElJQnsbdXbkRhVXJupACokXppdhpWO
+	// Output: HZ
 }
 
 func ExampleLexify() {
@@ -87,13 +87,13 @@ func TestStringBuild(t *testing.T) {
 	t.Log(s)
 
 	assert.Equal(t, "1nkm", s.Field1)
-	assert.Equal(t, "TeFS5Odn1cPhpV2u9WBocBKPvRUzZx1mLtxH9W1d", s.Field2)
-	assert.Equal(t, "21470", s.Field3)
-	assert.Equal(t, "91616148171577033030", s.Field4)
-	assert.Equal(t, "hRMljr", s.Field5)
-	assert.Equal(t, "krLqaIpuNJIyqpHnxwwlsVlyYmlIQJKpsekLGbykxAdtZOuUCoJwkQAMKjeEDYGYRgzhGDXhZkYUCasPAALIcPDsbkhMVsxJIYPytgJRFBCMWlEtukCKyKCYokIhiPYYofRkbpCPxtrAorUYCqRGejEFAGTikhUzvAgPuDHNonPnCbUxRJmxrqZoOjNEIQWuMhmgCljwIYQRymoOGiaANnzxPhQNIESQRxWsVtmLxcqIjCTTBbF", s.Field6)
-	assert.Equal(t, "aXbGc", s.Field7)
-	assert.Equal(t, "729x", s.Field8)
+	assert.Equal(t, "TeF", s.Field2)
+	assert.Equal(t, "61017", s.Field3)
+	assert.Equal(t, "43939689", s.Field4)
+	assert.Equal(t, "odEMfI", s.Field5)
+	assert.Equal(t, "VBilXp", s.Field6)
+	assert.Equal(t, "abbqc", s.Field7)
+	assert.Equal(t, "111x", s.Field8)
 	assert.Equal(t, "go-is-the-best-programming-language", s.Field9)
-	assert.Equal(t, "lion", s.Field10)
+	assert.Equal(t, "cat", s.Field10)
 }
