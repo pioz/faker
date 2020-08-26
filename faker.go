@@ -62,12 +62,14 @@ func decodeTag(tagString string) *fakerTag {
 // Build fills in exported elements of a struct with random data based on the
 // value of `faker` tag of exported elements. The faker tag value can be any
 // available function (case insensitive). Use `faker:"-"` to explicitly skip
-// an element. Use `faker:"unique"` to guarantee a unique value. Built-in
-// types supported are: bool, int, int8, int16, int32, int64, uint, uint8,
-// uint16, uint32, uint64, float32, float64, string. Other standard library
-// supported types are time.Time and time.Duration. But is really easy to
-// extend faker to add other builders to support other types and or customize
-// faker's behavior (see RegisterBuilder function).
+// an element. Use `faker:"unique"` to guarantee a unique value. Use
+// `faker:"len=x"` to specify the length of a slice or the size of a map (if
+// ommitted a slice or a map with random size between 1 and 8 will be
+// generated). Built-in types supported are: bool, int, int8, int16, int32,
+// int64, uint, uint8, uint16, uint32, uint64, float32, float64, string. Other
+// standard library supported types are time.Time and time.Duration. But is
+// really easy to extend faker to add other builders to support other types
+// and or customize faker's behavior (see RegisterBuilder function).
 func Build(input interface{}) error {
 	inputReflectType := reflect.TypeOf(input)
 	if inputReflectType == nil {
@@ -76,10 +78,28 @@ func Build(input interface{}) error {
 	if inputReflectType.Kind() != reflect.Ptr {
 		return errors.New("faker.Build input is not a pointer")
 	}
+
+	var err error
 	inputReflectValue := reflect.ValueOf(input)
-	err := build(inputReflectValue, &fakerTag{})
+	if inputReflectType.Elem().Kind() == reflect.Slice {
+		err = buildSlice(inputReflectValue.Elem(), &fakerTag{})
+	} else {
+		err = build(inputReflectValue, &fakerTag{})
+	}
 	if err != nil {
 		return err
+	}
+	return nil
+}
+
+func buildSlice(inputReflectValue reflect.Value, tag *fakerTag) error {
+	for i := 0; i < inputReflectValue.Len(); i++ {
+		if inputReflectValue.Index(i).IsZero() {
+			err := build(inputReflectValue.Index(i), tag)
+			if err != nil {
+				return err
+			}
+		}
 	}
 	return nil
 }
@@ -149,16 +169,11 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 			if tag != nil && tag.length != 0 {
 				sliceLen = tag.length
 			} else {
-				sliceLen = IntInRange(0, 9)
+				sliceLen = IntInRange(1, 8)
 			}
 			newSlice := reflect.MakeSlice(inputReflectType, sliceLen, sliceLen)
 			inputReflectValue.Set(newSlice)
-			for i := 0; i < newSlice.Len(); i++ {
-				err := build(newSlice.Index(i), tag)
-				if err != nil {
-					return err
-				}
-			}
+			return buildSlice(inputReflectValue, tag)
 		}
 	case reflect.Map:
 		if inputReflectValue.IsNil() {
@@ -171,7 +186,7 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 			if tag != nil && tag.length != 0 {
 				mapLen = tag.length
 			} else {
-				mapLen = IntInRange(0, 9)
+				mapLen = IntInRange(1, 8)
 			}
 			keyReflectType := inputReflectType.Key()
 			elemReflectType := inputReflectType.Elem()

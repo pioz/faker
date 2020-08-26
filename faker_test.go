@@ -23,6 +23,25 @@ func TestPtrBuild(t *testing.T) {
 	assert.Equal(t, 1743740582, *s.PtrIntField)
 }
 
+func TestArgumentSliceBuild(t *testing.T) {
+	faker.SetSeed(605)
+	slice := make([]string, 2)
+	err := faker.Build(&slice)
+	assert.Nil(t, err)
+	assert.Equal(t, "BlRzrRA", slice[0])
+	assert.Equal(t, "SHevwfBd", slice[1])
+}
+
+func TestArgumentSliceNotAllZeroBuild(t *testing.T) {
+	faker.SetSeed(606)
+	slice := make([]string, 2)
+	slice[0] = "test"
+	err := faker.Build(&slice)
+	assert.Nil(t, err)
+	assert.Equal(t, "test", slice[0])
+	assert.Equal(t, "typkI", slice[1])
+}
+
 func TestSliceBuild(t *testing.T) {
 	faker.SetSeed(600)
 	s := &struct {
@@ -48,7 +67,7 @@ func TestSliceBuild(t *testing.T) {
 	assert.Equal(t, 1775168364, *s.SlicePtrIntField[1])
 	assert.Equal(t, 546278985, *s.SlicePtrIntField[2])
 
-	assert.Equal(t, 8, len(s.SliceIntField2))
+	assert.Equal(t, 5, len(s.SliceIntField2))
 }
 
 func TestMapBuild(t *testing.T) {
@@ -65,23 +84,24 @@ func TestMapBuild(t *testing.T) {
 	err := faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
+	t.Log(s.Field2)
 
 	assert.Equal(t, 1, len(s.Field1))
-	assert.Equal(t, -408064131, s.Field1["pBrjYVHE4Letot5yTTsmIopXpnBff32wlwbLiH0EPQ7KR9upBp6zb2HqCkmQkzR3x71NOyPItdyK9AIqn0F9ROrYnDURrUNLMiDHSgI0ACoyFkguWYZTfOYjb"])
+	assert.Equal(t, 414796793, s.Field1["pBrjY"])
 
 	assert.Equal(t, 2, len(*s.Field2))
-	assert.Equal(t, "-567614h16m7.375390531s", (*s.Field2)[-1984597982].String())
-	assert.Equal(t, "-1393246h51m23.927637982s", (*s.Field2)[-473279944].String())
+	assert.Equal(t, "-1670489h52m2.887881426s", (*s.Field2)[-244204264].String())
+	assert.Equal(t, "-13678h42m55.366897902s", (*s.Field2)[1577669889].String())
 
 	assert.Equal(t, 2, len(s.Field3))
-	assert.Equal(t, 140005533, *s.Field3[-664005745])
-	assert.Equal(t, -1314422524, *s.Field3[-107123621])
+	assert.Equal(t, 2027576377, *s.Field3[-1215017291])
+	assert.Equal(t, -1688325745, *s.Field3[2062137016])
 
 	assert.Equal(t, 2, len(s.Field4))
 	assert.Equal(t, 2, len(s.Field5))
 
-	assert.Equal(t, 7, len(s.Field6))
-	assert.Equal(t, 1242048708, s.Field6[-503311227])
+	assert.Equal(t, 4, len(s.Field6))
+	assert.Equal(t, -1762085720, s.Field6[-1847156268])
 }
 
 func TestTagFuncCallBuild(t *testing.T) {
@@ -268,6 +288,47 @@ func TestNilNotAllowed(t *testing.T) {
 	assert.Equal(t, "faker.Build input interface{} not allowed", err.Error())
 }
 
+func TestWorkWithPrivateFields(t *testing.T) {
+	faker.SetSeed(624)
+	s := &struct {
+		PublicField  int
+		privateField int
+	}{}
+	err := faker.Build(&s)
+	assert.Nil(t, err)
+}
+
+func TestErrOnSliceBuild(t *testing.T) {
+	faker.SetSeed(625)
+	s := &struct {
+		Field []int `faker:"StringWithSize(3)"`
+	}{}
+	err := faker.Build(&s)
+	assert.NotNil(t, err)
+	assert.Equal(t, "invalid faker function 'StringWithSize' for type 'int'", err.Error())
+}
+
+func TestErrOnMapKeyBuild(t *testing.T) {
+	faker.SetSeed(626)
+	s := &struct {
+		Field map[int]bool `faker:"StringWithSize(3)"`
+	}{}
+	err := faker.Build(&s)
+	assert.NotNil(t, err)
+	assert.Equal(t, "invalid faker function 'StringWithSize' for type 'int'", err.Error())
+}
+
+func TestErrOnMapValueBuild(t *testing.T) {
+	faker.SetSeed(627)
+	s := &struct {
+		Field map[int]bool `faker:"IntInRange(1,3)"`
+	}{}
+	err := faker.Build(&s)
+	t.Log(s)
+	assert.NotNil(t, err)
+	// assert.Equal(t, "invalid faker function 'IntInRange' for type 'bool'", err.Error())
+}
+
 type testParent struct {
 	Name   string
 	Parent *testParent
@@ -280,7 +341,7 @@ func TestRecursiveStructBuild(t *testing.T) {
 	assert.Nil(t, err)
 	t.Log(s)
 
-	assert.Equal(t, "rpCLQtCMxnMcaT6CChHFohkI58zXOnTNQz5c2J25iD7VSU0SrNVxoADmVRx66L1tQx6ljCDaetBPRNqfLC13hczryEpD3YXCV8nGOsHUIpYGdcTjmiH0XTn", s.Name)
+	assert.Equal(t, "rpC", s.Name)
 	assert.Equal(t, (*testParent)(nil), s.Parent)
 }
 
@@ -301,8 +362,8 @@ func TestMutualRecursiveStructBuild(t *testing.T) {
 	assert.Nil(t, err)
 	t.Log(s)
 
-	assert.Equal(t, "E", s.Name)
-	assert.Equal(t, "0LX6dzNLnPogQSisq70w3F6YmFBQVk1CHiOoV9IUMNE2YfI4AvyupkIwiGVOTwpaHat1LOP3IVbz1X81M3ReM", s.Node.Name)
+	assert.Equal(t, "Ek0L", s.Name)
+	assert.Equal(t, "6dzNLn", s.Node.Name)
 	assert.Nil(t, nil, s.Node.Node)
 }
 
@@ -349,6 +410,7 @@ func TestStructBuild(t *testing.T) {
 	err = faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
+	t.Log(s.User2)
 	assert.Equal(t, 3, s.Number1)
 	assert.Equal(t, uint(1593375208), s.Number2)
 	assert.Equal(t, "tail", s.Coin)
@@ -356,21 +418,21 @@ func TestStructBuild(t *testing.T) {
 	assert.Equal(t, "not changed", s.NotEmpty)
 	assert.Equal(t, chan int(nil), s.Unknown)
 
-	assert.Equal(t, "strawboard", s.User1.Username)
-	assert.Equal(t, "palecek@stat.name", s.User1.Email)
+	assert.Equal(t, "magistery", s.User1.Username)
+	assert.Equal(t, "retool@sphinx.info", s.User1.Email)
 	assert.Equal(t, 3, len(s.User1.Comments))
-	assert.Equal(t, "We can assume that any instance of an owl can be construed as a patient lemon.", s.User1.Comments[0])
+	assert.Equal(t, "The calm scorpion comes from a vigorous kitten?", s.User1.Comments[0])
 	assert.Equal(t, map[string]int{"power": 2, "speed": 3, "intellect": 4}, s.User1.Feedbacks)
-	assert.Equal(t, 7, len(s.User1.FakeFeedbacks))
-	assert.Equal(t, -421206271, s.User1.FakeFeedbacks["8YV0qeIEnt3ixbFlO2sSFxDMdogn9GZlBD6mV1kgJtcFAvhx0D7C1Mafs5GJecb4z8G9MVWAX2NOjdxsbU2PYig9yZHR6Jc6jXxJnwc5"])
+	assert.Equal(t, 5, len(s.User1.FakeFeedbacks))
+	assert.Equal(t, 1279188829, s.User1.FakeFeedbacks["2ATA"])
 
-	assert.Equal(t, "roede", s.User2.Username)
-	assert.Equal(t, "monarski@unceremonious.name", s.User2.Email)
+	assert.Equal(t, "kenakenaf", s.User2.Username)
+	assert.Equal(t, "tingly@consubstantial.net", s.User2.Email)
 	assert.Equal(t, 3, len(s.User2.Comments))
-	assert.Equal(t, "The first warmhearted alligator is, in its own way, a tiger.", s.User2.Comments[0])
+	assert.Equal(t, "A kitten is a goldfish's peach?", s.User2.Comments[0])
 	assert.Equal(t, map[string]int{"power": 2, "speed": 3, "intellect": 4}, s.User2.Feedbacks)
-	assert.Equal(t, 6, len(s.User2.FakeFeedbacks))
-	assert.Equal(t, 982485615, s.User2.FakeFeedbacks["D8N3TcJSnbQNXxD4MHI7QQO4VGNj0E3Oat4OvZdRGfrZVrtf55iQ"])
+	assert.Equal(t, 7, len(s.User2.FakeFeedbacks))
+	assert.Equal(t, 1093938837, s.User2.FakeFeedbacks["5yjaG"])
 }
 
 func ExampleBuild() {
@@ -398,9 +460,9 @@ func ExampleBuild() {
 	// Output: Elizabeth
 	// Thai Nguyen
 	// 7
-	// QtCMxn
-	// 85fc6010-c82e-4770-b522-6a726c575662
-	// 2053519858
+	// QtCMxnMc
+	// 566235bc-4211-4ff2-b966-fa2d49d2b167
+	// 1267435813
 }
 
 func ExampleBuild_second() {
@@ -457,14 +519,14 @@ func ExampleBuild_second() {
 	// 25
 	// ff8d6917-b920-46e6-b1be-dc2d48becfcb
 	// 0
-	// z
-	// honegger
+	// zN
+	// clung
 	// Red
 	// 3
-	// teagan
 	// polypeptide
 	// chinfest
-	// map[70w:3F6 gQS:isq]
+	// chungchungking
+	// map[0w3:F6Y QSi:sq7]
 }
 
 func ExampleBuild_third() {
