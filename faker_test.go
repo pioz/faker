@@ -39,7 +39,7 @@ func TestArgumentSliceNotAllZeroBuild(t *testing.T) {
 	err := faker.Build(&slice)
 	assert.Nil(t, err)
 	assert.Equal(t, "test", slice[0])
-	assert.Equal(t, "typkI", slice[1])
+	assert.Equal(t, "wehNi", slice[1])
 }
 
 func TestSliceBuild(t *testing.T) {

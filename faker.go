@@ -94,11 +94,9 @@ func Build(input interface{}) error {
 
 func buildSlice(inputReflectValue reflect.Value, tag *fakerTag) error {
 	for i := 0; i < inputReflectValue.Len(); i++ {
-		if inputReflectValue.Index(i).IsZero() {
-			err := build(inputReflectValue.Index(i), tag)
-			if err != nil {
-				return err
-			}
+		err := build(inputReflectValue.Index(i), tag)
+		if err != nil {
+			return err
 		}
 	}
 	return nil
@@ -107,7 +105,6 @@ func buildSlice(inputReflectValue reflect.Value, tag *fakerTag) error {
 func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 	inputReflectType := inputReflectValue.Type()
 	kind := inputReflectType.Kind()
-	// fmt.Println(">", kind.String(), inputReflectType.String(), tag)
 
 	var (
 		fn    builderFunc
