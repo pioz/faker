@@ -116,9 +116,13 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 	fn, found = builders[key]
 
 	if found {
-		var value interface{}
-		var err error
-
+		if !inputReflectValue.IsZero() {
+			return nil
+		}
+		var (
+			value interface{}
+			err   error
+		)
 		if tag.unique {
 			value, err = Uniq(key, 3, func() (interface{}, error) {
 				return fn(tag.params...)
@@ -129,9 +133,7 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 		if err != nil {
 			return err
 		}
-		if inputReflectValue.IsZero() {
-			inputReflectValue.Set(reflect.ValueOf(value))
-		}
+		inputReflectValue.Set(reflect.ValueOf(value))
 		return nil
 	}
 

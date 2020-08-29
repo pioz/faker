@@ -39,7 +39,7 @@ func TestArgumentSliceNotAllZeroBuild(t *testing.T) {
 	err := faker.Build(&slice)
 	assert.Nil(t, err)
 	assert.Equal(t, "test", slice[0])
-	assert.Equal(t, "wehNi", slice[1])
+	assert.Equal(t, "typkI", slice[1])
 }
 
 func TestSliceBuild(t *testing.T) {
@@ -418,10 +418,10 @@ func TestStructBuild(t *testing.T) {
 	assert.Equal(t, "not changed", s.NotEmpty)
 	assert.Equal(t, chan int(nil), s.Unknown)
 
-	assert.Equal(t, "magistery", s.User1.Username)
-	assert.Equal(t, "retool@sphinx.info", s.User1.Email)
+	assert.Equal(t, "chorizo", s.User1.Username)
+	assert.Equal(t, "anguished@retool.name", s.User1.Email)
 	assert.Equal(t, 3, len(s.User1.Comments))
-	assert.Equal(t, "The calm scorpion comes from a vigorous kitten?", s.User1.Comments[0])
+	assert.Equal(t, "Washing and polishing the car,a grape can hardly be considered a calm scorpion without also being an octopus.", s.User1.Comments[0])
 	assert.Equal(t, map[string]int{"power": 2, "speed": 3, "intellect": 4}, s.User1.Feedbacks)
 	assert.Equal(t, 5, len(s.User1.FakeFeedbacks))
 	assert.Equal(t, 1279188829, s.User1.FakeFeedbacks["2ATA"])
