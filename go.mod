@@ -1,4 +1,4 @@
-module github.com/pioz/faker
+module github.com/pioz/faker/v2
 
 go 1.14
 
