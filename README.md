@@ -6,7 +6,7 @@
 [![GoReference](https://pkg.go.dev/badge/mod/github.com/pioz/faker)](https://pkg.go.dev/github.com/pioz/faker)
 <!-- [![GoDoc](https://godoc.org/github.com/pioz/faker?status.svg)](https://godoc.org/github.com/pioz/faker) -->
 
-Random fake data and struct generator for Go
+Random fake data and struct generator for Go.
 
 * More than 100 generator functions
 * Struct generator
