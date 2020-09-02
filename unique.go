@@ -1,7 +1,7 @@
 package faker
 
 import (
-	"errors"
+	"fmt"
 	"sync"
 )
 
@@ -34,7 +34,7 @@ func Uniq(group string, maxRetry int, fn func() (interface{}, error)) (interface
 			return value, nil
 		}
 	}
-	return value, errors.New("failed to generate a unique value")
+	return value, fmt.Errorf("failed to generate a unique value for group '%s'", group)
 }
 
 // UniqSlice run max maxRetry times fn function until fn returns a unique

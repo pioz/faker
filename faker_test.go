@@ -243,29 +243,40 @@ func TestSkipTag(t *testing.T) {
 
 func TestUniqueTag(t *testing.T) {
 	faker.SetSeed(602)
-	s1 := &struct {
-		Field int `faker:"IntInRange(0,1);unique"`
-	}{}
-	s2 := &struct {
-		Field int `faker:"IntInRange(0,1);unique"`
-	}{}
-	s3 := &struct {
-		Field int `faker:"IntInRange(0,1);unique"`
-	}{}
+	type CustomType1 struct {
+		Field1 int `faker:"IntInRange(0,1);unique"`
+		Field2 int `faker:"IntInRange(0,1);unique"`
+	}
+	type CustomType2 struct {
+		Field1 int `faker:"IntInRange(0,1);unique"`
+		Field2 int `faker:"IntInRange(0,1);unique"`
+	}
 
-	err := faker.Build(&s1)
+	ct11 := CustomType1{}
+	err := faker.Build(&ct11)
 	assert.Nil(t, err)
-	t.Log(s1)
-	assert.Equal(t, 1, s1.Field)
+	t.Log(ct11)
+	assert.Equal(t, 1, ct11.Field1)
+	assert.Equal(t, 1, ct11.Field2)
 
-	err = faker.Build(&s2)
+	ct12 := CustomType1{}
+	err = faker.Build(&ct12)
 	assert.Nil(t, err)
-	t.Log(s2)
-	assert.Equal(t, 0, s2.Field)
+	t.Log(ct12)
+	assert.Equal(t, 0, ct12.Field1)
+	assert.Equal(t, 0, ct12.Field2)
 
-	err = faker.Build(&s3)
+	ct13 := CustomType1{}
+	err = faker.Build(&ct13)
 	assert.NotNil(t, err)
-	assert.Equal(t, "failed to generate a unique value", err.Error())
+	assert.Equal(t, "failed to generate a unique value for group 'CustomType1-Field1'", err.Error())
+
+	ct21 := CustomType2{}
+	err = faker.Build(&ct21)
+	assert.Nil(t, err)
+	t.Log(ct21)
+	assert.Equal(t, 0, ct21.Field1)
+	assert.Equal(t, 1, ct21.Field2)
 }
 
 func TestInterfaceNotAllowed(t *testing.T) {

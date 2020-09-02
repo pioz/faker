@@ -22,17 +22,20 @@ var (
 )
 
 type fakerTag struct {
-	funcName string
-	unique   bool
-	length   int
-	params   []string
+	funcName    string
+	uniqueGroup string
+	length      int
+	params      []string
 }
 
 func (tag *fakerTag) mustSkip() bool {
 	return tag.funcName == skipTag
 }
 
-func decodeTag(tagString string) *fakerTag {
+// func decodeTag(tagString string) *fakerTag {
+func decodeTag(structReflectType reflect.Type, fieldIndex int) *fakerTag {
+	fieldReflectType := structReflectType.Field(fieldIndex)
+	tagString := fieldReflectType.Tag.Get(tagName)
 	tag := &fakerTag{}
 	for _, token := range strings.Split(tagString, ";") {
 		if token == skipTag {
@@ -40,7 +43,7 @@ func decodeTag(tagString string) *fakerTag {
 			return tag
 		}
 		if token == uniqueTag {
-			tag.unique = true
+			tag.uniqueGroup = fmt.Sprintf("%s-%s", structReflectType.Name(), fieldReflectType.Name)
 			continue
 		}
 		if m := tagLenRegexp.FindStringSubmatch(token); len(m) == 2 {
@@ -123,8 +126,8 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 			value interface{}
 			err   error
 		)
-		if tag.unique {
-			value, err = Uniq(key, 3, func() (interface{}, error) {
+		if tag.uniqueGroup != "" {
+			value, err = Uniq(tag.uniqueGroup, 0, func() (interface{}, error) {
 				return fn(tag.params...)
 			})
 		} else {
@@ -146,7 +149,7 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 		return build(inputReflectValue.Elem(), tag)
 	case reflect.Struct:
 		for i := 0; i < inputReflectValue.NumField(); i++ {
-			fieldTag := decodeTag(inputReflectType.Field(i).Tag.Get(tagName))
+			fieldTag := decodeTag(inputReflectType, i)
 			if fieldTag.mustSkip() {
 				continue
 			}
