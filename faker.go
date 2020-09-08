@@ -82,12 +82,13 @@ func Build(input interface{}) error {
 		return errors.New("faker.Build input is not a pointer")
 	}
 
+	parentReflectTypes := make(map[reflect.Type]struct{})
 	var err error
 	inputReflectValue := reflect.ValueOf(input)
 	if inputReflectType.Elem().Kind() == reflect.Slice {
-		err = buildSlice(inputReflectValue.Elem(), &fakerTag{})
+		err = buildSlice(inputReflectValue.Elem(), parentReflectTypes, &fakerTag{})
 	} else {
-		err = build(inputReflectValue, &fakerTag{})
+		err = build(inputReflectValue, parentReflectTypes, &fakerTag{})
 	}
 	if err != nil {
 		return err
@@ -95,9 +96,9 @@ func Build(input interface{}) error {
 	return nil
 }
 
-func buildSlice(inputReflectValue reflect.Value, tag *fakerTag) error {
+func buildSlice(inputReflectValue reflect.Value, parentReflectTypes map[reflect.Type]struct{}, tag *fakerTag) error {
 	for i := 0; i < inputReflectValue.Len(); i++ {
-		err := build(inputReflectValue.Index(i), tag)
+		err := build(inputReflectValue.Index(i), parentReflectTypes, tag)
 		if err != nil {
 			return err
 		}
@@ -105,7 +106,7 @@ func buildSlice(inputReflectValue reflect.Value, tag *fakerTag) error {
 	return nil
 }
 
-func build(inputReflectValue reflect.Value, tag *fakerTag) error {
+func build(inputReflectValue reflect.Value, parentReflectTypes map[reflect.Type]struct{}, tag *fakerTag) error {
 	inputReflectType := inputReflectValue.Type()
 	kind := inputReflectType.Kind()
 
@@ -142,12 +143,23 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 
 	switch kind {
 	case reflect.Ptr:
+		if infiniteLoopRecursion(parentReflectTypes, inputReflectType) {
+			return nil
+		}
 		if inputReflectValue.IsNil() {
 			newVar := reflect.New(inputReflectType.Elem())
 			inputReflectValue.Set(newVar)
 		}
-		return build(inputReflectValue.Elem(), tag)
+		return build(inputReflectValue.Elem(), parentReflectTypes, tag)
 	case reflect.Struct:
+		if infiniteLoopRecursion(parentReflectTypes, inputReflectType) {
+			return nil
+		}
+		parentReflectTypesCopy := make(map[reflect.Type]struct{})
+		for k, v := range parentReflectTypes {
+			parentReflectTypesCopy[k] = v
+		}
+		parentReflectTypesCopy[inputReflectType] = struct{}{}
 		for i := 0; i < inputReflectValue.NumField(); i++ {
 			fieldTag := decodeTag(inputReflectType, i)
 			if fieldTag.mustSkip() {
@@ -156,16 +168,16 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 			if !inputReflectValue.Field(i).CanSet() {
 				continue // to avoid panic to set on unexported field in struct
 			}
-			if inputReflectValue.Field(i).Kind() == reflect.Ptr && inputReflectValue.Field(i).Type().Elem() == inputReflectType {
-				continue // do not enter in an infinite loop on recursive type
-			}
-			err := build(inputReflectValue.Field(i), fieldTag)
+			err := build(inputReflectValue.Field(i), parentReflectTypesCopy, fieldTag)
 			if err != nil {
 				return err
 			}
 		}
 		return nil
 	case reflect.Slice:
+		if infiniteLoopRecursion(parentReflectTypes, inputReflectType.Elem()) {
+			return nil
+		}
 		if inputReflectValue.IsNil() {
 			var sliceLen int
 			if tag != nil && tag.length != 0 {
@@ -175,9 +187,17 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 			}
 			newSlice := reflect.MakeSlice(inputReflectType, sliceLen, sliceLen)
 			inputReflectValue.Set(newSlice)
-			return buildSlice(inputReflectValue, tag)
+			return buildSlice(inputReflectValue, parentReflectTypes, tag)
 		}
 	case reflect.Map:
+		keyReflectType := inputReflectType.Key()
+		if infiniteLoopRecursion(parentReflectTypes, keyReflectType) {
+			return nil
+		}
+		elemReflectType := inputReflectType.Elem()
+		if infiniteLoopRecursion(parentReflectTypes, elemReflectType) {
+			return nil
+		}
 		if inputReflectValue.IsNil() {
 			var (
 				mapLen int
@@ -190,17 +210,15 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 			} else {
 				mapLen = IntInRange(1, 8)
 			}
-			keyReflectType := inputReflectType.Key()
-			elemReflectType := inputReflectType.Elem()
 			newMap := reflect.MakeMap(inputReflectType)
 			for i := 0; i < mapLen; i++ {
 				key = reflect.New(keyReflectType).Elem()
 				elem = reflect.New(elemReflectType).Elem()
-				err = build(key, tag)
+				err = build(key, parentReflectTypes, tag)
 				if err != nil {
 					return err
 				}
-				err = build(elem, tag)
+				err = build(elem, parentReflectTypes, tag)
 				if err != nil {
 					return err
 				}
@@ -215,4 +233,16 @@ func build(inputReflectValue reflect.Value, tag *fakerTag) error {
 		return nil
 	}
 	return nil
+}
+
+func infiniteLoopRecursion(parentReflectTypes map[reflect.Type]struct{}, reflectType reflect.Type) bool {
+	for {
+		if reflectType.Kind() == reflect.Ptr {
+			reflectType = reflectType.Elem()
+		} else {
+			break
+		}
+	}
+	_, found := parentReflectTypes[reflectType]
+	return found
 }

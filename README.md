@@ -14,6 +14,7 @@ Random fake data and struct generator for Go.
 * Builtin types support
 * Easily customizable
 * Zero dependencies
+* Recursive infinite loop detector
 * Benchmarks (coming soon)
 
 ## Installation

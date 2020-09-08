@@ -340,42 +340,38 @@ func TestErrOnMapValueBuild(t *testing.T) {
 	// assert.Equal(t, "invalid faker function 'IntInRange' for type 'bool'", err.Error())
 }
 
-type testParent struct {
-	Name   string
-	Parent *testParent
+type testRec1 struct {
+	Name     string
+	Parent1  *testRec1
+	Parent2  **testRec1
+	Parents1 []testRec1
+	Parents2 map[*testRec1]string
+	Parents3 map[string]testRec1
+	Child    *testRec2
+}
+
+type testRec2 struct {
+	Name    string
+	Parent1 testRec1
+	Parent2 *testRec1
 }
 
 func TestRecursiveStructBuild(t *testing.T) {
 	faker.SetSeed(621)
-	s := testParent{}
+	s := testRec1{}
 	err := faker.Build(&s)
 	assert.Nil(t, err)
 	t.Log(s)
 
 	assert.Equal(t, "rpC", s.Name)
-	assert.Equal(t, (*testParent)(nil), s.Parent)
-}
-
-type testNode1 struct {
-	Name string
-	Node *testNode2
-}
-
-type testNode2 struct {
-	Name string
-	Node *testNode1 `faker:"-"` // if we remove the ignore tag "-" we will have an infinite loop
-}
-
-func TestMutualRecursiveStructBuild(t *testing.T) {
-	faker.SetSeed(622)
-	s := testNode1{}
-	err := faker.Build(&s)
-	assert.Nil(t, err)
-	t.Log(s)
-
-	assert.Equal(t, "Ek0L", s.Name)
-	assert.Equal(t, "6dzNLn", s.Node.Name)
-	assert.Nil(t, nil, s.Node.Node)
+	assert.Nil(t, s.Parent1)
+	assert.Nil(t, s.Parent2)
+	assert.Nil(t, s.Parents1)
+	assert.Nil(t, s.Parents2)
+	assert.Nil(t, s.Parents3)
+	assert.Equal(t, "QtCMxnMc", s.Child.Name)
+	assert.Empty(t, s.Child.Parent1)
+	assert.Nil(t, s.Child.Parent2)
 }
 
 type userTest struct {
