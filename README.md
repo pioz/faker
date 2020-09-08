@@ -107,9 +107,9 @@ fmt.Println(p.Extra)
 ## Factory
 
 One of the nice things about Faker is that it can also be used as a factory
-library. In fact when we call the `faker.Build` method if a value is not zero
-then it is not modified, leaving the original value. This allows you to create
-factory functions very easily:
+library. In fact when we call the `faker.Build` function if a value is not
+zero then it is not modified, leaving the original value. This allows you to
+create factory functions very easily:
 
 ```go
 faker.SetSeed(623)
