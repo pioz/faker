@@ -3,6 +3,7 @@
 ![Go](https://github.com/pioz/faker/workflows/Go/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/pioz/faker)](https://goreportcard.com/report/github.com/pioz/faker)
 [![codecov](https://codecov.io/gh/pioz/faker/branch/master/graph/badge.svg)](https://codecov.io/gh/pioz/faker)
+[![awesome-go](https://camo.githubusercontent.com/13c4e50d88df7178ae1882a203ed57b641674f94/68747470733a2f2f63646e2e7261776769742e636f6d2f73696e647265736f726875732f617765736f6d652f643733303566333864323966656437386661383536353265336136336531353464643865383832392f6d656469612f62616467652e737667)](https://github.com/avelino/awesome-go)
 [![GoReference](https://pkg.go.dev/badge/mod/github.com/pioz/faker)](https://pkg.go.dev/github.com/pioz/faker)
 <!-- [![GoDoc](https://godoc.org/github.com/pioz/faker?status.svg)](https://godoc.org/github.com/pioz/faker) -->
 
