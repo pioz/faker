@@ -68,6 +68,11 @@ func TestSliceBuild(t *testing.T) {
 	assert.Equal(t, 546278985, *s.SlicePtrIntField[2])
 
 	assert.Equal(t, 5, len(s.SliceIntField2))
+
+	s.SliceIntField = []int{0, 1, 2, 3}
+	err = faker.Build(&s)
+	assert.Nil(t, err)
+	assert.Equal(t, 0, s.SliceIntField[0])
 }
 
 func TestMapBuild(t *testing.T) {
