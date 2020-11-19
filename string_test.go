@@ -68,6 +68,11 @@ func ExamplePick() {
 	// Output: dog
 }
 
+func TestPickWithNoArgs(t *testing.T) {
+	faker.SetSeed(910)
+	assert.Equal(t, "", faker.Pick())
+}
+
 func TestStringBuild(t *testing.T) {
 	faker.SetSeed(920)
 	s := &struct {
@@ -96,4 +101,35 @@ func TestStringBuild(t *testing.T) {
 	assert.Equal(t, "111x", s.Field8)
 	assert.Equal(t, "go-is-the-best-programming-language", s.Field9)
 	assert.Equal(t, "cat", s.Field10)
+}
+
+func TestStringInvalidParams(t *testing.T) {
+	faker.SetSeed(921)
+	s1 := &struct {
+		Field string `faker:"DigitsWithSize(a)"`
+	}{}
+	err := faker.Build(&s1)
+	assert.NotNil(t, err)
+	assert.Equal(t, "invalid parameters: strconv.Atoi: parsing \"a\": invalid syntax", err.Error())
+
+	s2 := &struct {
+		Field string `faker:"LettersWithSize(a)"`
+	}{}
+	err = faker.Build(&s2)
+	assert.NotNil(t, err)
+	assert.Equal(t, "invalid parameters: strconv.Atoi: parsing \"a\": invalid syntax", err.Error())
+
+	s3 := &struct {
+		Field string `faker:"Lexify"`
+	}{}
+	err = faker.Build(&s3)
+	assert.NotNil(t, err)
+	assert.Equal(t, "invalid parameters", err.Error())
+
+	s4 := &struct {
+		Field string `faker:"Numerify"`
+	}{}
+	err = faker.Build(&s4)
+	assert.NotNil(t, err)
+	assert.Equal(t, "invalid parameters", err.Error())
 }

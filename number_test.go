@@ -282,3 +282,76 @@ func TestNumberBuild(t *testing.T) {
 	assert.Equal(t, float32(3.0873776e+38), s.Float32Field)
 	assert.Equal(t, float32(3.3773583e+38), s.DefaultFloat32Field)
 }
+
+func TestNumberInvalidParams(t *testing.T) {
+	faker.SetSeed(31)
+	s1 := &struct {
+		Field int64 `faker:"Int64InRange(a)"`
+	}{}
+	err := faker.Build(&s1)
+	assert.NotNil(t, err)
+	assert.Equal(t, "invalid parameters", err.Error())
+
+	s2 := &struct {
+		Field int32 `faker:"Int32InRange(1,a)"`
+	}{}
+	err = faker.Build(&s2)
+	assert.NotNil(t, err)
+	assert.Equal(t, "invalid parameters: strconv.Atoi: parsing \"a\": invalid syntax", err.Error())
+
+	s3 := &struct {
+		Field int16 `faker:"Int16InRange(a)"`
+	}{}
+	err = faker.Build(&s3)
+	assert.NotNil(t, err)
+	assert.Equal(t, "invalid parameters", err.Error())
+
+	s4 := &struct {
+		Field int8 `faker:"Int8InRange(a)"`
+	}{}
+	err = faker.Build(&s4)
+	assert.NotNil(t, err)
+	assert.Equal(t, "invalid parameters", err.Error())
+
+	s5 := &struct {
+		Field uint64 `faker:"Uint64InRange(a)"`
+	}{}
+	err = faker.Build(&s5)
+	assert.NotNil(t, err)
+	assert.Equal(t, "invalid parameters", err.Error())
+
+	s6 := &struct {
+		Field uint32 `faker:"Uint32InRange(a)"`
+	}{}
+	err = faker.Build(&s6)
+	assert.NotNil(t, err)
+	assert.Equal(t, "invalid parameters", err.Error())
+
+	s7 := &struct {
+		Field uint16 `faker:"Uint16InRange(a)"`
+	}{}
+	err = faker.Build(&s7)
+	assert.NotNil(t, err)
+	assert.Equal(t, "invalid parameters", err.Error())
+
+	s8 := &struct {
+		Field uint8 `faker:"Uint8InRange(a)"`
+	}{}
+	err = faker.Build(&s8)
+	assert.NotNil(t, err)
+	assert.Equal(t, "invalid parameters", err.Error())
+
+	s9 := &struct {
+		Field float64 `faker:"float64InRange(a)"`
+	}{}
+	err = faker.Build(&s9)
+	assert.NotNil(t, err)
+	assert.Equal(t, "invalid parameters", err.Error())
+
+	s10 := &struct {
+		Field float32 `faker:"float32InRange(a)"`
+	}{}
+	err = faker.Build(&s10)
+	assert.NotNil(t, err)
+	assert.Equal(t, "invalid parameters", err.Error())
+}
