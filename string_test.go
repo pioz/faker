@@ -132,4 +132,11 @@ func TestStringInvalidParams(t *testing.T) {
 	err = faker.Build(&s4)
 	assert.NotNil(t, err)
 	assert.Equal(t, "invalid parameters", err.Error())
+
+	s5 := &struct {
+		Field string `faker:"Parameterize"`
+	}{}
+	err = faker.Build(&s5)
+	assert.NotNil(t, err)
+	assert.Equal(t, "invalid parameters", err.Error())
 }
