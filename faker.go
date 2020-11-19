@@ -19,10 +19,12 @@ const (
 var (
 	tagFnCallRegexp = regexp.MustCompile(`(.+?)\((.+?)\)`)
 	tagLenRegexp    = regexp.MustCompile(`len=(\d+)`)
+	tagSkipIfRegexp = regexp.MustCompile(`skip\s+if\s+(\w+)`)
 )
 
 type fakerTag struct {
 	funcName    string
+	skipIf      string
 	uniqueGroup string
 	length      int
 	params      []string
@@ -41,6 +43,10 @@ func decodeTag(structReflectType reflect.Type, fieldIndex int) *fakerTag {
 		if token == skipTag {
 			tag.funcName = skipTag
 			return tag
+		}
+		if m := tagSkipIfRegexp.FindStringSubmatch(token); len(m) == 2 {
+			tag.skipIf = m[1]
+			continue
 		}
 		if token == uniqueTag {
 			tag.uniqueGroup = fmt.Sprintf("%s-%s", structReflectType.Name(), fieldReflectType.Name)
@@ -64,15 +70,24 @@ func decodeTag(structReflectType reflect.Type, fieldIndex int) *fakerTag {
 
 // Build fills in exported elements of a struct with random data based on the
 // value of `faker` tag of exported elements. The faker tag value can be any
-// available function (case insensitive). Use `faker:"-"` to explicitly skip
-// an element. Use `faker:"unique"` to guarantee a unique value. Use
-// `faker:"len=x"` to specify the length of a slice or the size of a map (if
-// ommitted a slice or a map with random size between 1 and 8 will be
-// generated). Built-in types supported are: bool, int, int8, int16, int32,
-// int64, uint, uint8, uint16, uint32, uint64, float32, float64, string. Other
-// standard library supported types are time.Time and time.Duration. But is
-// really easy to extend faker to add other builders to support other types
-// and or customize faker's behavior (see RegisterBuilder function).
+// available function (case insensitive).
+//
+// Use `faker:"-"` to explicitly skip an element.
+//
+// Use `faker:"skip if FieldName"` to explicitly skip this field if another
+// field (FieldName) is not empty.
+//
+// Use `faker:"unique"` to guarantee a unique value.
+//
+// Use `faker:"len=x"` to specify the length of a slice or the size of a map
+// (if ommitted, will be generated a slice or map with random size between 1
+// and 8).
+//
+// Built-in supported types are: bool, int, int8, int16, int32, int64, uint,
+// uint8, uint16, uint32, uint64, float32, float64, string. Other standard
+// library supported types are time.Time and time.Duration. But is really easy
+// to extend faker to add other builders to support other types and or
+// customize faker's behavior (see RegisterBuilder function).
 func Build(input interface{}) error {
 	inputReflectType := reflect.TypeOf(input)
 	if inputReflectType == nil {
@@ -167,6 +182,12 @@ func buildStruct(inputReflectValue reflect.Value, inputReflectType reflect.Type,
 		fieldTag := decodeTag(inputReflectType, i)
 		if fieldTag.mustSkip() {
 			continue
+		}
+		if fieldTag.skipIf != "" {
+			skipIfReflectValue := inputReflectValue.FieldByName(fieldTag.skipIf)
+			if (skipIfReflectValue != reflect.Value{}) && !skipIfReflectValue.IsZero() {
+				continue
+			}
 		}
 		if !inputReflectValue.Field(i).CanSet() {
 			continue // to avoid panic to set on unexported field in struct

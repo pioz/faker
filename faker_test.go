@@ -246,6 +246,25 @@ func TestSkipTag(t *testing.T) {
 	assert.Nil(t, s.PtrField)
 }
 
+func TestSkipIfTag(t *testing.T) {
+	faker.SetSeed(607)
+	s := &struct {
+		Field1 string
+		Field2 string `faker:"skip if Field1"`
+		Field3 *int   `faker:"skip if Field1;IntInRange(0,10)"`
+		Field4 string `faker:"skip if NotExistingFieldName;FirstName"`
+	}{Field1: "Amazing"}
+
+	err := faker.Build(&s)
+	assert.Nil(t, err)
+	t.Log(s)
+
+	assert.Equal(t, s.Field1, "Amazing")
+	assert.Empty(t, s.Field2)
+	assert.Nil(t, s.Field3)
+	assert.Equal(t, s.Field4, "Corey")
+}
+
 func TestUniqueTag(t *testing.T) {
 	faker.SetSeed(602)
 	type CustomType1 struct {
@@ -477,7 +496,7 @@ func ExampleBuild() {
 	// 1267435813
 }
 
-func ExampleBuild_second() {
+func ExampleBuild_recursive() {
 	faker.SetSeed(622)
 
 	// Define a new builder
@@ -541,7 +560,7 @@ func ExampleBuild_second() {
 	// map[0w3:F6Y QSi:sq7]
 }
 
-func ExampleBuild_third() {
+func ExampleBuild_factory() {
 	faker.SetSeed(623)
 
 	type User struct {
@@ -564,7 +583,7 @@ func ExampleBuild_third() {
 	// Output: &{spicule hoag@ornamented.biz IT}
 }
 
-func ExampleBuild_fourth() {
+func ExampleBuild_array() {
 	faker.SetSeed(623)
 
 	type User struct {
@@ -581,4 +600,38 @@ func ExampleBuild_fourth() {
 	}
 	fmt.Printf("%+v", users)
 	// Output: [{Username:spicule Email:hoag@ornamented.biz Country:FI} {Username:twelvetone Email:mechanics@ramiform.name Country:TL} {Username:considerate Email:solnit@canonry.biz Country:TG}]
+}
+
+func ExampleBuild_conditionalSkip() {
+	faker.SetSeed(623)
+
+	type Author struct {
+		Id   uint64 `faker:"uint64inrange(1,10)"`
+		Name string `faker:"FirstName"`
+	}
+
+	type Post struct {
+		Title    string  `faker:"Sentence"`
+		AuthorId uint64  `faker:"-"`
+		Author   *Author `faker:"skip if AuthorId"`
+	}
+
+	// Gen random Post with Author
+	post1 := &Post{}
+	err := faker.Build(&post1)
+	if err != nil {
+		panic(err)
+	}
+
+	// Gen random Post with same Author
+	post2 := &Post{AuthorId: post1.Author.Id}
+	err = faker.Build(&post2)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(post1.Author.Id == post2.AuthorId)
+	fmt.Println(post2.Author == nil)
+	// Output: true
+	// true
 }
