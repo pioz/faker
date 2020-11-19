@@ -90,7 +90,7 @@ func TestParamsToMinMaxDurationInvalidParams2(t *testing.T) {
 	}{}
 	err := faker.Build(&s)
 	assert.NotNil(t, err)
-	assert.Equal(t, "invalid parameters: time: invalid duration b", err.Error())
+	assert.Equal(t, "invalid parameters: time: invalid duration \"b\"", err.Error())
 }
 
 func TestParamsToMinMaxDurationInvalidParams3(t *testing.T) {
@@ -99,7 +99,7 @@ func TestParamsToMinMaxDurationInvalidParams3(t *testing.T) {
 	}{}
 	err := faker.Build(&s)
 	assert.NotNil(t, err)
-	assert.Equal(t, "invalid parameters: time: invalid duration a", err.Error())
+	assert.Equal(t, "invalid parameters: time: invalid duration \"a\"", err.Error())
 }
 
 func TestParamsToIntInvalidParams1(t *testing.T) {
