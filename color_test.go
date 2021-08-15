@@ -15,15 +15,15 @@ func ExampleColorName() {
 }
 
 func ExampleColorHex() {
-	faker.SetSeed(1901)
+	faker.SetSeed(1902)
 	fmt.Println(faker.ColorHex())
-	// Output: #89f01b
+	// Output: #1908b0
 }
 
 func ExampleColorRGB() {
-	faker.SetSeed(1902)
+	faker.SetSeed(1901)
 	fmt.Println(faker.ColorRGB())
-	// Output: [25 8 176]
+	// Output: [137 240 27]
 }
 
 func ExampleColorHSL() {
