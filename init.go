@@ -2,6 +2,7 @@ package faker
 
 var db = PoolData{
 	"address":  addressData,
+	"color":    colorData,
 	"country":  countryData,
 	"currency": currencyData,
 	"gender":   genderData,
@@ -22,6 +23,11 @@ var builders = map[string]builderFunc{
 	builderKey("AddressSecondaryAddress", "string"): addressSecondaryAddressBuilder,
 	builderKey("AddressZip", "string"):              addressZipBuilder,
 	builderKey("AddressFull", "string"):             addressFullBuilder,
+	// color
+	builderKey("ColorName", "string"): colorNameBuilder,
+	builderKey("ColorHex", "string"):  colorHexBuilder,
+	builderKey("ColorRGB", "[3]int"):  colorRGBBuilder,
+	builderKey("ColorHSL", "[3]int"):  colorHSLBuilder,
 	// country
 	builderKey("CountryName", "string"):        countryNameBuilder,
 	builderKey("CountryAlpha2", "string"):      countryAlpha2Builder,

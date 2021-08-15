@@ -39,7 +39,7 @@ func TestGetAndSetPool(t *testing.T) {
 	t.Log(value)
 	assert.Equal(t, "foo", value)
 
-	faker.SetPoolGroup("ns3", faker.PoolGroup{"grp1": {"foo", "bar"}})
+	faker.SetPoolGroup("ns3", faker.PoolGroup{"grp1": faker.Pool{"foo", "bar"}})
 	value, err = faker.GetData("ns3", "grp1")
 	assert.Nil(t, err)
 	t.Log(value)
