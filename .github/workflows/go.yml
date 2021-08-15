@@ -98,8 +98,4 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Run golangci-lint
-        uses: actions-contrib/golangci-lint@v1
-        with:
-          args: 'run'
-        env:
-          GOROOT: ''
+        uses: golangci/golangci-lint-action@v2
