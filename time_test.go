@@ -45,6 +45,13 @@ func TestTime(t *testing.T) {
 	assert.NotEmpty(t, value)
 }
 
+func TestNowTime(t *testing.T) {
+	faker.SetSeed(44)
+	value := faker.TimeNow()
+	t.Log(value)
+	assert.NotEmpty(t, value)
+}
+
 func ExampleNanoSecond() {
 	faker.SetSeed(45)
 	fmt.Println(faker.NanoSecond())

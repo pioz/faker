@@ -38,6 +38,11 @@ func Time() time.Time {
 	return time.Now().Add(Duration())
 }
 
+// TimeNow will build the current time.
+func TimeNow() time.Time {
+	return time.Now()
+}
+
 // NanoSecond will build a random nano second.
 func NanoSecond() int {
 	return IntInRange(0, 999999999)
@@ -128,6 +133,10 @@ func durationBuilder(params ...string) (interface{}, error) {
 
 func timeBuilder(params ...string) (interface{}, error) {
 	return Time(), nil
+}
+
+func timeNowBuilder(params ...string) (interface{}, error) {
+	return TimeNow(), nil
 }
 
 func nanoSecondBuilder(params ...string) (interface{}, error) {

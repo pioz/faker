@@ -129,6 +129,7 @@ var builders = map[string]builderFunc{
 	builderKey("", "time.Duration"):                durationBuilder,
 	builderKey("Time", "time.Time"):                timeBuilder,
 	builderKey("", "time.Time"):                    timeBuilder,
+	builderKey("TimeNow", "time.Time"):             timeNowBuilder,
 	builderKey("NanoSecond", "int"):                nanoSecondBuilder,
 	builderKey("Second", "int"):                    secondBuilder,
 	builderKey("Minute", "int"):                    minuteBuilder,
