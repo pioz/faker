@@ -160,12 +160,13 @@ func ExampleUint8() {
 
 func ExampleFloat64InRange() {
 	faker.SetSeed(23)
-	fmt.Println(faker.Float64InRange(10, 20))
-	fmt.Println(faker.Float64InRange(-20, -10))
-	fmt.Println(faker.Float64InRange(-20, -30))
-	// Output: 18.120965248489753
-	// -14.513652135502497
-	// -20
+	fmt.Println(faker.Float64InRange(1, 2))
+	fmt.Println(faker.Float64InRange(-2, -1))
+	fmt.Println(faker.Float64InRange(-2, -3))
+	// Output:
+	// 1.8120965248489755
+	// -1.4513652135502495
+	// -2
 }
 
 func ExampleFloat64() {
