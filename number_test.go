@@ -163,7 +163,8 @@ func ExampleFloat64InRange() {
 	fmt.Println(faker.Float64InRange(10, 20))
 	fmt.Println(faker.Float64InRange(-20, -10))
 	fmt.Println(faker.Float64InRange(-20, -30))
-	// Output: 18.120965248489753
+	// Output:
+	// 18.120965248489757
 	// -14.513652135502497
 	// -20
 }
