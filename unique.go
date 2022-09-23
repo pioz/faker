@@ -8,7 +8,7 @@ import (
 const uniqueDefaultMaxRetry = 10000
 
 var uniqueCacheMutex = &sync.Mutex{}
-var uniqueCache = make(map[string]map[interface{}]struct{})
+var uniqueCache = make(map[string]map[interface{}]int)
 
 // Uniq run max maxRetry times fn function until fn returns a unique value for
 // the group of runs group. Returns error if the number of runs reach
@@ -19,8 +19,8 @@ func Uniq(group string, maxRetry int, fn func() (interface{}, error)) (interface
 	}
 	uniqueCacheMutex.Lock()
 	defer uniqueCacheMutex.Unlock()
-	if _, ok := uniqueCache[group]; !ok {
-		uniqueCache[group] = make(map[interface{}]struct{})
+	if _, found := uniqueCache[group]; !found {
+		uniqueCache[group] = make(map[interface{}]int)
 	}
 	var value interface{}
 	var err error
@@ -29,10 +29,18 @@ func Uniq(group string, maxRetry int, fn func() (interface{}, error)) (interface
 		if err != nil {
 			return nil, err
 		}
-		if _, ok := uniqueCache[group][value]; !ok {
-			uniqueCache[group][value] = struct{}{}
+		if _, found := uniqueCache[group][value]; !found {
+			uniqueCache[group][value] = 0
 			return value, nil
 		}
+	}
+	// If the value is a string avoid to return an error, and generate a unique
+	// value adding an index after the string.
+	valueAsString, ok := value.(string)
+	if ok {
+		uniqValue := fmt.Sprintf("%s %d", valueAsString, uniqueCache[group][value])
+		uniqueCache[group][value]++
+		return uniqValue, nil
 	}
 	return value, fmt.Errorf("failed to generate a unique value for group '%s'", group)
 }
@@ -63,6 +71,6 @@ func ClearUniqCache(group string) {
 // ClearAllUniqCache delete all results for all groups of run.
 func ClearAllUniqCache() {
 	uniqueCacheMutex.Lock()
-	uniqueCache = make(map[string]map[interface{}]struct{})
+	uniqueCache = make(map[string]map[interface{}]int)
 	uniqueCacheMutex.Unlock()
 }

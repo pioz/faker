@@ -19,7 +19,8 @@ func ExampleUniq() {
 	faker.ClearUniqCache("test")
 	value3, _ := faker.Uniq("test", 0, generator)
 	fmt.Println(value3)
-	// Output: 1
+	// Output:
+	// 1
 	// 0
 	// 0
 }
@@ -50,6 +51,41 @@ func TestUniq(t *testing.T) {
 	faker.ClearAllUniqCache()
 	_, err = faker.Uniq("test", 0, func() (interface{}, error) { return faker.IntInRange(0, 0), nil })
 	assert.Nil(t, err)
+}
+
+func TestUniqNoErrorIfValueIsString(t *testing.T) {
+	faker.SetSeed(405)
+	valuesRound1 := make([]string, 0)
+	for i := 0; i < 15; i++ {
+		value, err := faker.Uniq("test", 0, func() (interface{}, error) { return faker.NamePrefix(), nil })
+		assert.Nil(t, err)
+		valuesRound1 = append(valuesRound1, value.(string))
+	}
+	assert.Equal(t, 15, len(valuesRound1))
+
+	valuesRound2 := make([]string, 0)
+	for i := 0; i < 15; i++ {
+		value, err := faker.Uniq("test", 0, func() (interface{}, error) { return faker.NamePrefix(), nil })
+		assert.Nil(t, err)
+		valuesRound2 = append(valuesRound2, value.(string))
+	}
+	assert.Equal(t, 15, len(valuesRound2))
+
+	valuesRound3 := make([]string, 0)
+	for i := 0; i < 15; i++ {
+		value, err := faker.Uniq("test", 0, func() (interface{}, error) { return faker.NamePrefix(), nil })
+		assert.Nil(t, err)
+		valuesRound3 = append(valuesRound3, value.(string))
+	}
+	assert.Equal(t, 15, len(valuesRound3))
+
+	checkUniquenes := map[string]struct{}{}
+
+	for _, s := range append(append(valuesRound1, valuesRound2...), valuesRound3...) {
+		_, found := checkUniquenes[s]
+		assert.False(t, found)
+		checkUniquenes[s] = struct{}{}
+	}
 }
 
 func TestUniqError(t *testing.T) {
